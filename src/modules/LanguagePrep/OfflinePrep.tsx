@@ -18,7 +18,7 @@ const OfflinePrep = () => {
 
     const invalidate = fetchQueriesHook()
 
-    const { latitude, longitude, area } = useSelector((state: any) => state.user_location);
+    // const { latitude, longitude, area } = useSelector((state: any) => state.user_location);
 
     const navigate = useNavigate();
 
@@ -36,12 +36,14 @@ const OfflinePrep = () => {
 
     // Fetch nearby agents
     const { data: agents, isFetching } = useQuery({
-        queryKey: ['nearbyAgents', selectedLanguages,latitude, longitude],
+        // queryKey: ['nearbyAgents', selectedLanguages,latitude, longitude],
+        queryKey: ['nearbyAgents', selectedLanguages],
         queryFn: async () => {
             const queryParams = new URLSearchParams({
-                latitude: latitude, // Example value
-                longitude: longitude, // Example value
-                radiusInKm: '10'
+                // latitude: latitude, // Example value
+                // longitude: longitude, // Example value
+                // radiusInKm: '10',
+                agent_uuid: import.meta.env.VITE_AGENT_UUID
             });
             if (selectedLanguages.length) {
                 queryParams.append('selected_language_id', selectedLanguages.join(','));
@@ -69,17 +71,7 @@ const OfflinePrep = () => {
 
     return (
         <div className='container mx-auto p-4'>
-            <div className="col-span-full flex flex-col gap-4 items-center bg-accent/10  rounded-lg">
-                <p className="text-md font-medium">Selected Location: {area}</p>
 
-                <div className='flex flex-row items-center justify-center gap-4 col-span-2'>
-                    <Separator orientation="horizontal" className="my-2 mx-auto" />
-                    OR
-                    <Separator orientation="horizontal" className="my-2 mx-auto" />
-                </div>
-                <IconButton onClick={() => { onOpenChange() }} icon={<MapPin className='p-1' />}>Select Other Location</IconButton>
-
-            </div>
             <h2 className='text-xl font-bold my-4'>Offline Language Preparation</h2>
             <p>Please Select the languages that you want to filter out</p>
             {/* Language Filters */}
@@ -111,7 +103,6 @@ const OfflinePrep = () => {
                     <TableHeader>
                         <TableColumn>Name</TableColumn>
                         <TableColumn>Languages</TableColumn>
-                        <TableColumn>Distance</TableColumn>
                         <TableColumn>Action</TableColumn>
                     </TableHeader>
                     <TableBody
@@ -124,7 +115,6 @@ const OfflinePrep = () => {
                                     {agent?.languages?.map(lang => languages.find(l => l.id === lang)?.title || 'Unknown')?.join(', ')}
                                 </TableCell>
 
-                                <TableCell>{agent.distance.toFixed(2)} km</TableCell>
                                 <TableCell>
                                     <Button
                                         color='primary'

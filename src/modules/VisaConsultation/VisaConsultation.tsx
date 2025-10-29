@@ -14,6 +14,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import useApiCallUtils from '@/hooks/useApiCallUtils';
 import { countries } from 'country-data'
 import 'rsuite/dist/rsuite.min.css';
+import { PREDEFINED_AGENCY_ID } from '@/utils/Constants';
 
 
 const VisaConsultation = () => {
@@ -211,13 +212,14 @@ const VisaConsultation = () => {
 
     const { isOpen, onOpenChange } = useDisclosure()
 
-    const { latitude, longitude, area } = useSelector((state: any) => state.user_location);
+    // const { latitude, longitude, area } = useSelector((state: any) => state.user_location);
 
     const handleSubmit = async () => {
         // raise_application
         setRaisedApplicationLoader(true)
 
         const sendData = {
+            agency_id:PREDEFINED_AGENCY_ID,
             country: formData.country,
             state: formData.state,
             university: formData.university,
@@ -230,8 +232,8 @@ const VisaConsultation = () => {
             // intakeYear: formData.intakeYear,
             tuitionFees: formData.tuitionFees,
             otherOption: formData.otherOption,
-            latitude: latitude,
-            longitude: longitude,
+            // latitude: latitude,
+            // longitude: longitude,
         };
 
         const { success } = await commonPostAPICall({ ...sendData }, "/student/raise_application", true)
@@ -423,7 +425,7 @@ const VisaConsultation = () => {
                                 </div>
 
                                 {/* Location Section */}
-                                <div className="col-span-full flex flex-col gap-4 items-center bg-accent/10  rounded-lg">
+                                {/* <div className="col-span-full flex flex-col gap-4 items-center bg-accent/10  rounded-lg">
                                     <p className="text-md font-medium">Selected Location: {area}</p>
 
                                     <div className='flex flex-row items-center justify-center gap-4 col-span-2'>
@@ -433,7 +435,7 @@ const VisaConsultation = () => {
                                     </div>
                                     <IconButton onClick={() => { onOpenChange() }} icon={<MapPin className='p-1' />}>Select Other Location</IconButton>
 
-                                </div>
+                                </div> */}
 
                                 {/* Submit Button */}
                                 <div className="col-span-full mt-6 mx-auto flex items-center justify-center gap-4 flex-wrap">

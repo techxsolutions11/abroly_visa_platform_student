@@ -14,7 +14,7 @@ const AchievementBanner = ({ target_type }) => {
     }, [target_type])
 
     const findBanners = async () => {
-        const { data, success } = await commonGetAPICalls(`/side_banner/student/achievement/${target_type}`)
+        const { data, success } = await commonGetAPICalls(`/side_banner/student/achievement/${target_type}/${import.meta.env.VITE_AGENT_UUID}`)
         if (success && success == true) {
             setBanners(data)
         }
@@ -118,6 +118,8 @@ const AchievementBanner = ({ target_type }) => {
                                             name="email"
                                             value={form.email}
                                             onChange={handleChange}
+                                            labelPlacement='outside-left'
+                                            className='block'
                                             required
                                         />
                                     </div>
@@ -129,6 +131,8 @@ const AchievementBanner = ({ target_type }) => {
                                             label="Name"
                                             value={form.name}
                                             onChange={handleChange}
+                                              labelPlacement='outside-left'
+                                               className='block'
                                             required
                                         />
                                     </div>
@@ -139,6 +143,8 @@ const AchievementBanner = ({ target_type }) => {
                                             name="phone_number"
                                             label="Phone Number"
                                             value={form.phone_number}
+                                              labelPlacement='outside-left'
+                                               className='block'
                                             onChange={handleChange}
                                             required
                                         />

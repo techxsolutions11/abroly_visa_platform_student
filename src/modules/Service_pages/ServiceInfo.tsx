@@ -241,9 +241,8 @@ const ServiceInfo = () => {
                         <AchievementBanner target_type={service} />
                     </section>
                 </section>
-
             }
-            {!contentWritingServices.includes(service) &&
+            {!contentWritingServices.includes(service) &&( service == "health_ins" || service == "sim_card" || service == "language") &&
                 <section className='grid grid-cols-12'>
                     <section className='container mx-auto col-span-10'>
                         {/* display here halth insurenace and in simcard details */}
@@ -256,6 +255,7 @@ const ServiceInfo = () => {
                         {
                             service == "language" && getAuthToken() && <LanguagePrep />
                         }
+                        
                     </section>
                     <section className='col-span-2 h-full items-center'>
                         <AchievementBanner target_type={service} />

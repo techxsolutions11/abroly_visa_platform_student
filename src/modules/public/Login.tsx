@@ -122,7 +122,7 @@ const Login = () => {
         <section className="min-h-[85vh] flex items-center justify-center bg-gray-100">
             <Card className="w-full max-w-md shadow-lg p-6 bg-white rounded-xl">
                 <CardHeader className="flex flex-col items-center">
-                    <h1 className="text-2xl font-semibold text-gray-800">Welcome to Abroly</h1>
+                    <h1 className="text-2xl font-semibold text-gray-800">Welcome to {import.meta.env.VITE_APP_NAME}</h1>
                     <p className="text-sm text-gray-500 mt-1">Log in to manage your account</p>
                 </CardHeader>
                 <CardBody>
@@ -131,6 +131,7 @@ const Login = () => {
                             <div className="space-y-2">
                                 <Input
                                     label="Enter your phone number"
+                                    labelPlacement='outside-left'
                                     startContent={<span className="text-sm text-gray-500">+91</span>}
                                     value={numberAndCountryCode.phone_number}
                                     onChange={(e) =>
@@ -139,7 +140,7 @@ const Login = () => {
                                             phone_number: e.target.value
                                         })
                                     }
-                                    className="w-full"
+                                    className="w-full block"
                                     variant="bordered"
                                     placeholder="1234567890"
                                 />

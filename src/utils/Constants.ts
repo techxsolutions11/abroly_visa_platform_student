@@ -1,0 +1,1 @@
+export const PREDEFINED_AGENCY_ID = import.meta.env.VITE_AGENT_UUID;

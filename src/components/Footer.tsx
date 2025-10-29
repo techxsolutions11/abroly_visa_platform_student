@@ -37,7 +37,7 @@
 //                     {/* Brand Column */}
 //                     <div className="col-span-2 lg:col-span-1">
 //                         <a className="flex-none text-xl font-semibold text-white" href="/">
-//                             Abroly
+//                             {import.meta.env.VITE_APP_NAME}
 //                         </a>
 //                         <p className="mt-3 text-sm text-slate-400">
 //                             Empowering visa consultants with intelligent CRM solutions to streamline operations and grow their business.
@@ -84,7 +84,7 @@
 //                         <div className="mt-3 grid space-y-3">
 //                             <p className="flex items-center gap-2 text-sm text-slate-400">
 //                                 <Mail size={16} />
-//                                 support@abroly.com
+//                                 {import.meta.env.VITE_SUPPORT_EMAIL}
 //                             </p>
 //                             <p className="flex items-center gap-2 text-sm text-slate-400">
 //                                 <Phone size={16} />
@@ -102,7 +102,7 @@
 //                 <div className="mt-12 grid gap-y-2 sm:flex sm:justify-between sm:items-center border-t border-slate-700 pt-6">
 //                     <div className="flex items-center gap-x-3">
 //                         <p className="text-sm text-slate-400">
-//                             © {new Date().getFullYear()} Abroly. All rights reserved.
+//                             © {new Date().getFullYear()} {import.meta.env.VITE_APP_NAME}. All rights reserved.
 //                         </p>
 //                     </div>
 //                     <div className="flex gap-x-4">
@@ -152,7 +152,7 @@ const Footer = () => {
                     {/* Brand Info */}
                     <div className="flex flex-col">
                         <Link to="/" className="text-2xl font-bold text-white mb-3">
-                            Abroly
+                            {import.meta.env.VITE_APP_NAME}
                         </Link>
                         <p className="text-sm text-gray-400 max-w-xs">
                             Get personalized guidance for admissions, scholarships, and visa processing at top universities worldwide.
@@ -200,10 +200,10 @@ const Footer = () => {
                         <h4 className="font-semibold text-white mb-3">Contact</h4>
                         <ul className="space-y-3">
                             <li className="flex items-center gap-2 text-sm text-gray-400">
-                                <Mail size={16} /> contact@abroly.com
+                                <Mail size={16} /> {import.meta.env.VITE_SUPPORT_EMAIL}
                             </li>
                             <li className="flex items-center gap-2 text-sm text-gray-400">
-                                <Phone size={16} /> +91 9879000738
+                                <Phone size={16} /> {import.meta.env.VITE_SUPPORT_NUMBER}
                             </li>
                             {/* Uncomment if you want to add address */}
                             {/* <li className="flex items-center gap-2 text-sm text-gray-400">
@@ -216,7 +216,7 @@ const Footer = () => {
                 {/* Bottom Bar */}
                 <div className="mt-12 flex flex-col sm:flex-row justify-between items-center border-t border-gray-700 pt-6 text-center sm:text-left">
                     <p className="text-sm text-gray-400 mb-4 sm:mb-0">
-                        © {new Date().getFullYear()} Abroly. All rights reserved.
+                        © {new Date().getFullYear()} {import.meta.env.VITE_APP_NAME}. All rights reserved.
                     </p>
                     <p className="text-sm text-gray-400">
                         Developed by

@@ -5,7 +5,7 @@ import {
   DrawerBody,
   DrawerHeader,
   DrawerFooter,
-} from "@heroui/drawer";
+} from "@nextui-org/react";
 import { TriangleAlert } from 'lucide-react';
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Dialog, DialogContent, DialogFooter } from "./ui/dialog";

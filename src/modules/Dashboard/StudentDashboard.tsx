@@ -118,22 +118,31 @@ const data = {
       icon: SquareChartGantt,
       isActive: true,
       items: [
+        // {
+        //   title: "Health Insurenace",
+        //   url: "/services/health_ins",
+        // },
+        // {
+        //   title: "Sim Cards",
+        //   url: "/services/sim_card",
+        // },
+        // {
+        //   title: "Visa & Course Consultation",
+        //   url: "/services/visa_consultation",
+        // },
+        // {
+        //   title: "Accommodation",
+        //   url: "/services/accommodation",
+        // },
         {
-          title: "Health Insurenace",
-          url: "/services/health_ins",
+          title: "Health Insurance",
+          url: "/services_request/health",
         },
         {
-          title: "Sim Cards",
-          url: "/services/sim_card",
+          title: "International SIM Card",
+          url: "/services_request/data",
         },
-        {
-          title: "Visa & Course Consultation",
-          url: "/services/visa_consultation",
-        },
-        {
-          title: "Accommodation",
-          url: "/services/accommodation",
-        },
+
 
       ],
     },
@@ -174,30 +183,6 @@ const data = {
       ],
     },
     {
-      title: "Content Writing",
-      url: "#",
-      icon: ScrollText,
-      isActive: true,
-      items: [
-        {
-          title: "SOP",
-          url: "/services/sop",
-        },
-        {
-          title: "Motivation Letter",
-          url: "/services/motivation",
-        },
-        {
-          title: "Cover Letter",
-          url: "/services/cover",
-        },
-        {
-          title: "Purchased",
-          url: "/content_writing_history",
-        },
-      ],
-    },
-    {
       title: "Career",
       url: "#",
       icon: Briefcase,
@@ -226,11 +211,6 @@ const data = {
       url: "/contact_us",
       icon: Contact,
     },
-    {
-      title: "Feedback",
-      url: "#",
-      icon: Send,
-    },
   ],
   profile: [
     {
@@ -243,22 +223,8 @@ const data = {
           title: "Student Profile",
           url: "/student_profile",
         },
-        // {
-        //   title: "Visa Profile",
-        //   url: "/",
-        // },
       ],
     },
-    //   {
-    //     name: "Sales & Marketing",
-    //     url: "#",
-    //     icon: PieChart,
-    //   },
-    //   {
-    //     name: "Travel",
-    //     url: "#",
-    //     icon: Map,
-    //   },
   ],
 }
 
@@ -278,83 +244,6 @@ const StudentDashboard = () => {
 
   const { phone, email, profileimage, user_name } = useSelector((state: any) => state.login);
 
-
-  const { latitude, longitude, area } = useSelector((state: any) => state.user_location);
-
-  useEffect(() => {
-    if (area == "") {
-      handleGetCurrentLocation();
-    }
-  }, []);
-
-  const handleGetCurrentLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        async (position) => {
-          const { latitude, longitude } = position.coords;
-          dispatch(setLatitude(latitude));
-          addToLocal("latitude", latitude + "");
-          dispatch(setLongitude(longitude));
-          addToLocal("longitude", longitude + "");
-
-          // Fetch the area using the Geocoding API
-          await fetchAreaFromCoordinates(latitude, longitude);
-        },
-        (error) => {
-          console.error("Error getting location:", error);
-          ErrorToast("Failed to get your location. Please enable location services.");
-        },
-        {
-          enableHighAccuracy: true, // Request high-accuracy location
-          timeout: 10000, // Timeout after 10 seconds
-          maximumAge: 0, // Do not use cached location
-        }
-      );
-    } else {
-      ErrorToast("Geolocation is not supported by your browser.");
-    }
-  };
-
-  const fetchAreaFromCoordinates = async (lat: number, lng: number) => {
-    try {
-      const response = await fetch(
-        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${placesApiKey}`
-      );
-
-      const data = await response.json();
-
-      if (data.status === "OK" && data.results.length > 0) {
-        const formattedAddress = data.results[0].formatted_address; // Full address
-        const areaName = data.results[0].address_components.find((component: any) =>
-          component.types.includes("locality")
-        )?.long_name; // Area name
-        dispatch(setArea(areaName || formattedAddress || "Unknown Area"));
-        addToLocal("area", areaName || formattedAddress || "Unknown Area");
-      } else {
-        console.error("Failed to fetch area:", data);
-        dispatch(setArea("Unknown Area"));
-      }
-    } catch (error) {
-      console.error("Error fetching area:", error);
-      dispatch(setArea("Unknown Area"));
-    }
-  };
-
-  // api to get coins
-  const coinsBalance = async () =>{
-    const {data,success,message } = await commonGetAPICalls(`/coins/student/get_coins_balance`) 
-    if(success && success == true){
-      return data 
-    }
-    throw new Error(message)
-  }
-
-  const {data:balance} = useQuery({
-    queryKey:['coins_balance'],
-    queryFn:coinsBalance,
-    staleTime: 1000 * 60 * 60 * 24, // 1 day
-  })
-
   return (
     <>
       <SidebarProvider className="bg-white">
@@ -366,12 +255,12 @@ const StudentDashboard = () => {
                   size="lg"
                   className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
                 >
-                  <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                  <img src={aborlyIcon} alt="Abroly"  /> 
+                  <div className="flex aspect-square size-8 items-center justify-center rounded-lg">
+                  <img src={aborlyIcon} alt={import.meta.env.VITE_APP_NAME}  /> 
                   </div>
                   <div className="grid flex-1 text-left text-sm leading-tight">
                     <span className="truncate font-semibold">
-                      Abroly
+                      {import.meta.env.VITE_APP_NAME}
                     </span>
                     <span className="truncate text-xs">
                       Student
@@ -542,13 +431,13 @@ const StudentDashboard = () => {
             <div className="flex items-center gap-2 px-4 w-full">
               <SidebarTrigger className="-ml-1" />
               <Separator orientation="vertical" className="mr-2 h-4" />
-              <Button size="sm" onClick={() => { onLocationOpenChange() }} startContent={<MapPin className="p-1" />} color="primary">{area !== "" ? area : "Select Your Location"}</Button>
+              {/* <Button size="sm" onClick={() => { onLocationOpenChange() }} startContent={<MapPin className="p-1" />} color="primary">{area !== "" ? area : "Select Your Location"}</Button> */}
               <Separator orientation="vertical" className="mr-2 h-4" />
-              <Button size="sm" variant="flat" className="ml-auto"
+              {/* <Button size="sm" variant="flat" className="ml-auto"
               onClick={()=> {
                 navigate("/coin_history")
               }}
-              startContent={<BadgeIndianRupee className="p-1" />} color="success"><p className="font-bold text-lg">{balance}</p></Button>
+              startContent={<BadgeIndianRupee className="p-1" />} color="success"><p className="font-bold text-lg">{balance}</p></Button> */}
             </div>
           </header>
           <div className="flex flex-1 flex-col gap-4 p-4 pt-0">

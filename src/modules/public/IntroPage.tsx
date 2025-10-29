@@ -92,7 +92,7 @@ const IntroPage = () => {
 
             <div className="relative overflow-hidden bg-gradient-to-b from-gray-200/20 to-gray-100/20  flex items-center justify-center">
                 {/* Animated Background Blobs */}
-                <div className="absolute inset-0">
+                {/* <div className="absolute inset-0">
                     <motion.div
                         variants={blobVariants.blob1}
                         initial="initial"
@@ -115,12 +115,12 @@ const IntroPage = () => {
                         filter blur-xl opacity-50"
                     />
 
-                </div>
+                </div> */}
 
                 {/* Content */}
-                <div className="relative z-10 container mx-auto mx-6 px-4 pt-20 pb-16 flex flex-col items-center">
+                {/* <div className="relative z-10 container mx-auto mx-6 px-4 pt-20 pb-16 flex flex-col items-center">
                     <div className="grid lg:grid-cols-2 gap-12 items-center">
-                        {/* Left Content */}
+
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -165,7 +165,7 @@ const IntroPage = () => {
                             </div>
                         </motion.div>
 
-                        {/* Features Grid */}
+
                         <div className="grid md:grid-cols-3 gap-4 pt-8">
                             {features?.map((feature, index) => (
                                 <motion.div
@@ -182,18 +182,18 @@ const IntroPage = () => {
                             ))}
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
 
-            <PublicEventBanners />
+            {/* <PublicEventBanners /> */}
 
             {/* services */}
 
-            <section className='container mx-auto my-36' id='services' >
-                <h1 className='text-3xl text-center my-5'>Everything you need for academics in one place</h1>
+            {/* <section className='container mx-auto my-36' id='services' >
+                <h1 className='text-3xl text-center my-5'>Everything you need for academics in one place</h1> */}
 
                 {/* <p className='text-center'>Content Writing</p> */}
-                <ContentWritingList onOpenChange={onOpenChange} />
+                {/* <ContentWritingList onOpenChange={onOpenChange} />
 
                 <section className="grid gap-2 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 p-4">
                     {[
@@ -266,27 +266,16 @@ const IntroPage = () => {
                             </Button>
                         </div>
                     ))}
-                </section>
-            </section>
+                </section> */}
+            {/* </section> */}
 
             {/* flags */}
-            <HomePageFlags />
+            {/* <HomePageFlags /> */}
 
             {/* why choose abroly */}
 
-            <div className="container p-10  mx-auto">
+            {/* <div className="container p-10  mx-auto">
                 <div className="grid  gap-12">
-                    {/* <div className="lg:w-3/4">
-                        <h2 className="text-3xl lg:text-3xl dark:text-white">
-                            Why Choose Abroly?
-                        </h2>
-                        <p className="mt-3 dark:text-neutral-400">
-                            Abroly is a comprehensive platform designed to simplify the journey of studying and working abroad. Whether
-                            you're a student exploring course options or a professional looking to advance your career in a foreign country,
-                            Abroly has everything you need in one place. With trusted consultants, language preparation, and visa
-                            assistance, we ensure a seamless transition to your dream destination.
-                        </p>
-                    </div> */}
                     <div className="text-center">
                         <h2 className="text-3xl font-bold mb-4"> Why Choose Abroly?</h2>
                         <p className="text-gray-600 max-w-2xl text-xl mx-auto text-justify">
@@ -374,9 +363,9 @@ const IntroPage = () => {
 
                     </div>
                 </div>
-            </div>
+            </div> */}
 
-            <Testimonials />
+            {/* <Testimonials /> */}
 
             {/* <FaqSection /> */}
 

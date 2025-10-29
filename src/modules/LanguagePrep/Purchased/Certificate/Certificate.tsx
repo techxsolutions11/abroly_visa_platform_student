@@ -52,7 +52,7 @@ const Certificate = () => {
                         {/* Header */}
                         <div className="flex justify-between items-center px-8 py-6 bg-gradient-to-r from-indigo-600 to-blue-500 text-white">
                             <div className="flex items-center space-x-4">
-                                <span className="text-2xl font-bold">Abroly</span>
+                                <span className="text-2xl font-bold">{import.meta.env.VITE_APP_NAME}</span>
                             </div>
                             <div className='text-[10px]'>
                                 <p className="text-sm font-light">Certificate ID: {certificateDetails?.certificate_id}</p>
@@ -65,7 +65,7 @@ const Certificate = () => {
                             {/* Certificate Title */}
                             <div className="text-center space-y-2">
                                 <h1 className="text-4xl font-semibold text-gray-800">Certificate</h1>
-                                <p className="text-sm text-gray-600">Achievement for Course Completion Provided by Abroly</p>
+                                <p className="text-sm text-gray-600">Achievement for Course Completion Provided by {import.meta.env.VITE_APP_NAME}</p>
                             </div>
 
                             {/* Recipient Information */}
@@ -108,7 +108,7 @@ const Certificate = () => {
                     <span className="ml-2">
                         Verify this certificate at{' '}
                         <a href="https://verify.abroly.com" className="text-indigo-600 underline">
-                            verify.abroly.com
+                            {import.meta.env.VITE_CERTIFICATE_URL}
                         </a>
                     </span>
                 </div> */}

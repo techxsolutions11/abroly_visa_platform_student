@@ -14,7 +14,7 @@ const LanguagePrep = () => {
 
 
     const fetchApiCall = async () => {
-        const { data, success } = await commonPublicGetApiCalls("/language_prep/public/list")
+        const { data, success } = await commonPublicGetApiCalls("/language_prep/public/list/" + import.meta.env.VITE_AGENT_ID)
         if (success && success == true) {
             setLanguages(data)
         }

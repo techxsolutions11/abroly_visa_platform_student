@@ -62,38 +62,13 @@ const PrivateIntroPage = () => {
     return (
         <div className=''>
 
-            {/* <div className="container  p-6 sm:p-6 lg:p-8" >
-                <div className="grid lg:grid-cols-7 lg:gap-x-8 xl:gap-x-12 lg:items-center">
-                    <div className="lg:col-span-3">
-                        <h1 className="tracking-* text-3xl font-bold lg:text-3xl">Abroly - Destination, One Click</h1>
-                        <p className="my-3 text-lg ">Find all visa-related solutions, tailored for students and travelers. From application guidance to expert advice, Abroly simplifies your journey abroad.</p>
-
-                        <Button
-                            as={"a"}
-                            href='#services'
-                            variant='flat'
-                            color='primary'
-                        >
-                            Getting Started
-                        </Button>
-
-                    </div>
-
-                    <div className="lg:col-span-4 mt-10 lg:mt-0 hidden sm:block">
-                        <video className="w-full h-[50vh] object-cover rounded-xl" src='https://videos.pexels.com/video-files/7431747/7431747-uhd_2732_1440_30fps.mp4' autoPlay loop muted />
-                    </div>
-                </div>
-            </div> */}
-
-            {/* services */}
-
             <section className='container' id='services' >
                 <h1 className='text-3xl text-center my-5'>Everything you need for academics in one place</h1>
 
                 {/* <p className='text-center'>Content Writing</p> */}
-                <ContentWritingList setFormOptions={setFormOptions} formOptions={formOptions} />
+                {/* <ContentWritingList setFormOptions={setFormOptions} formOptions={formOptions} /> */}
 
-                <section className="grid gap-2 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 p-4">
+                <section className="grid gap-2 grid-cols-1 md:grid-cols-2 p-4">
                     {[
                         {
                             title: "Visa & Course Consultation",
@@ -116,20 +91,20 @@ const PrivateIntroPage = () => {
                             icon: <Briefcase className="text-orange-500" size={40} />,
                             navigateTo: "/services/sim_card",
                         },
-                        {
-                            title: "Accommodation",
-                            description:
-                                "Find comfortable and secure accommodation options near your university or workplace.",
-                            icon: <Home className="text-orange-500" size={40} />,
-                            navigateTo: "/services/accommodation",
-                        },
-                        {
-                            title: "Tourist Visa/Package",
-                            description:
-                                "Hassle-free visa services and exciting travel packages to explore new destinations.",
-                            icon: <Globe className="text-orange-500" size={40} />,
-                            navigateTo: "/services/tourist_visa",
-                        },
+                        // {
+                        //     title: "Accommodation",
+                        //     description:
+                        //         "Find comfortable and secure accommodation options near your university or workplace.",
+                        //     icon: <Home className="text-orange-500" size={40} />,
+                        //     navigateTo: "/services/accommodation",
+                        // },
+                        // {
+                        //     title: "Tourist Visa/Package",
+                        //     description:
+                        //         "Hassle-free visa services and exciting travel packages to explore new destinations.",
+                        //     icon: <Globe className="text-orange-500" size={40} />,
+                        //     navigateTo: "/services/tourist_visa",
+                        // },
                         {
                             title: "Language Preparation",
                             description:

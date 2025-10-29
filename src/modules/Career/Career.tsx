@@ -409,7 +409,7 @@ const Career = () => {
                                             </p>
                                         </div>
                                         <Button
-                                            className="w-fit bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition-colors flex items-center"
+                                            className="w-fit bg-primary text-white py-2 rounded-md hover:bg-primary/90 transition-colors flex items-center"
                                             onPress={() => {
                                                 navigate(`/career/details/${job.uuid}`);
                                             }}

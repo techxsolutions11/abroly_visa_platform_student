@@ -6,7 +6,7 @@ import {
   Drawer,
   DrawerContent,
   DrawerBody,
-} from "@heroui/drawer";
+} from "@nextui-org/react";
 import { MapPin, Search } from 'lucide-react';
 import { Button } from '@nextui-org/react';
 import { addToLocal } from '@/utils/localstorage';

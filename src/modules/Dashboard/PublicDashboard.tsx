@@ -64,11 +64,11 @@ const PublicDashboard = () => {
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             onClick={() => navigate("/")}
-                            className="flex items-center gap-2 cursor-pointer bg-sidebar-primary"
+                            className="flex items-center gap-2 cursor-pointer "
                         >
                             {/* <FaGraduationCap className="text-primary text-3xl" />
                             <span className="font-bold text-xl bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
-                                Abroly
+                                {import.meta.env.VITE_APP_NAME}
                             </span> */}
                             <img src={aborlyIcon} alt="Aborly" className="w-12 h-12" />
                         </motion.div>
@@ -86,7 +86,7 @@ const PublicDashboard = () => {
                                 >
                                     <Button
                                         className={`min-w-[120px] ${isActive
-                                            ? 'bg-sidebar-primary text-white'
+                                            ? 'bg-primary text-white'
                                             : 'bg-default text-default-600 hover:bg-default-200'
                                             }`}
                                         variant={isActive ? "solid" : "flat"}
@@ -111,7 +111,7 @@ const PublicDashboard = () => {
                                 variant="flat"
                                 color="primary"
                                 onPress={() => navigate("/signup")}
-                                className="hidden sm:flex bg-sidebar-primary text-white"
+                                className="hidden sm:flex bg-primary text-white"
                                 startContent={<HiAcademicCap className="text-lg" />}
                             >
                                 Sign Up
@@ -124,7 +124,7 @@ const PublicDashboard = () => {
                             <Button
                                 color="primary"
                                 variant="solid"
-                                className='bg-sidebar-primary'
+                                className='bg-primary'
                                 onPress={() => navigate("/login")}
                                 startContent={<LogIn className="text-lg" />}
                             >

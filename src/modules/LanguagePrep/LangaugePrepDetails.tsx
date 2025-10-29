@@ -21,7 +21,7 @@ const LangaugePrepDetails = () => {
 
 
     const fetchApiCall = async () => {
-        const { data, success } = await commonPostPublicAPICall({ uuid: id }, "/language_prep/public/details")
+        const { data, success } = await commonPostPublicAPICall({ uuid: id, agent_id: import.meta.env.VITE_AGENT_ID }, "/language_prep/public/details")
         if (success && success == true) {
             setDetails(data)
         }

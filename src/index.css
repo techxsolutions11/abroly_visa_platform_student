@@ -28,6 +28,11 @@ h1,h2,h3,h4,h5,h6{
 
 @layer base {
   :root {
+    /* Custom colors from environment variables */
+    --primary-color: #f66b47;
+    --primary-foreground-color: #ffffff;
+    --dark-primary-color: #050a30;
+    
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
     --card: 0 0% 100%;

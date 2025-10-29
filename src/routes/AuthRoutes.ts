@@ -32,8 +32,9 @@ const VisaConsultationDetails = lazy(()=> import("@/modules/VisaConsultation/Vis
 const AcceptedApplicationProgress = lazy(()=> import("@/modules/VisaConsultation/AcceptedApplicationProgress"))
 const AcceptedApplications = lazy(()=> import("@/modules/VisaConsultation/AcceptedApplications"))
 const AgnetProfile = lazy(()=> import("@/modules/VisaConsultation/AgnetProfile"))
-const CoinHistory = lazy(()=> import("@/modules/Coins/CoinHistory"))
+// const CoinHistory = lazy(()=> import("@/modules/Coins/CoinHistory"))
 const OfflinePrep =  lazy(()=> import("@/modules/LanguagePrep/OfflinePrep"))
+const ServicesRequest = lazy(()=> import("@/modules/ServiceRequests/ServicesRequest"))
 
 export const PublicRoutes = [
     {
@@ -67,6 +68,11 @@ export const PublicRoutes = [
     {
         path: "/services/:service",
         element: ServiceInfo
+    },
+
+    {
+        path: "/services_request/:service",
+        element: ServicesRequest
     },
     // public certificate validation
     {
@@ -221,12 +227,16 @@ export const StudentRoutes = [
         path: "/event_banners",
         element: PublicEventBanners
     },
-
-    // event banners
     {
-        path: "/coin_history",
-        element: CoinHistory
+        path: "/services_request/:service",
+        element: ServicesRequest
     },
+
+    // // event banners
+    // {
+    //     path: "/coin_history",
+    //     element: CoinHistory
+    // },
 
     // 404
     {
