@@ -136,7 +136,7 @@ const PrivateIntroPage = () => {
                 </section>
             </section>
 
-            {/* why choose abroly */}
+            {/* why choose Techxuniverse */}
 
             {/* <Testimonials /> */}
 

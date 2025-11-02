@@ -143,9 +143,9 @@ const ContactUs = () => {
                                 <h4 className="font-semibold">Email us:</h4>
                                 <a 
                                     className="text-sm hover:text-primary focus:outline-none focus:text-primary" 
-                                    href={`mailto:${getSupportEmail() || 'contact@abroly.com'}`}
+                                    href={`mailto:${getSupportEmail() || 'contact@techxunivers.com'}`}
                                 >
-                                    {getSupportEmail() || 'contact@abroly.com'}
+                                    {getSupportEmail() || 'contact@techxunivers.com'}
                                 </a>
                             </div>
                         </div>

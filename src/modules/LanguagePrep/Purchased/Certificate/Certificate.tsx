@@ -108,7 +108,7 @@ const Certificate = () => {
                     <CheckCircle className="w-5 h-5 text-green-600 inline-block" />
                     <span className="ml-2">
                         Verify this certificate at{' '}
-                        <a href="https://verify.abroly.com" className="text-indigo-600 underline">
+                        <a href="https://verify.Techxuniverse.com" className="text-indigo-600 underline">
                             {getCertificateUrl()}
                         </a>
                     </span>

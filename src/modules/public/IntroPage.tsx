@@ -273,7 +273,7 @@ const IntroPage = () => {
             {/* flags */}
             {/* <HomePageFlags /> */}
 
-            {/* why choose abroly */}
+            {/* why choose Techxuniverse */}
 
            <div className="container p-10  mx-auto">
                 <div className="grid  gap-12">
@@ -282,7 +282,7 @@ const IntroPage = () => {
                         <p className="text-gray-600 max-w-2xl text-xl mx-auto text-justify">
                             {getAppName()} is a comprehensive platform designed to simplify the journey of studying and working abroad. Whether
                             you're a student exploring course options or a professional looking to advance your career in a foreign country,
-                            Abroly has everything you need in one place. With trusted consultants, language preparation, and visa
+                            Techxuniverse has everything you need in one place. With trusted consultants, language preparation, and visa
                             assistance, we ensure a seamless transition to your dream destination.
                         </p>
                     </div>
