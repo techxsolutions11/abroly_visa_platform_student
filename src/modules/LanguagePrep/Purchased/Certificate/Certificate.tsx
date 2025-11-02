@@ -5,6 +5,7 @@ import { Button, Spinner } from '@nextui-org/react';
 import { AlertCircle, ArrowLeft, Award, CheckCircle, Shield, Star } from 'lucide-react';
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
+import { getAppName, getCertificateUrl } from '@/utils/config';
 
 const Certificate = () => {
     const { commonPostAPICall, commonPostPublicAPICall } = useApiCallUtils()
@@ -52,11 +53,11 @@ const Certificate = () => {
                         {/* Header */}
                         <div className="flex justify-between items-center px-8 py-6 bg-gradient-to-r from-indigo-600 to-blue-500 text-white">
                             <div className="flex items-center space-x-4">
-                                <span className="text-2xl font-bold">{import.meta.env.VITE_APP_NAME}</span>
+                                <span className="text-2xl font-bold">{getAppName()}</span>
                             </div>
                             <div className='text-[10px]'>
                                 <p className="text-sm font-light">Certificate ID: {certificateDetails?.certificate_id}</p>
-                                Verify on <a href={`${import.meta.env.VITE_CERTIFICATE_URL}/${id}`} target='_blank'>{import.meta.env.VITE_CERTIFICATE_URL}/{id}</a>
+                                Verify on <a href={`${getCertificateUrl()}/${id}`} target='_blank'>{getCertificateUrl()}/{id}</a>
                             </div>
                         </div>
 
@@ -65,7 +66,7 @@ const Certificate = () => {
                             {/* Certificate Title */}
                             <div className="text-center space-y-2">
                                 <h1 className="text-4xl font-semibold text-gray-800">Certificate</h1>
-                                <p className="text-sm text-gray-600">Achievement for Course Completion Provided by {import.meta.env.VITE_APP_NAME}</p>
+                                <p className="text-sm text-gray-600">Achievement for Course Completion Provided by {getAppName()}</p>
                             </div>
 
                             {/* Recipient Information */}
@@ -108,7 +109,7 @@ const Certificate = () => {
                     <span className="ml-2">
                         Verify this certificate at{' '}
                         <a href="https://verify.abroly.com" className="text-indigo-600 underline">
-                            {import.meta.env.VITE_CERTIFICATE_URL}
+                            {getCertificateUrl()}
                         </a>
                     </span>
                 </div> */}

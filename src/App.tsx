@@ -34,7 +34,13 @@ const App = () => {
             returnValue.message = error.response.data?.message || "Unauthorized access";
             setTimeout(() => {
               window.location.href = '/';
-              localStorage.clear()
+              // Only clear auth-related items, keep app_config
+              const appConfig = localStorage.getItem('app_config');
+              localStorage.clear();
+              // Restore app_config after clearing to maintain branding
+              if (appConfig) {
+                localStorage.setItem('app_config', appConfig);
+              }
               persistor.purge();
             }, 1000);
           } else {

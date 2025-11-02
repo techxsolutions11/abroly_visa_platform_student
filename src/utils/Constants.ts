@@ -1,1 +1,3 @@
-export const PREDEFINED_AGENCY_ID = import.meta.env.VITE_AGENT_UUID;
+import { getAgentUuid } from './config';
+
+export const PREDEFINED_AGENCY_ID = getAgentUuid();

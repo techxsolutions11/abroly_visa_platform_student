@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { Mail, MapPin } from 'lucide-react'
 import useApiCallUtils from '@/hooks/useApiCallUtils'
 import { ErrorToast, SuccessToast } from '@/utils/Toaster'
+import { getAgentId, getAgencyAddress, getSupportEmail } from '@/utils/config'
 
 const ContactUs = () => {
     useEffect(() => {
@@ -11,7 +12,7 @@ const ContactUs = () => {
     }, [])
 
     const { commonPostPublicAPICall } = useApiCallUtils()
-    const agentId = import.meta.env.VITE_AGENT_ID as string
+    const agentId = getAgentId()
     const [isSubmitting, setIsSubmitting] = useState(false)
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -131,7 +132,7 @@ const ContactUs = () => {
                             <div className='flex flex-col items-start'>
                                 <h4 className="font-semibold">Our address:</h4>
                                 <address className="text-sm not-italic">
-                                    {import.meta.env.VITE_AGENCY_ADDRESS || "Ahmedabad, Gujarat"}
+                                    {getAgencyAddress() || "Ahmedabad, Gujarat"}
                                 </address>
                             </div>
                         </div>
@@ -142,9 +143,9 @@ const ContactUs = () => {
                                 <h4 className="font-semibold">Email us:</h4>
                                 <a 
                                     className="text-sm hover:text-primary focus:outline-none focus:text-primary" 
-                                    href={`mailto:${import.meta.env.VITE_SUPPORT_EMAIL || 'contact@abroly.com'}`}
+                                    href={`mailto:${getSupportEmail() || 'contact@abroly.com'}`}
                                 >
-                                    {import.meta.env.VITE_SUPPORT_EMAIL || 'contact@abroly.com'}
+                                    {getSupportEmail() || 'contact@abroly.com'}
                                 </a>
                             </div>
                         </div>

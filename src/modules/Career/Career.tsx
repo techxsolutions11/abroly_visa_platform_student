@@ -14,6 +14,7 @@ import AchievementBanner from '../AchievementBanner/AchievementBanner';
 import useApiCallUtils from '@/hooks/useApiCallUtils';
 import ReactFlagsSelect from 'react-flags-select';
 import { countries } from 'country-data';
+import { getAgentUuid } from '@/utils/config';
 
 const Career = () => {
 
@@ -39,6 +40,7 @@ const Career = () => {
         salaryMax: '',
         experienceRequired: '',
         educationLevel: '',
+        agent_uuid: getAgentUuid(),
     });
 
     useEffect(() => {

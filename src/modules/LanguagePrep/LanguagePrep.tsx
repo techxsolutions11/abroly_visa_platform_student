@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button, Card, CardBody, CardFooter, Image } from '@nextui-org/react'
 import useApiCallUtils from '@/hooks/useApiCallUtils'
+import { getAgentId } from '@/utils/config'
 
 const LanguagePrep = () => {
 
@@ -14,7 +15,8 @@ const LanguagePrep = () => {
 
 
     const fetchApiCall = async () => {
-        const { data, success } = await commonPublicGetApiCalls("/language_prep/public/list/" + import.meta.env.VITE_AGENT_ID)
+        alert( getAgentId())
+        const { data, success } = await commonPublicGetApiCalls("/language_prep/public/list/" + getAgentId())
         if (success && success == true) {
             setLanguages(data)
         }

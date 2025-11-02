@@ -10,6 +10,7 @@ import { IconButton } from 'rsuite';
 import { MapPin } from 'lucide-react';
 import { SuccessToast } from '@/utils/Toaster';
 import fetchQueriesHook from '@/hooks/fetchQueriesHook';
+import { getAgentUuid } from '@/utils/config';
 
 const OfflinePrep = () => {
     const { commonGetAPICalls, commonPostAPICall } = useApiCallUtils();
@@ -43,7 +44,7 @@ const OfflinePrep = () => {
                 // latitude: latitude, // Example value
                 // longitude: longitude, // Example value
                 // radiusInKm: '10',
-                agent_uuid: import.meta.env.VITE_AGENT_UUID
+                agent_uuid: getAgentUuid()
             });
             if (selectedLanguages.length) {
                 queryParams.append('selected_language_id', selectedLanguages.join(','));

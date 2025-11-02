@@ -7,6 +7,7 @@ import { addToLocal } from '../../utils/localstorage'
 import { GrEdit } from 'react-icons/gr'
 import { Link, useNavigate } from 'react-router-dom'
 import useApiCallUtils from '@/hooks/useApiCallUtils'
+import { getAppName } from '@/utils/config'
 
 const IS_LOCAL = import.meta.env.VITE_IS_LOCAL || false
 
@@ -122,7 +123,7 @@ const Login = () => {
         <section className="min-h-[85vh] flex items-center justify-center bg-gray-100">
             <Card className="w-full max-w-md shadow-lg p-6 bg-white rounded-xl">
                 <CardHeader className="flex flex-col items-center">
-                    <h1 className="text-2xl font-semibold text-gray-800">Welcome to {import.meta.env.VITE_APP_NAME}</h1>
+                    <h1 className="text-2xl font-semibold text-gray-800">Welcome to {getAppName()}</h1>
                     <p className="text-sm text-gray-500 mt-1">Log in to manage your account</p>
                 </CardHeader>
                 <CardBody>

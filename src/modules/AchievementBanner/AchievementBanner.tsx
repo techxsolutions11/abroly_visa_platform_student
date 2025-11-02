@@ -2,6 +2,7 @@ import useApiCallUtils from '@/hooks/useApiCallUtils'
 import { ModalContent, useDisclosure, Modal, ModalHeader, ModalBody, Input, Button } from '@nextui-org/react'
 import { LucideMegaphone } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
+import { getAgentUuid } from '@/utils/config'
 
 const AchievementBanner = ({ target_type }) => {
 
@@ -14,7 +15,7 @@ const AchievementBanner = ({ target_type }) => {
     }, [target_type])
 
     const findBanners = async () => {
-        const { data, success } = await commonGetAPICalls(`/side_banner/student/achievement/${target_type}/${import.meta.env.VITE_AGENT_UUID}`)
+        const { data, success } = await commonGetAPICalls(`/side_banner/student/achievement/${target_type}/${getAgentUuid()}`)
         if (success && success == true) {
             setBanners(data)
         }

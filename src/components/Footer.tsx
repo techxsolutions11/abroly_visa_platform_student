@@ -128,6 +128,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Facebook, Twitter, Linkedin, Instagram, Mail, Phone, MapPin } from 'lucide-react';
 import useApiCallUtils from '@/hooks/useApiCallUtils';
+import { getAppName, getSupportEmail, getSupportNumber } from '@/utils/config';
 
 const Footer = () => {
     const { commonPublicGetApiCalls } = useApiCallUtils();
@@ -152,11 +153,11 @@ const Footer = () => {
                     {/* Brand Info */}
                     <div className="flex flex-col">
                         <Link to="/" className="text-2xl font-bold text-white mb-3">
-                            {import.meta.env.VITE_APP_NAME}
+                            {getAppName()}
                         </Link>
-                        <p className="text-sm text-gray-400 max-w-xs">
+                        {/* <p className="text-sm text-gray-400 max-w-xs">
                             Get personalized guidance for admissions, scholarships, and visa processing at top universities worldwide.
-                        </p>
+                        </p> */}
                         <div className="mt-4 flex space-x-4">
                             {[Facebook, Twitter, Linkedin, Instagram].map((Icon, idx) => (
                                 <a
@@ -200,10 +201,10 @@ const Footer = () => {
                         <h4 className="font-semibold text-white mb-3">Contact</h4>
                         <ul className="space-y-3">
                             <li className="flex items-center gap-2 text-sm text-gray-400">
-                                <Mail size={16} /> {import.meta.env.VITE_SUPPORT_EMAIL}
+                                <Mail size={16} /> {getSupportEmail()}
                             </li>
                             <li className="flex items-center gap-2 text-sm text-gray-400">
-                                <Phone size={16} /> {import.meta.env.VITE_SUPPORT_NUMBER}
+                                <Phone size={16} /> {getSupportNumber()}
                             </li>
                             {/* Uncomment if you want to add address */}
                             {/* <li className="flex items-center gap-2 text-sm text-gray-400">
@@ -216,7 +217,7 @@ const Footer = () => {
                 {/* Bottom Bar */}
                 <div className="mt-12 flex flex-col sm:flex-row justify-between items-center border-t border-gray-700 pt-6 text-center sm:text-left">
                     <p className="text-sm text-gray-400 mb-4 sm:mb-0">
-                        © {new Date().getFullYear()} {import.meta.env.VITE_APP_NAME}. All rights reserved.
+                        © {new Date().getFullYear()} {getAppName()}. All rights reserved.
                     </p>
                     <p className="text-sm text-gray-400">
                         Developed by

@@ -93,6 +93,7 @@ import { addToLocal } from "@/utils/localstorage"
 import useApiCallUtils from "@/hooks/useApiCallUtils"
 import { useQuery } from "@tanstack/react-query"
 import aborlyIcon from "../../assets/logo.png"
+import { getAppName, getConfig } from "@/utils/config"
 
 const data = {
   navMain: [
@@ -256,11 +257,12 @@ const StudentDashboard = () => {
                   className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
                 >
                   <div className="flex aspect-square size-8 items-center justify-center rounded-lg">
-                  <img src={aborlyIcon} alt={import.meta.env.VITE_APP_NAME}  /> 
+                  {/* <img src={aborlyIcon} alt={getAppName()}  />  */}
+                  <img src={getConfig('FAVICON_URL')} alt="techxuniverse" className="w-12 h-12" />
                   </div>
                   <div className="grid flex-1 text-left text-sm leading-tight">
                     <span className="truncate font-semibold">
-                      {import.meta.env.VITE_APP_NAME}
+                      {getAppName()}
                     </span>
                     <span className="truncate text-xs">
                       Student

@@ -15,6 +15,7 @@ import { Carousel } from 'rsuite';
 import { motion } from 'framer-motion'
 import PublicEventBanners from '../EventBanners/PublicEventBanners';
 import { Layout, Target, Users, Languages, FileText, Heart, Stamp, Activity, Headphones } from "lucide-react";
+import { getAppName } from '@/utils/config';
 
 
 const IntroPage = () => {
@@ -92,7 +93,7 @@ const IntroPage = () => {
 
             <div className="relative overflow-hidden bg-gradient-to-b from-gray-200/20 to-gray-100/20  flex items-center justify-center">
                 {/* Animated Background Blobs */}
-                {/* <div className="absolute inset-0">
+                <div className="absolute inset-0">
                     <motion.div
                         variants={blobVariants.blob1}
                         initial="initial"
@@ -115,10 +116,10 @@ const IntroPage = () => {
                         filter blur-xl opacity-50"
                     />
 
-                </div> */}
+                </div>
 
                 {/* Content */}
-                {/* <div className="relative z-10 container mx-auto mx-6 px-4 pt-20 pb-16 flex flex-col items-center">
+                <div className="relative z-10 container mx-auto mx-6 px-4 pt-20 pb-16 flex flex-col items-center">
                     <div className="grid lg:grid-cols-2 gap-12 items-center">
 
                         <motion.div
@@ -138,9 +139,9 @@ const IntroPage = () => {
                                 Begin Here
                             </h1>
 
-                            <p className="text-xl text-sidebar-primary">
+                            {/* <p className="text-xl text-sidebar-primary">
                                 Get personalized guidance for admissions, scholarships, and visa processing at top universities worldwide.
-                            </p>
+                            </p> */}
 
                             <div className="flex flex-wrap gap-4 justify-start">
                                 <Button
@@ -182,7 +183,7 @@ const IntroPage = () => {
                             ))}
                         </div>
                     </div>
-                </div> */}
+                </div> 
             </div>
 
             {/* <PublicEventBanners /> */}
@@ -190,7 +191,7 @@ const IntroPage = () => {
             {/* services */}
 
             {/* <section className='container mx-auto my-36' id='services' >
-                <h1 className='text-3xl text-center my-5'>Everything you need for academics in one place</h1> */}
+                <h1 className='text-3xl text-center my-5'>Everything you need for academics in one place</h1>  */}
 
                 {/* <p className='text-center'>Content Writing</p> */}
                 {/* <ContentWritingList onOpenChange={onOpenChange} />
@@ -267,19 +268,19 @@ const IntroPage = () => {
                         </div>
                     ))}
                 </section> */}
-            {/* </section> */}
+            {/* </section>  */}
 
             {/* flags */}
             {/* <HomePageFlags /> */}
 
             {/* why choose abroly */}
 
-            {/* <div className="container p-10  mx-auto">
+           <div className="container p-10  mx-auto">
                 <div className="grid  gap-12">
                     <div className="text-center">
-                        <h2 className="text-3xl font-bold mb-4"> Why Choose Abroly?</h2>
+                        <h2 className="text-3xl font-bold mb-4"> Why Choose {getAppName()}?</h2>
                         <p className="text-gray-600 max-w-2xl text-xl mx-auto text-justify">
-                            Abroly is a comprehensive platform designed to simplify the journey of studying and working abroad. Whether
+                            {getAppName()} is a comprehensive platform designed to simplify the journey of studying and working abroad. Whether
                             you're a student exploring course options or a professional looking to advance your career in a foreign country,
                             Abroly has everything you need in one place. With trusted consultants, language preparation, and visa
                             assistance, we ensure a seamless transition to your dream destination.
@@ -363,7 +364,7 @@ const IntroPage = () => {
 
                     </div>
                 </div>
-            </div> */}
+            </div> 
 
             {/* <Testimonials /> */}
 

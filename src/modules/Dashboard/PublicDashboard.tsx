@@ -9,6 +9,7 @@ import { PublicRoutes } from '@/routes/AuthRoutes';
 import Footer from '@/components/Footer';
 import { LogIn, MessageCircleQuestion } from 'lucide-react';
 import aborlyIcon from "../../assets/logo.png"
+import { getAppName, getConfig } from '@/utils/config'
 
 const PublicDashboard = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -68,9 +69,10 @@ const PublicDashboard = () => {
                         >
                             {/* <FaGraduationCap className="text-primary text-3xl" />
                             <span className="font-bold text-xl bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
-                                {import.meta.env.VITE_APP_NAME}
+                                {getAppName()}
                             </span> */}
-                            <img src={aborlyIcon} alt="Aborly" className="w-12 h-12" />
+                            {/* <img src={aborlyIcon} alt="Aborly" className="w-12 h-12" /> */}
+                            <img src={getConfig('FAVICON_URL')} alt="techxuniverse" className="w-12 h-12" />
                         </motion.div>
                     </NavbarBrand>
                 </NavbarContent>
