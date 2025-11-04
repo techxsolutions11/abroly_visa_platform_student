@@ -67,8 +67,42 @@ const Index = () => {
     const fetchAppConfig = async () => {
         setConfigLoading(true);
         try {
+            // Extract domain and subdomain from current hostname
+            const hostname = window.location.hostname;
+            const hostnameWithoutPort = hostname.split(':')[0];
+            const hostParts = hostnameWithoutPort.split('.');
+            
+            let domain = '';
+            let subdomain = '';
+            
+            // Parse hostname to extract domain and subdomain
+            // Example: admin.techxuniverse.com -> subdomain: admin, domain: techxuniverse.com
+            if (hostParts.length >= 3) {
+                // If hostname has 3+ parts (e.g., admin.techxuniverse.com)
+                subdomain = hostParts[0]; // 'admin'
+                domain = hostParts.slice(-2).join('.'); // 'techxuniverse.com'
+            } else if (hostParts.length === 2) {
+                // If hostname has exactly 2 parts (e.g., techxuniverse.com)
+                domain = hostnameWithoutPort; // techxuniverse.com
+                // No subdomain in this case
+            }
+            
+            // Build query parameters
+            const queryParams = new URLSearchParams();
+            if (domain) {
+                queryParams.append('domain', domain);
+            }
+            if (subdomain) {
+                queryParams.append('sudomain', subdomain); // Backend accepts 'sudomain'
+            }
+            
+            const queryString = queryParams.toString();
+            const apiUrl = queryString 
+                ? `/agent/get_agency?${queryString}`
+                : '/agent/get_agency';
+            
             // Fetch config from backend - adjust endpoint as needed
-            const { data, success } = await commonPublicGetApiCalls('/agent/get_agency');
+            const { data, success } = await commonPublicGetApiCalls(apiUrl);
             
             if (success && data) {
                 console.log('Fetched config data:', data); // Debug log
