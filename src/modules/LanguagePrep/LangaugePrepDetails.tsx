@@ -129,7 +129,8 @@ const LangaugePrepDetails = () => {
                         variant='shadow'
                         color='primary'
                         onPress={purchaseLevel}
-                    > <ShoppingCart className='p-1' />  Purchase {levels}  <IndianRupee className='-mr-3 p-1' />{levels == "level1" ? details?.level1_price : levels == "level2" ? details?.level2_price : levels == "level3" ? details?.level3_price : "Please Select Level"}</Button>
+                    // > <ShoppingCart className='p-1' />  Learn {levels}  <IndianRupee className='-mr-3 p-1' />{levels == "level1" ? details?.level1_price : levels == "level2" ? details?.level2_price : levels == "level3" ? details?.level3_price : "Please Select Level"}</Button>
+                    > <ShoppingCart className='p-1' />  Learn {levels} </Button>
                 }
             </section>
 

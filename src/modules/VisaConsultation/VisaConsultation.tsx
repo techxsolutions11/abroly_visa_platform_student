@@ -249,14 +249,14 @@ const VisaConsultation = () => {
     const isFormValid = () => {
         const requiredFields = [
             formData?.country,
-            formData?.state,
-            formData?.university,
-            formData?.universityType?.length > 0,
+            // formData?.state,
+            // formData?.university,
+            // formData?.universityType?.length > 0,
             formData?.programLevel,
             formData?.fieldOfStudy,
             formData?.intakeMonth,
             formData?.intakeYear,
-            formData?.tuitionFees
+            // formData?.tuitionFees
         ]
         return requiredFields.every(field => field && field !== '')
     }
@@ -303,7 +303,7 @@ const VisaConsultation = () => {
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 ">
                                 {/* First section - Country, State, University */}
                                 <div className="space-y-2">
-                                    <label className="text-sm font-medium">Country</label>
+                                    <label className="text-sm font-medium">Country*</label>
                                     <ReactFlagsSelect
                                         selected={formData?.country}
                                         searchable={true}
@@ -348,7 +348,7 @@ const VisaConsultation = () => {
 
                                 {/* Program Level */}
                                 <div className="col-span-full space-y-2">
-                                    <label className="text-sm font-medium">Program Level</label>
+                                    <label className="text-sm font-medium">Program Level*</label>
                                     <SelectPicker
                                         data={programLevels.flatMap((group) =>
                                             group.items.map((item) => ({
@@ -367,7 +367,7 @@ const VisaConsultation = () => {
 
                                 {/* Field of Study */}
                                 <div className="space-y-2">
-                                    <label className="text-sm font-medium">Field of Study</label>
+                                    <label className="text-sm font-medium">Field of Study*</label>
                                     <SelectPicker
                                         data={fieldsOfStudy.map((field) => ({ label: field, value: field }))}
                                         onChange={(value) => handleInputChange('fieldOfStudy', value)}
@@ -379,7 +379,7 @@ const VisaConsultation = () => {
 
                                 {/* Intake Section */}
                                 <div className="space-y-2">
-                                    <label className="text-sm font-medium">Intake</label>
+                                    <label className="text-sm font-medium">Intake*</label>
                                     <div className="grid grid-cols-2 gap-4">
                                         {/* <SelectPicker
                                             data={generateMonths()}
@@ -575,9 +575,9 @@ const VisaConsultation = () => {
             <div className="grid gap-6 mt-5">
                 {previous_applications?.map((application) => (
                     <Card key={application?.id} className="shadow-lg border border-gray-300">
-                        <CardHeader className="text-lg font-bold text-blue-800 border-b pb-2">
+                        {/* <CardHeader className="text-lg font-bold text-blue-800 border-b pb-2">
                             {application?.university} ({application?.universityType})
-                        </CardHeader>
+                        </CardHeader> */}
                         <CardContent>
                             <div className="mb-4 space-y-2">
                                 <div className="flex items-center space-x-2 my-2">

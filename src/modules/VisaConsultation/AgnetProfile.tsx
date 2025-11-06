@@ -73,14 +73,14 @@ const AgentProfile = () => {
               <User className="w-8 h-8 text-blue-600" />
             </div>
             <div>
-              <h1 className="text-2xl font-bold text-gray-900">{agent.username}</h1>
-              <p className="text-gray-500">Agency Representative</p>
+              <h1 className="text-2xl font-bold text-gray-900">{agent?.username}</h1>
+              <p className="text-gray-500">{agent?.app_name} Representative</p>
             </div>
           </div>
           <div className="flex flex-col gap-2">
             <div className="flex items-center gap-2 text-gray-600">
               <Mail className="w-5 h-5" />
-              <a href={`mailto:${agent?.email}`} className="hover:text-blue-600">{agent.email}</a>
+              <a href={`mailto:${agent?.email}`} className="hover:text-blue-600">{agent?.email}</a>
             </div>
             <div className="flex items-center gap-2 text-gray-600">
               <Phone className="w-5 h-5" />
@@ -99,9 +99,9 @@ const AgentProfile = () => {
               <div>
                 <p className="font-medium text-gray-900">Address</p>
                 <p className="text-gray-600">
-                  {agent_details.officeStreetAddress}, {agent_details.officeArea}<br />
-                  {agent_details.officeCity}, {agent_details.officeStateProvince}<br />
-                  {agent_details.officeCountry} - {agent_details.officePostalCode}
+                  {agent_details?.officeStreetAddress}, {agent_details?.officeArea}<br />
+                  {agent_details?.officeCity}, {agent_details?.officeStateProvince}<br />
+                  {agent_details?.officeCountry} - {agent_details?.officePostalCode}
                 </p>
               </div>
             </div>
@@ -110,9 +110,9 @@ const AgentProfile = () => {
               <div>
                 <p className="font-medium text-gray-900">Operating Hours</p>
                 <p className="text-gray-600">
-                  Weekdays: {agent_details.operatingHoursWeekdays}<br />
-                  Weekends: {agent_details.operatingHoursWeekends}<br />
-                  Timezone: {agent_details.operatingHoursTimeZone}
+                  Weekdays: {agent_details?.operatingHoursWeekdays}<br />
+                  Weekends: {agent_details?.operatingHoursWeekends}<br />
+                  Timezone: {agent_details?.operatingHoursTimeZone}
                 </p>
               </div>
             </div>
@@ -125,9 +125,9 @@ const AgentProfile = () => {
             <div>
               <h4 className="font-medium text-gray-900 mb-2">Specialized Countries</h4>
               <div className="flex flex-wrap gap-2">
-                {countries_specialization.map((item, index) => (
+                {countries_specialization.map((item:any, index:number) => (
                   <span key={index} className="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-sm">
-                    {countries[item.country]?.name}
+                    {countries[item?.country]?.name}
                   </span>
                 ))}
               </div>

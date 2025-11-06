@@ -28,7 +28,8 @@ const AcceptedApplicationProgress = () => {
 
 
     const onChange = (nextStep) => {
-        const newStep = nextStep < 0 ? 0 : nextStep > 3 ? 3 : nextStep;
+        const maxSteps = tabs?.steps?.length ? tabs?.steps?.length - 1 : 3;
+        const newStep = nextStep < 0 ? 0 : nextStep > maxSteps ? maxSteps : nextStep;
         setStep(newStep);
         setSearchParams({ step: newStep });
     };
@@ -115,8 +116,8 @@ const AcceptedApplicationProgress = () => {
                 <CardBody className="w-full">
                     <div className="flex justify-between items-center gap-4 mb-4">
                         <div>
-                            <h1 className="text-lg font-semibold">{data?.step?.step_title}</h1>
-                            <p>{description}</p>
+                            <h1 className="text-lg font-semibold">{data?.step?.step_title || ""}</h1>
+                            <p>{description || ""}</p>
                         </div>
                     </div>
 
@@ -136,22 +137,22 @@ const AcceptedApplicationProgress = () => {
                                 <div key={question?.id} className="bg-white p-4 rounded-lg shadow-md border space-y-2">
                                     <div className="flex items-center gap-2">
                                         <Avatar showFallback src={question?.created_by?.profile_image} size="sm" className="w-8 h-8" />
-                                        <p>{question?.created_by?.username}</p>
+                                        <p>{question?.created_by?.username || "Unknown"}</p>
                                     </div>
 
                                     <h2 className="text-base font-medium text-gray-800">
-                                        {question?.question_text}
+                                        {question?.question_text || ""}
                                     </h2>
 
                                     {/* For pending questions, provide an individual answer form */}
-                                    {(question?.status == 'pending' || question?.status === 'rejected') && (
+                                    {(question?.status === 'pending' || question?.status === 'rejected') && (
                                         <div className="mt-2">
-                                            {question?.question_type == 'text_input' && (
+                                            {question?.question_type === 'text_input' && (
                                                 <>
                                                     <input
                                                         type="text"
                                                         placeholder="Enter your answer"
-                                                        value={(answers[question?.id] && answers[question?.id].answer) || ''}
+                                                        value={answers[question?.id]?.answer || ''}
                                                         onChange={(e) =>
                                                             handleTextChange(question?.id, e.target.value)
                                                         }
@@ -169,14 +170,14 @@ const AcceptedApplicationProgress = () => {
                                                 </>
                                             )}
 
-                                            {question?.question_type == 'file_selector' && (
+                                            {question?.question_type === 'file_selector' && (
                                                 <>
                                                     <input
                                                         type="file"
                                                         onChange={(e) =>
                                                             handleFileChange(
                                                                 question?.id,
-                                                                e.target.files ? e.target.files[0] : null
+                                                                e.target.files?.[0] || null
                                                             )
                                                         }
                                                         className="border p-2 rounded w-full"
@@ -200,14 +201,14 @@ const AcceptedApplicationProgress = () => {
                                         <div className="mt-2">
                                             {question?.question_type === 'text_input' && (
                                                 <p className="text-sm text-gray-700">
-                                                    Answer: {question?.question_answer}
+                                                    Answer: {question?.question_answer || "N/A"}
                                                 </p>
                                             )}
                                             {(question?.question_type === 'file_selector' || question?.question_type === 'document_provide') && (
                                                <div className="flex gap-2 items-center">
                                                     <p className="text-sm text-gray-700">File:</p>
                                                     <a
-                                                        href={question?.file_path}
+                                                        href={question?.file_path || "#"}
                                                         target="_blank"
                                                         rel="noopener noreferrer"
                                                         className="text-blue-500 underline text-sm"
@@ -220,7 +221,9 @@ const AcceptedApplicationProgress = () => {
                                                         color="primary"
                                                         isIconOnly={true}
                                                         onClick={() => {
-                                                            FileSaver.saveAs(question?.file_path);
+                                                            if (question?.file_path) {
+                                                                FileSaver.saveAs(question?.file_path);
+                                                            }
                                                         }}
                                                     ><ArrowDownToLine /></Button>
                                                 </div>
@@ -254,7 +257,7 @@ const AcceptedApplicationProgress = () => {
                                             {question?.status}
                                         </Badge>
                                         <div>
-                                            <p>{moment(question?.createdAt).format('lll')}</p>
+                                            <p>{question?.createdAt ? moment(question?.createdAt).format('lll') : "N/A"}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -263,7 +266,7 @@ const AcceptedApplicationProgress = () => {
                     )}
                 </CardBody>
                 <CardFooter className="flex justify-between">
-                    Status : {data?.step?.step_status === 0 ? "Incomplete" : "Completed"}
+                    Status : {data?.step?.step_status === 0 ? "Incomplete" : data?.step?.step_status === 1 ? "Completed" : "Unknown"}
                 </CardFooter>
             </Card>
         );
@@ -279,7 +282,7 @@ const AcceptedApplicationProgress = () => {
 
     const fetchSteps = async (): Promise<any> => {
         const { success, data, message } = await commonGetAPICalls(`/leads/lead_progress/student/get_steps/${id}`)
-        if (success && success == true) {
+        if (success && success === true) {
             return data
         }
         throw new Error(message)
@@ -292,7 +295,7 @@ const AcceptedApplicationProgress = () => {
 
     const withdrawApplication = async () => {
         const { success, data, message } = await commonGetAPICalls(`/leads/lead_progress/student/widthdraw_application/${id}`)
-        if (success && success == true) {
+        if (success && success === true) {
             SuccessToast(message)
             return data
         }
@@ -308,7 +311,7 @@ const AcceptedApplicationProgress = () => {
     })
 
     return (
-        <section className='space-y-2 w-full'>
+        <section className='space-y-4 w-full'>
             <div className="flex w-full justify-end">
                 <Button
                     size="sm"
@@ -319,27 +322,32 @@ const AcceptedApplicationProgress = () => {
                     }}
                 >Withdraw Application</Button>
             </div>
+            
+            {/* Agent Details - Always visible */}
+            {!isFetching && tabs?.agent && (
+                <Card className="p-4 w-fit flex flex-row items-center m-2">
+                    <Avatar
+                        showFallback
+                        src={tabs?.agent?.profile_image || tabs?.agent?.access_profile}
+                        size="lg"
+                        className="border-2 border-gray-300 dark:border-gray-600 shadow-sm"
+                    />
+                    <CardBody className="flex flex-col gap-1">
+                        <div className="flex items-center gap-2 text-lg font-semibold">
+                            <User className="w-5 h-5 text-primary" />
+                            <p className="text-gray-800 dark:text-gray-200">{tabs?.agent?.username || "Unknown"}</p>
+                        </div>
+                        <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+                            <Phone className="w-4 h-4 text-green-500" />
+                            <p>{tabs?.agent?.phone || tabs?.agent?.phone_number || "N/A"}</p>
+                        </div>
+                    </CardBody>
+                </Card>
+            )}
+
             {isError ? <p>{error?.message}</p> : isFetching ? <div className="flex items-center justify-center w-full h-20"><Spinner /></div> :
-                tabs?.steps.length == 0 ? <div className="flex w-full flex-col items-center"> <p>No Steps Created Yet, You'll here out from agent soon...</p> </div> : <div className="flex w-full">
+                tabs?.steps?.length === 0 ? <div className="flex w-full flex-col items-center"> <p>No Steps Created Yet, You'll here out from agent soon...</p> </div> : <div className="flex w-full">
                     <div className="w-full">
-                        <Card className="p-4 w-fit flex flex-row items-center m-2">
-                            <Avatar
-                                showFallback
-                                src={tabs?.agent?.access_profile}
-                                size="lg"
-                                className="border-2 border-gray-300 dark:border-gray-600 shadow-sm"
-                            />
-                            <CardBody className="flex flex-col gap-1">
-                                <div className="flex items-center gap-2 text-lg font-semibold">
-                                    <User className="w-5 h-5 text-primary" />
-                                    <p className="text-gray-800 dark:text-gray-200">{tabs?.agent?.username || "Unknown"}</p>
-                                </div>
-                                <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
-                                    <Phone className="w-4 h-4 text-green-500" />
-                                    <p>{tabs?.agent?.phone || "N/A"}</p>
-                                </div>
-                            </CardBody>
-                        </Card>
 
                         {/* <Tabs aria-label="Dynamic tabs" items={tabs?.steps} isVertical variant='solid'>
                             {(item: any) => (
@@ -358,16 +366,18 @@ const AcceptedApplicationProgress = () => {
                                 {tabs?.steps?.map((item: any, index: number) => (
                                     <Steps.Item
                                         onClick={() => { onChange(index) }}
-                                        title={item?.step_title}
-                                        description={item?.step_description}
+                                        title={item?.step_title || ""}
+                                        description={item?.step_description || ""}
                                         key={item?.id}
-                                        className={`cursor-pointer ${step == index ? "font-bold text-black" : "text-gray-600"}`}
-                                        status={`${item?.step_status == 1 ? "finish" : "wait"}`}
+                                        className={`cursor-pointer ${step === index ? "font-bold text-black" : "text-gray-600"}`}
+                                        status={`${item?.step_status === 1 ? "finish" : "wait"}`}
                                     />
                                 ))}
                             </Steps>
                             <div className="col-span-2">
-                                <StepDetails step_id={tabs?.steps[step]?.id} description={tabs?.steps[step]?.step_description} />
+                                {tabs?.steps?.[step] && (
+                                    <StepDetails step_id={tabs?.steps?.[step]?.id} description={tabs?.steps?.[step]?.step_description} />
+                                )}
                             </div>
                         </div>
                     </div>

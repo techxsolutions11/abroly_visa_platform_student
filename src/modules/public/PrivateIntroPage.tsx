@@ -82,14 +82,14 @@ const PrivateIntroPage = () => {
                             description:
                                 "Comprehensive health coverage to ensure peace of mind during your academic pursuits abroad.",
                             icon: <Shield className="text-orange-500" size={40} />,
-                            navigateTo: "/services/health_ins",
+                            navigateTo: "/services_request/health",
                         },
                         {
                             title: "International SIM Card",
                             description:
                                 "Stay connected with affordable international SIM card options tailored to your needs.",
                             icon: <Briefcase className="text-orange-500" size={40} />,
-                            navigateTo: "/services/sim_card",
+                            navigateTo: "/services_request/data",
                         },
                         // {
                         //     title: "Accommodation",

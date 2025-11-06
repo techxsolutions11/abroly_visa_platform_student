@@ -15,7 +15,7 @@ const LanguagePrep = () => {
 
 
     const fetchApiCall = async () => {
-        alert( getAgentId())
+        // alert( getAgentId())
         const { data, success } = await commonPublicGetApiCalls("/language_prep/public/list/" + getAgentId())
         if (success && success == true) {
             setLanguages(data)

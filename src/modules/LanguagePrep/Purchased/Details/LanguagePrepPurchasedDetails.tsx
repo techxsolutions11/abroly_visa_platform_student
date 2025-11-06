@@ -226,7 +226,7 @@ const LanguagePrepPurchasedDetailsFullScreen = () => {
                                                     fs: 0,
                                                     iv_load_policy: 3,
                                                     playlist: '',
-                                                    enablejsapi: 1
+                                                    enablejsapi: import.meta.env.VITE_IS_LOCAL !== "true" ? 1 : 0
                                                 },
                                             },
                                         }}

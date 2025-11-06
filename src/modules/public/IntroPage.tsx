@@ -89,7 +89,7 @@ const IntroPage = () => {
 
 
     return (
-        <div className='text-dark_primary dark:text-white'>
+        <section className='text-dark_primary dark:text-white'>
 
             <div className="relative overflow-hidden bg-gradient-to-b from-gray-200/20 to-gray-100/20  flex items-center justify-center">
                 {/* Animated Background Blobs */}
@@ -190,11 +190,11 @@ const IntroPage = () => {
 
             {/* services */}
 
-            {/* <section className='container mx-auto my-36' id='services' >
-                <h1 className='text-3xl text-center my-5'>Everything you need for academics in one place</h1>  */}
+            <section className='container mx-auto my-36' id='services' >
+                <h1 className='text-3xl text-center my-5'>Everything you need for academics in one place</h1> 
 
-                {/* <p className='text-center'>Content Writing</p> */}
-                {/* <ContentWritingList onOpenChange={onOpenChange} />
+                <p className='text-center'>Content Writing</p>
+                <ContentWritingList onOpenChange={onOpenChange} />
 
                 <section className="grid gap-2 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 p-4">
                     {[
@@ -267,8 +267,8 @@ const IntroPage = () => {
                             </Button>
                         </div>
                     ))}
-                </section> */}
-            {/* </section>  */}
+                </section>
+            </section> 
 
             {/* flags */}
             {/* <HomePageFlags /> */}
@@ -383,11 +383,7 @@ const IntroPage = () => {
                 positiveTitle={"Yes"}
             />
 
-
-
-
-
-        </div >
+        </section>
     )
 
 }

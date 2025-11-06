@@ -107,10 +107,10 @@ const data = {
           title: "Home",
           url: "/",
         },
-        {
-          title: "Events",
-          url: "/event_banners",
-        },
+        // {
+        //   title: "Events",
+        //   url: "/event_banners",
+        // },
       ],
     },
     {
@@ -174,7 +174,7 @@ const data = {
           url: "/services/language",
         },
         {
-          title: "Purchased",
+          title: "In Progress",
           url: "/purchased_language_prep",
         },
         {
