@@ -1,10 +1,10 @@
 // import React, { useEffect, useState } from 'react';
 // import { Link, useNavigate } from 'react-router-dom';
 // import { Button } from '@nextui-org/react';
-// import { 
-//   Facebook, 
-//   Twitter, 
-//   Linkedin, 
+// import {
+//   Facebook,
+//   Twitter,
+//   Linkedin,
 //   Instagram,
 //   Mail,
 //   Phone,
@@ -44,9 +44,9 @@
 //                         </p>
 //                         <div className="mt-4 flex space-x-4">
 //                             {[Facebook, Twitter, Linkedin, Instagram].map((Icon, idx) => (
-//                                 <a 
+//                                 <a
 //                                     key={idx}
-//                                     href="#" 
+//                                     href="#"
 //                                     className="text-slate-400 hover:text-blue-500 transition-colors"
 //                                 >
 //                                     <Icon size={20} />
@@ -62,7 +62,7 @@
 //                             {initStaticPages.map((item: any, idx) => (
 //                                 <p
 //                                     key={idx}
-//                                     // variant='light' 
+//                                     // variant='light'
 //                                     className="justify-start p-0 text-sm text-slate-400 hover:text-blue-500 cursor-pointer"
 //                                     onClick={() => navigate(`/static/${item?.url}`, { replace: true })}
 //                                 >
@@ -108,8 +108,8 @@
 //                     <div className="flex gap-x-4">
 //                         <p className="text-sm text-slate-400">
 //                             Developed by{' '}
-//                             <a 
-//                                 href='https://techxsolutions.in/' 
+//                             <a
+//                                 href='https://techxsolutions.in/'
 //                                 target='_blank'
 //                                 className='text-blue-500 hover:text-blue-400 transition-colors'
 //                             >
@@ -124,116 +124,126 @@
 // };
 
 // export default Footer;
-import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { Facebook, Twitter, Linkedin, Instagram, Mail, Phone, MapPin } from 'lucide-react';
-import useApiCallUtils from '@/hooks/useApiCallUtils';
-import { getAppName, getSupportEmail, getSupportNumber } from '@/utils/config';
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  Facebook,
+  Twitter,
+  Linkedin,
+  Instagram,
+  Mail,
+  Phone,
+  MapPin,
+} from "lucide-react";
+import useApiCallUtils from "@/hooks/useApiCallUtils";
+import { getAppName, getSupportEmail, getSupportNumber } from "@/utils/config";
 
 const Footer = () => {
-    const { commonPublicGetApiCalls } = useApiCallUtils();
-    const [staticPages, setStaticPages] = useState([]);
-    const navigate = useNavigate();
+  const { commonPublicGetApiCalls } = useApiCallUtils();
+  const [staticPages, setStaticPages] = useState([]);
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        fetchStaticPages();
-    }, []);
+  useEffect(() => {
+    fetchStaticPages();
+  }, []);
 
-    const fetchStaticPages = async () => {
-        const { data, success } = await commonPublicGetApiCalls('/static/list');
-        if (success) {
-            setStaticPages(data);
-        }
-    };
+  const fetchStaticPages = async () => {
+    const { data, success } = await commonPublicGetApiCalls("/static/list");
+    if (success) {
+      setStaticPages(data);
+    }
+  };
 
-    return (
-        <footer className="w-full bg-gray-900 text-white py-10">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-                    {/* Brand Info */}
-                    <div className="flex flex-col">
-                        <Link to="/" className="text-2xl font-bold text-white mb-3">
-                            {getAppName()}
-                        </Link>
-                        {/* <p className="text-sm text-gray-400 max-w-xs">
+  return (
+    <footer className="w-full bg-gray-900 text-white py-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+          {/* Brand Info */}
+          <div className="flex flex-col">
+            <Link to="/" className="text-2xl font-bold text-white mb-3">
+              {getAppName()}
+            </Link>
+            {/* <p className="text-sm text-gray-400 max-w-xs">
                             Get personalized guidance for admissions, scholarships, and visa processing at top universities worldwide.
                         </p> */}
-                        <div className="mt-4 flex space-x-4">
-                            {[Facebook, Twitter, Linkedin, Instagram].map((Icon, idx) => (
-                                <a
-                                    key={idx}
-                                    href="#"
-                                    className="text-gray-400 hover:text-blue-500 transition-colors duration-200"
-                                >
-                                    <Icon size={20} />
-                                </a>
-                            ))}
-                        </div>
-                    </div>
+            <div className="mt-4 flex space-x-4">
+              {[Facebook, Twitter, Linkedin, Instagram].map((Icon, idx) => (
+                <a
+                  key={idx}
+                  href="#"
+                  className="text-gray-400 hover:text-blue-500 transition-colors duration-200"
+                >
+                  <Icon size={20} />
+                </a>
+              ))}
+            </div>
+          </div>
 
-                    {/* Static Pages */}
-                    <div className="flex flex-col">
-                        <h4 className="font-semibold text-white mb-3">Company</h4>
-                        <ul className="space-y-2">
-                            {staticPages?.filter((item: any) => item?.url !== "agent_tnc_signup").map((item, idx) => (
-                                <li key={idx}>
-                                    <p
-                                        className="text-sm text-gray-400 hover:text-blue-500 cursor-pointer transition-colors duration-200"
-                                        onClick={() => navigate(`/static/${item.url}`)}
-                                    >
-                                        {item.title}
-                                    </p>
-                                </li>
-                            ))}
-                            <li>
-                                <p
-                                    className="text-sm text-gray-400 hover:text-blue-500 cursor-pointer transition-colors duration-200"
-                                    onClick={() => navigate('/contact_us')}
-                                >
-                                    Contact Us
-                                </p>
-                            </li>
-                        </ul>
-                    </div>
+          {/* Static Pages */}
+          <div className="flex flex-col">
+            <h4 className="font-semibold text-white mb-3">Company</h4>
+            <ul className="space-y-2">
+              {staticPages
+                ?.filter((item: any) => item?.url !== "agent_tnc_signup")
+                .map((item, idx) => (
+                  <li key={idx}>
+                    <p
+                      className="text-sm text-gray-400 hover:text-blue-500 cursor-pointer transition-colors duration-200"
+                      onClick={() => navigate(`/static/${item.url}`)}
+                    >
+                      {item.title}
+                    </p>
+                  </li>
+                ))}
+              <li>
+                <p
+                  className="text-sm text-gray-400 hover:text-blue-500 cursor-pointer transition-colors duration-200"
+                  onClick={() => navigate("/contact_us")}
+                >
+                  Contact Us
+                </p>
+              </li>
+            </ul>
+          </div>
 
-                    {/* Contact Info */}
-                    <div className="flex flex-col">
-                        <h4 className="font-semibold text-white mb-3">Contact</h4>
-                        <ul className="space-y-3">
-                            <li className="flex items-center gap-2 text-sm text-gray-400">
-                                <Mail size={16} /> {getSupportEmail()}
-                            </li>
-                            <li className="flex items-center gap-2 text-sm text-gray-400">
-                                <Phone size={16} /> {getSupportNumber()}
-                            </li>
-                            {/* Uncomment if you want to add address */}
-                            {/* <li className="flex items-center gap-2 text-sm text-gray-400">
+          {/* Contact Info */}
+          <div className="flex flex-col">
+            <h4 className="font-semibold text-white mb-3">Contact</h4>
+            <ul className="space-y-3">
+              <li className="flex items-center gap-2 text-sm text-gray-400">
+                <Mail size={16} /> {getSupportEmail()}
+              </li>
+              <li className="flex items-center gap-2 text-sm text-gray-400">
+                <Phone size={16} /> {getSupportNumber()}
+              </li>
+              {/* Uncomment if you want to add address */}
+              {/* <li className="flex items-center gap-2 text-sm text-gray-400">
               <MapPin size={16} /> 123 Business Ave, Suite 100
             </li> */}
-                        </ul>
-                    </div>
-                </div>
+            </ul>
+          </div>
+        </div>
 
-                {/* Bottom Bar */}
-                <div className="mt-12 flex flex-col sm:flex-row justify-between items-center border-t border-gray-700 pt-6 text-center sm:text-left">
-                    <p className="text-sm text-gray-400 mb-4 sm:mb-0">
-                        © {new Date().getFullYear()} {getAppName()}. All rights reserved.
-                    </p>
-                    <p className="text-sm text-gray-400">
-                        Developed by
-                        <a
-                            href="https://techxsolutions.in/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-blue-500 hover:text-blue-400 ml-1 transition-colors duration-200"
-                        >
-                            TechX Solutions
-                        </a>
-                    </p>
-                </div>
-            </div>
-        </footer>
-    );
+        {/* Bottom Bar */}
+        <div className="mt-12 flex flex-col sm:flex-row justify-between items-center border-t border-gray-700 pt-6 text-center sm:text-left">
+          <p className="text-sm text-gray-400 mb-4 sm:mb-0">
+            © {new Date().getFullYear()} {getAppName()}
+          </p>
+          <p className="text-sm text-gray-400">
+            Powered by
+            <a
+              href="https://techxuniverse.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-500 hover:text-blue-400 ml-1 transition-colors duration-200"
+            >
+              TechX Universe.
+            </a>
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
 };
 
 export default Footer;
