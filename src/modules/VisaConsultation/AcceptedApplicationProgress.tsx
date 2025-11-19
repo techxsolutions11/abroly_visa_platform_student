@@ -4,10 +4,11 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import fetchQueriesHook from "@/hooks/fetchQueriesHook";
 import useApiCallUtils from "@/hooks/useApiCallUtils";
 import { ErrorToast, SuccessToast } from "@/utils/Toaster";
-import { Avatar, Button, Card, CardBody, CardFooter, Input, Radio, RadioGroup, Spinner, Tab, Tabs } from "@nextui-org/react";
+import { Avatar, Button, Input, Radio, RadioGroup, Spinner, Tab, Tabs } from "@nextui-org/react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import FileSaver from "file-saver";
-import { ArrowDownToLine, CircleCheck, Phone, User } from 'lucide-react';
+import { ArrowDownToLine, CircleCheck, Phone, User, FileText, MessageSquare, Upload, CheckCircle2, XCircle, AlertCircle, Clock, HelpCircle } from 'lucide-react';
 import moment from "moment";
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
@@ -112,66 +113,151 @@ const AcceptedApplicationProgress = () => {
         };
 
         return (
-            <Card>
-                <CardBody className="w-full">
-                    <div className="flex justify-between items-center gap-4 mb-4">
-                        <div>
-                            <h1 className="text-lg font-semibold">{data?.step?.step_title || ""}</h1>
-                            <p>{description || ""}</p>
+            <Card className="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-lg">
+                <CardHeader className="pb-4 border-b border-gray-200 dark:border-gray-700">
+                    <div className="flex items-center gap-3">
+                        <div className="p-2 rounded-lg bg-primary/10 dark:bg-primary/20">
+                            <FileText size={20} className="text-primary" />
                         </div>
+                        <div className="flex-1">
+                            <CardTitle className="text-xl font-semibold text-gray-900 dark:text-white">
+                                {data?.step?.step_title || "Step Details"}
+                            </CardTitle>
+                            {description && (
+                                <CardDescription className="text-gray-600 dark:text-gray-400 mt-1">
+                                    {description}
+                                </CardDescription>
+                            )}
+                        </div>
+                        {data?.step && (
+                            <Badge
+                                variant={data?.step?.step_status === 1 ? "default" : "secondary"}
+                                className={data?.step?.step_status === 1 ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400" : "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400"}
+                            >
+                                {data?.step?.step_status === 0 ? "Incomplete" : data?.step?.step_status === 1 ? "Completed" : "Unknown"}
+                            </Badge>
+                        )}
                     </div>
-
+                </CardHeader>
+                <CardContent className="pt-6">
                     {isError ? (
-                        <p className="text-red-500">{error?.message}</p>
+                        <div className="flex items-center gap-3 p-4 rounded-lg bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-800">
+                            <AlertCircle size={20} className="text-red-600 dark:text-red-400" />
+                            <p className="text-red-600 dark:text-red-400">{error?.message}</p>
+                        </div>
                     ) : isFetching ? (
-                        <div className="flex items-center justify-center w-full h-20">
-                            <Spinner />
+                        <div className="flex items-center justify-center w-full py-12">
+                            <div className="flex flex-col items-center gap-4">
+                                <Spinner size="lg" />
+                                <p className="text-gray-600 dark:text-gray-400">Loading questions...</p>
+                            </div>
                         </div>
                     ) : data?.questions?.length === 0 ? (
-                        <div className="flex w-full flex-col items-center p-4 bg-gray-100 rounded-lg">
-                            <p className="text-gray-600">No Questions Created Yet</p>
-                        </div>
+                        <Card className="border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
+                            <CardContent className="p-8 text-center">
+                                <HelpCircle size={48} className="mx-auto text-gray-400 dark:text-gray-500 mb-4" />
+                                <p className="text-gray-600 dark:text-gray-400">No Questions Created Yet</p>
+                            </CardContent>
+                        </Card>
                     ) : (
                         <div className="grid grid-cols-1 gap-4">
                             {data?.questions?.map((question) => (
-                                <div key={question?.id} className="bg-white p-4 rounded-lg shadow-md border space-y-2">
-                                    <div className="flex items-center gap-2">
-                                        <Avatar showFallback src={question?.created_by?.profile_image} size="sm" className="w-8 h-8" />
-                                        <p>{question?.created_by?.username || "Unknown"}</p>
+                                <Card
+                                    key={question?.id}
+                                    className={`border ${
+                                        question?.status === 'rejected'
+                                            ? 'border-red-200 dark:border-red-800 bg-red-50/30 dark:bg-red-950/20'
+                                            : question?.status === 'completed'
+                                            ? 'border-green-200 dark:border-green-800 bg-green-50/30 dark:bg-green-950/20'
+                                            : 'border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900'
+                                    }`}
+                                >
+                                    <CardContent className="p-6">
+                                        {/* Question Header */}
+                                        <div className="flex items-start justify-between mb-4 pb-4 border-b border-gray-200 dark:border-gray-700">
+                                            <div className="flex items-start gap-3 flex-1">
+                                                <Avatar
+                                                    showFallback
+                                                    src={question?.created_by?.profile_image}
+                                                    size="sm"
+                                                    className="w-10 h-10 border-2 border-gray-200 dark:border-gray-700"
+                                                />
+                                                <div className="flex-1">
+                                                    <p className="text-sm font-medium text-gray-900 dark:text-white">
+                                                        {question?.created_by?.username || "Unknown"}
+                                                    </p>
+                                                    <div className="flex items-center gap-2 mt-1">
+                                                        <Clock size={12} className="text-gray-500 dark:text-gray-400" />
+                                                        <p className="text-xs text-gray-500 dark:text-gray-400">
+                                                            {question?.createdAt ? moment(question?.createdAt).format('MMM DD, YYYY h:mm A') : "N/A"}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <Badge
+                                                variant={
+                                                    question?.status === 'completed' || question?.status === 'provided'
+                                                        ? "default"
+                                                        : question?.status === 'rejected'
+                                                        ? "destructive"
+                                                        : "secondary"
+                                                }
+                                                className={`
+                                                    capitalize
+                                                    ${question?.status === 'pending' ? 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400' : ''}
+                                                    ${question?.status === 'completed' || question?.status === 'provided' ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400' : ''}
+                                                    ${question?.status === 'rejected' ? 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400' : ''}
+                                                `}
+                                            >
+                                                {question?.status}
+                                            </Badge>
                                     </div>
 
-                                    <h2 className="text-base font-medium text-gray-800">
+                                        {/* Question Text */}
+                                        <div className="mb-4">
+                                            <div className="flex items-start gap-2 mb-2">
+                                                <MessageSquare size={18} className="text-primary mt-0.5 flex-shrink-0" />
+                                                <h3 className="text-base font-semibold text-gray-900 dark:text-white">
                                         {question?.question_text || ""}
-                                    </h2>
+                                                </h3>
+                                            </div>
+                                        </div>
 
                                     {/* For pending questions, provide an individual answer form */}
                                     {(question?.status === 'pending' || question?.status === 'rejected') && (
-                                        <div className="mt-2">
+                                            <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
                                             {question?.question_type === 'text_input' && (
-                                                <>
-                                                    <input
+                                                    <div className="space-y-3">
+                                                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                                            Your Answer
+                                                        </label>
+                                                        <Input
                                                         type="text"
                                                         placeholder="Enter your answer"
                                                         value={answers[question?.id]?.answer || ''}
                                                         onChange={(e) =>
                                                             handleTextChange(question?.id, e.target.value)
                                                         }
-                                                        className="border p-2 rounded w-full"
+                                                            className="w-full"
                                                     />
                                                     <Button
                                                         onClick={() => handleSubmitAnswer(question?.id)}
-                                                        className="mt-2"
                                                         size="sm"
-                                                        variant="flat"
                                                         color="primary"
+                                                            isDisabled={mutation.isPending || !answers[question?.id]?.answer}
+                                                            isLoading={mutation.isPending}
                                                     >
-                                                        Answer this
+                                                            Submit Answer
                                                     </Button>
-                                                </>
+                                                    </div>
                                             )}
 
                                             {question?.question_type === 'file_selector' && (
-                                                <>
+                                                    <div className="space-y-3">
+                                                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                                            Upload File
+                                                        </label>
+                                                        <div className="flex items-center gap-3">
                                                     <input
                                                         type="file"
                                                         onChange={(e) =>
@@ -180,94 +266,112 @@ const AcceptedApplicationProgress = () => {
                                                                 e.target.files?.[0] || null
                                                             )
                                                         }
-                                                        className="border p-2 rounded w-full"
-                                                    />
+                                                                className="block w-full text-sm text-gray-500 dark:text-gray-400
+                                                                    file:mr-4 file:py-2 file:px-4
+                                                                    file:rounded-md file:border-0
+                                                                    file:text-sm file:font-semibold
+                                                                    file:bg-primary file:text-white
+                                                                    hover:file:bg-primary/90
+                                                                    file:cursor-pointer"
+                                                            />
+                                                        </div>
+                                                        {answers[question?.id]?.file && (
+                                                            <p className="text-sm text-gray-600 dark:text-gray-400">
+                                                                Selected: {answers[question?.id]?.file?.name}
+                                                            </p>
+                                                        )}
                                                     <Button
                                                         onClick={() => handleSubmitAnswer(question?.id)}
-                                                        className="mt-2"
-                                                        size="md"
-                                                        variant="shadow"
+                                                            size="sm"
                                                         color="primary"
+                                                            isDisabled={mutation.isPending || !answers[question?.id]?.file}
+                                                            isLoading={mutation.isPending}
+                                                            startContent={<Upload size={16} />}
                                                     >
                                                         Submit File
                                                     </Button>
-                                                </>
+                                                    </div>
                                             )}
                                         </div>
                                     )}
 
                                     {/* For completed questions, display answer details */}
                                     {(question?.status === 'completed' || question?.status === 'provided') && (
-                                        <div className="mt-2">
+                                            <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
                                             {question?.question_type === 'text_input' && (
-                                                <p className="text-sm text-gray-700">
-                                                    Answer: {question?.question_answer || "N/A"}
-                                                </p>
+                                                    <div className="p-3 rounded-lg bg-gray-50 dark:bg-gray-800/50">
+                                                        <p className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-1">
+                                                            Your Answer
+                                                        </p>
+                                                        <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                                                            {question?.question_answer || "N/A"}
+                                                        </p>
+                                                    </div>
                                             )}
                                             {(question?.question_type === 'file_selector' || question?.question_type === 'document_provide') && (
-                                               <div className="flex gap-2 items-center">
-                                                    <p className="text-sm text-gray-700">File:</p>
+                                                    <div className="p-3 rounded-lg bg-gray-50 dark:bg-gray-800/50">
+                                                        <p className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">
+                                                            Submitted File
+                                                        </p>
+                                                        <div className="flex items-center gap-3">
+                                                            <FileText size={18} className="text-primary" />
                                                     <a
                                                         href={question?.file_path || "#"}
                                                         target="_blank"
                                                         rel="noopener noreferrer"
-                                                        className="text-blue-500 underline text-sm"
+                                                                className="text-sm font-medium text-primary hover:underline"
                                                     >
                                                         View File
                                                     </a>
                                                     <Button
                                                         size="sm"
-                                                        variant="light"
+                                                                variant="flat"
                                                         color="primary"
-                                                        isIconOnly={true}
+                                                                isIconOnly
                                                         onClick={() => {
                                                             if (question?.file_path) {
                                                                 FileSaver.saveAs(question?.file_path);
                                                             }
                                                         }}
-                                                    ><ArrowDownToLine /></Button>
+                                                            >
+                                                                <ArrowDownToLine size={16} />
+                                                            </Button>
+                                                        </div>
                                                 </div>
                                             )}
                                             {question?.question_type === 'update_status' && (
-                                                <div className="text-sm text-green-600 font-semibold">
-                                                    Update
+                                                    <div className="flex items-center gap-2 p-3 rounded-lg bg-green-50 dark:bg-green-900/20">
+                                                        <CheckCircle2 size={18} className="text-green-600 dark:text-green-400" />
+                                                        <p className="text-sm font-semibold text-green-700 dark:text-green-400">
+                                                            Status Updated
+                                                        </p>
                                                 </div>
                                             )}
                                         </div>
                                     )}
 
                                     {/* Display rejection reason if rejected */}
-                                    {question?.status === 'rejected' && (
-                                        <div className="mt-2">
-                                            <p className="text-sm text-red-600">
-                                                Rejected: {question?.reason || "No reason provided"}
+                                        {question?.status === 'rejected' && question?.reason && (
+                                            <div className="mt-4 pt-4 border-t border-red-200 dark:border-red-800">
+                                                <div className="flex items-start gap-2 p-3 rounded-lg bg-red-50 dark:bg-red-950/20">
+                                                    <XCircle size={18} className="text-red-600 dark:text-red-400 mt-0.5 flex-shrink-0" />
+                                                    <div className="flex-1">
+                                                        <p className="text-xs font-medium text-red-600 dark:text-red-400 uppercase tracking-wide mb-1">
+                                                            Rejection Reason
+                                                        </p>
+                                                        <p className="text-sm text-red-700 dark:text-red-300">
+                                                            {question?.reason || "No reason provided"}
                                             </p>
                                         </div>
-                                    )}
-
-                                    <div className="mt-3 flex items-center justify-between">
-                                        <Badge
-                                            className={`
-                                                capitalize
-                                                ${question?.status === 'pending' ? 'bg-yellow-500' : ''}
-                                                ${question?.status === 'completed' ? 'bg-green-500' : ''}
-                                                ${question?.status === 'rejected' ? 'bg-red-500' : ''}
-                                            `}
-                                        >
-                                            {question?.status}
-                                        </Badge>
-                                        <div>
-                                            <p>{question?.createdAt ? moment(question?.createdAt).format('lll') : "N/A"}</p>
                                         </div>
                                     </div>
-                                </div>
+                                        )}
+                                    </CardContent>
+                                </Card>
                             ))}
                         </div>
                     )}
-                </CardBody>
-                <CardFooter className="flex justify-between">
-                    Status : {data?.step?.step_status === 0 ? "Incomplete" : data?.step?.step_status === 1 ? "Completed" : "Unknown"}
-                </CardFooter>
+                </CardContent>
             </Card>
         );
     };
@@ -311,57 +415,103 @@ const AcceptedApplicationProgress = () => {
     })
 
     return (
-        <section className='space-y-4 w-full'>
-            <div className="flex w-full justify-end">
+        <div className="w-full min-h-screen p-4 md:p-6 lg:p-8">
+            <div className="max-w-7xl mx-auto">
+                {/* Header Section */}
+                <div className="mb-6 flex items-center justify-between">
+                    <div>
+                        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2">
+                            Application Progress
+                        </h1>
+                        <p className="text-gray-600 dark:text-gray-400">
+                            Track your application progress and respond to agent questions
+                        </p>
+                    </div>
                 <Button
                     size="sm"
                     color="danger"
-                    variant="shadow"
+                        variant="flat"
                     onClick={() => {
                         setIsOpen(true)
                     }}
-                >Withdraw Application</Button>
+                    >
+                        Withdraw Application
+                    </Button>
             </div>
             
-            {/* Agent Details - Always visible */}
+                {/* Agent Details Card */}
             {!isFetching && tabs?.agent && (
-                <Card className="p-4 w-fit flex flex-row items-center m-2">
+                    <Card className="mb-6 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-lg">
+                        <CardContent className="p-6">
+                            <div className="flex items-center gap-4">
                     <Avatar
                         showFallback
                         src={tabs?.agent?.profile_image || tabs?.agent?.access_profile}
                         size="lg"
-                        className="border-2 border-gray-300 dark:border-gray-600 shadow-sm"
-                    />
-                    <CardBody className="flex flex-col gap-1">
-                        <div className="flex items-center gap-2 text-lg font-semibold">
-                            <User className="w-5 h-5 text-primary" />
-                            <p className="text-gray-800 dark:text-gray-200">{tabs?.agent?.username || "Unknown"}</p>
+                                    className="w-16 h-16 border-2 border-gray-200 dark:border-gray-700"
+                                />
+                                <div className="flex-1">
+                                    <div className="flex items-center gap-2 mb-2">
+                                        <User size={18} className="text-primary" />
+                                        <CardTitle className="text-lg font-semibold text-gray-900 dark:text-white">
+                                            {tabs?.agent?.username || "Unknown Agent"}
+                                        </CardTitle>
+                                    </div>
+                                    <div className="flex items-center gap-2">
+                                        <Phone size={16} className="text-gray-500 dark:text-gray-400" />
+                                        <CardDescription className="text-gray-600 dark:text-gray-400">
+                                            {tabs?.agent?.phone || tabs?.agent?.phone_number || "N/A"}
+                                        </CardDescription>
+                                    </div>
                         </div>
-                        <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
-                            <Phone className="w-4 h-4 text-green-500" />
-                            <p>{tabs?.agent?.phone || tabs?.agent?.phone_number || "N/A"}</p>
                         </div>
-                    </CardBody>
+                        </CardContent>
                 </Card>
             )}
 
-            {isError ? <p>{error?.message}</p> : isFetching ? <div className="flex items-center justify-center w-full h-20"><Spinner /></div> :
-                tabs?.steps?.length === 0 ? <div className="flex w-full flex-col items-center"> <p>No Steps Created Yet, You'll here out from agent soon...</p> </div> : <div className="flex w-full">
-                    <div className="w-full">
-
-                        {/* <Tabs aria-label="Dynamic tabs" items={tabs?.steps} isVertical variant='solid'>
-                            {(item: any) => (
-                                <Tab key={item?.id} title={<div className="w-48 flex items-center justify-between gap-2 ">
-                                    <CircleCheck className={`${item?.step_status == 1 ? "text-green-600" : "text-yellow-600"} `} />
-                                    <p className="truncate">{item?.step_title}</p>
-                                </div>} >
-                                    <div className="flex-1 border-l pl-4">
-                                        <StepDetails step_id={item?.id} description={item?.step_description} />
+                {/* Main Content */}
+                {isError ? (
+                    <Card className="border border-red-200 dark:border-red-800">
+                        <CardContent className="p-8 text-center">
+                            <AlertCircle size={48} className="mx-auto text-red-500 dark:text-red-400 mb-4" />
+                            <CardTitle className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                                Error Loading Progress
+                            </CardTitle>
+                            <CardDescription className="text-red-600 dark:text-red-400">
+                                {error?.message || "An error occurred while loading the application progress"}
+                            </CardDescription>
+                        </CardContent>
+                    </Card>
+                ) : isFetching ? (
+                    <div className="flex items-center justify-center min-h-[400px]">
+                        <div className="flex flex-col items-center gap-4">
+                            <Spinner size="lg" />
+                            <p className="text-gray-600 dark:text-gray-400">Loading application progress...</p>
+                        </div>
                                     </div>
-                                </Tab>
-                            )}
-                        </Tabs> */}
-                        <div className="grid sm:grid-cols-3 sm:w-[70vw]">
+                ) : tabs?.steps?.length === 0 ? (
+                    <Card className="border border-gray-200 dark:border-gray-700">
+                        <CardContent className="p-12 text-center">
+                            <CircleCheck size={48} className="mx-auto text-gray-400 dark:text-gray-500 mb-4" />
+                            <CardTitle className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                                No Steps Created Yet
+                            </CardTitle>
+                            <CardDescription className="text-gray-600 dark:text-gray-400">
+                                You'll hear from the agent soon. Steps will appear here once they are created.
+                            </CardDescription>
+                        </CardContent>
+                    </Card>
+                ) : (
+                    <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                        {/* Steps Navigation */}
+                        <div className="lg:col-span-1">
+                            <Card className="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-lg sticky top-6">
+                                <CardHeader className="pb-4 border-b border-gray-200 dark:border-gray-700">
+                                    <CardTitle className="text-lg font-semibold text-gray-900 dark:text-white">
+                                        Steps
+                                    </CardTitle>
+                                </CardHeader>
+                                <CardContent className="pt-4">
                             <Steps current={step} vertical>
                                 {tabs?.steps?.map((item: any, index: number) => (
                                     <Steps.Item
@@ -369,20 +519,30 @@ const AcceptedApplicationProgress = () => {
                                         title={item?.step_title || ""}
                                         description={item?.step_description || ""}
                                         key={item?.id}
-                                        className={`cursor-pointer ${step === index ? "font-bold text-black" : "text-gray-600"}`}
+                                                className={`cursor-pointer transition-colors ${
+                                                    step === index
+                                                        ? "font-bold text-primary dark:text-primary"
+                                                        : "text-gray-600 dark:text-gray-400"
+                                                }`}
                                         status={`${item?.step_status === 1 ? "finish" : "wait"}`}
                                     />
                                 ))}
                             </Steps>
-                            <div className="col-span-2">
+                                </CardContent>
+                            </Card>
+                        </div>
+
+                        {/* Step Details */}
+                        <div className="lg:col-span-3">
                                 {tabs?.steps?.[step] && (
-                                    <StepDetails step_id={tabs?.steps?.[step]?.id} description={tabs?.steps?.[step]?.step_description} />
+                                <StepDetails
+                                    step_id={tabs?.steps?.[step]?.id}
+                                    description={tabs?.steps?.[step]?.step_description}
+                                />
                                 )}
-                            </div>
                         </div>
                     </div>
-                </div>
-            }
+                )}
 
             <CommonConfirmation
                 isOpen={isOpen}
@@ -392,7 +552,8 @@ const AcceptedApplicationProgress = () => {
                 nagativeTitle='No'
                 positiveTitle='Yes'
             />
-        </section>
+            </div>
+        </div>
     )
 }
 

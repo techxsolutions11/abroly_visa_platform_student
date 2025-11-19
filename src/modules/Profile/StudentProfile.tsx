@@ -3,6 +3,8 @@ import 'rsuite/dist/rsuite.min.css';
 import { Nav, Input, SelectPicker, Button } from 'rsuite';
 import { Spinner } from '@nextui-org/react';
 import useApiCallUtils from '@/hooks/useApiCallUtils';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { GraduationCap, BookOpen, MapPin, DollarSign, Award, Briefcase, FileCheck, Settings } from 'lucide-react';
 
 
 const StudentProfile = () => {
@@ -122,11 +124,19 @@ const StudentProfile = () => {
     switch (activeKey) {
       case 'academic':
         return (
-          <div className="p-6 space-y-6 bg-white rounded-lg shadow-md border border-gray-300">
-            <h3 className="text-xl font-semibold text-gray-800">Academic and Career Aspirations</h3>
-            <p className="text-sm text-gray-500">Please provide information regarding your academic goals and career aspirations.</p>
+          <Card className="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-lg">
+            <CardHeader className="pb-4 border-b border-gray-200 dark:border-gray-700">
+              <div className="flex items-center gap-3">
+                <GraduationCap size={24} className="text-primary" />
+                <div>
+                  <CardTitle className="text-xl font-semibold text-gray-900 dark:text-white">Academic and Career Aspirations</CardTitle>
+                  <CardDescription className="text-gray-600 dark:text-gray-400">Please provide information regarding your academic goals and career aspirations.</CardDescription>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent className="pt-6 space-y-6">
             <div className="flex flex-col">
-              <label className="font-medium text-gray-700">Are you planning to study abroad?</label>
+              <label className="font-medium text-gray-700 dark:text-gray-300">Are you planning to study abroad?</label>
               <SelectPicker
                 data={[{ label: 'Yes', value: 'Yes' }, { label: 'No', value: 'No' }]}
                 style={{ width: '100%', marginBottom: '1rem' }}
@@ -136,7 +146,7 @@ const StudentProfile = () => {
               />
             </div>
             <div className="flex flex-col">
-              <label className="font-medium text-gray-700">Why do you want to study abroad?</label>
+              <label className="font-medium text-gray-700 dark:text-gray-300">Why do you want to study abroad?</label>
               <Input
                 style={{ width: '100%', marginBottom: '1rem' }}
                 onChange={setStudyAbroadReasons}
@@ -145,7 +155,7 @@ const StudentProfile = () => {
               />
             </div>
             <div className="flex flex-col">
-              <label className="font-medium text-gray-700">What is your field of study?</label>
+              <label className="font-medium text-gray-700 dark:text-gray-300">What is your field of study?</label>
               <Input
                 style={{ width: '100%', marginBottom: '1rem' }}
                 onChange={setFieldOfStudy}
@@ -154,7 +164,7 @@ const StudentProfile = () => {
               />
             </div>
             <div className="flex flex-col">
-              <label className="font-medium text-gray-700">What degree level are you aiming for?</label>
+              <label className="font-medium text-gray-700 dark:text-gray-300">What degree level are you aiming for?</label>
               <SelectPicker
                 data={[
                   { label: "Arts", value: "Arts" },
@@ -172,7 +182,7 @@ const StudentProfile = () => {
               />
             </div>
             <div className="flex flex-col">
-              <label className="font-medium text-gray-700">What are your long-term career goals?</label>
+              <label className="font-medium text-gray-700 dark:text-gray-300">What are your long-term career goals?</label>
               <Input
                 style={{ width: '100%', marginBottom: '1rem' }}
                 onChange={setCareerGoals}
@@ -181,19 +191,28 @@ const StudentProfile = () => {
               />
             </div>
 
-            <div className='flex flex-row items-center justify-start gap-2'>
-              <Button appearance="primary" onClick={(e) => { setActiveKey('course'); handleSubmit(e) }} className="w-fit">Update & Next</Button>
-            </div>
-          </div>
+              <div className='flex flex-row items-center justify-start gap-2 pt-4 border-t border-gray-200 dark:border-gray-700'>
+                <Button appearance="primary" onClick={(e) => { setActiveKey('course'); handleSubmit(e) }} className="w-fit">Update & Next</Button>
+              </div>
+            </CardContent>
+          </Card>
         );
 
       case 'course':
         return (
-          <div className="p-6 bg-white shadow-md rounded-lg border border-gray-300 space-y-4">
-            <h3 className="text-xl font-semibold text-gray-800">Course Preferences</h3>
-            <p className="text-sm text-gray-600">Please share your preferences regarding courses and program durations.</p>
+          <Card className="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-lg">
+            <CardHeader className="pb-4 border-b border-gray-200 dark:border-gray-700">
+              <div className="flex items-center gap-3">
+                <BookOpen size={24} className="text-primary" />
+                <div>
+                  <CardTitle className="text-xl font-semibold text-gray-900 dark:text-white">Course Preferences</CardTitle>
+                  <CardDescription className="text-gray-600 dark:text-gray-400">Please share your preferences regarding courses and program durations.</CardDescription>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent className="pt-6 space-y-4">
             <div className="flex flex-col">
-              <label className="font-medium text-gray-700">What courses are you interested in pursuing?</label>
+              <label className="font-medium text-gray-700 dark:text-gray-300">What courses are you interested in pursuing?</label>
               <Input
                 style={{ width: '100%', marginBottom: '1rem' }}
                 onChange={setCourseSelection}
@@ -202,7 +221,7 @@ const StudentProfile = () => {
               />
             </div>
             <div className="flex flex-col">
-              <label className="font-medium text-gray-700">Preferred program duration:</label>
+              <label className="font-medium text-gray-700 dark:text-gray-300">Preferred program duration:</label>
               <Input
                 style={{ width: '100%', marginBottom: '1rem' }}
                 onChange={setProgramDuration}
@@ -210,19 +229,28 @@ const StudentProfile = () => {
                 className="border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
-            <div className='flex flex-row items-center justify-start gap-2'>
-              <Button appearance="primary" onClick={(e) => {setActiveKey('location'); handleSubmit(e)}} className="w-fit">Update & Next</Button>
-            </div>
-          </div>
+              <div className='flex flex-row items-center justify-start gap-2 pt-4 border-t border-gray-200 dark:border-gray-700'>
+                <Button appearance="primary" onClick={(e) => {setActiveKey('location'); handleSubmit(e)}} className="w-fit">Update & Next</Button>
+              </div>
+            </CardContent>
+          </Card>
         );
 
       case 'location':
         return (
-          <div className="p-6 bg-white shadow-lg rounded-lg border border-gray-300 space-y-4">
-            <h3 className="text-xl font-semibold text-gray-800">Location Preferences</h3>
-            <p className="text-sm text-gray-500">Please indicate your preferred locations for studying.</p>
+          <Card className="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-lg">
+            <CardHeader className="pb-4 border-b border-gray-200 dark:border-gray-700">
+              <div className="flex items-center gap-3">
+                <MapPin size={24} className="text-primary" />
+                <div>
+                  <CardTitle className="text-xl font-semibold text-gray-900 dark:text-white">Location Preferences</CardTitle>
+                  <CardDescription className="text-gray-600 dark:text-gray-400">Please indicate your preferred locations for studying.</CardDescription>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent className="pt-6 space-y-4">
             <div className="flex flex-col">
-              <label className="font-medium text-gray-700">Preferred countries for your studies:</label>
+              <label className="font-medium text-gray-700 dark:text-gray-300">Preferred countries for your studies:</label>
               <Input
                 style={{ width: '100%', marginBottom: '1rem' }}
                 onChange={setPreferredCountry}
@@ -231,7 +259,7 @@ const StudentProfile = () => {
               />
             </div>
             <div className="flex flex-col">
-              <label className="font-medium text-gray-700">Preferred University for your studies:</label>
+              <label className="font-medium text-gray-700 dark:text-gray-300">Preferred University for your studies:</label>
               <Input
                 style={{ width: '100%', marginBottom: '1rem' }}
                 onChange={setUniversityPreferences}
@@ -239,19 +267,28 @@ const StudentProfile = () => {
                 className="border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
-            <div className='flex flex-row items-center justify-start gap-2'>
-              <Button appearance="primary" onClick={(e) => {setActiveKey('financial'); handleSubmit(e)}} className="w-fit">Update & Next</Button>
-            </div>
-          </div>
+              <div className='flex flex-row items-center justify-start gap-2 pt-4 border-t border-gray-200 dark:border-gray-700'>
+                <Button appearance="primary" onClick={(e) => {setActiveKey('financial'); handleSubmit(e)}} className="w-fit">Update & Next</Button>
+              </div>
+            </CardContent>
+          </Card>
         );
 
       case 'financial':
         return (
-          <div className="p-6 bg-white shadow-md rounded-lg border border-gray-300 space-y-4">
-            <h3 className="text-xl font-semibold text-gray-800">Financial and Scholarship Information</h3>
-            <p className="text-sm text-gray-500">Please provide details about your financial situation and scholarship needs.</p>
+          <Card className="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-lg">
+            <CardHeader className="pb-4 border-b border-gray-200 dark:border-gray-700">
+              <div className="flex items-center gap-3">
+                <DollarSign size={24} className="text-primary" />
+                <div>
+                  <CardTitle className="text-xl font-semibold text-gray-900 dark:text-white">Financial and Scholarship Information</CardTitle>
+                  <CardDescription className="text-gray-600 dark:text-gray-400">Please provide details about your financial situation and scholarship needs.</CardDescription>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent className="pt-6 space-y-4">
             <div className="flex flex-col">
-              <label className="font-medium text-gray-700">Are you looking for scholarship opportunities?</label>
+              <label className="font-medium text-gray-700 dark:text-gray-300">Are you looking for scholarship opportunities?</label>
               <SelectPicker
                 data={[{ label: 'Yes', value: "true" }, { label: 'No', value: "false" }]}
                 style={{ width: '100%', marginBottom: '1rem' }}
@@ -261,7 +298,7 @@ const StudentProfile = () => {
               />
             </div>
             <div className="flex flex-col">
-              <label className="font-medium text-gray-700">What is your estimated budget for your studies?</label>
+              <label className="font-medium text-gray-700 dark:text-gray-300">What is your estimated budget for your studies?</label>
               <Input
                 style={{ width: '100%', marginBottom: '1rem' }}
                 onChange={setBudget}
@@ -269,19 +306,28 @@ const StudentProfile = () => {
                 className="border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
-            <div className='flex flex-row items-center justify-start gap-2'>
-              <Button appearance="primary" onClick={(e) => {setActiveKey('performance'); handleSubmit(e)}} className="w-fit">Update & Next</Button>
-            </div>
-          </div>
+              <div className='flex flex-row items-center justify-start gap-2 pt-4 border-t border-gray-200 dark:border-gray-700'>
+                <Button appearance="primary" onClick={(e) => {setActiveKey('performance'); handleSubmit(e)}} className="w-fit">Update & Next</Button>
+              </div>
+            </CardContent>
+          </Card>
         );
 
       case 'performance':
         return (
-          <div className="p-6 bg-white shadow-lg rounded-lg border border-gray-300 space-y-4">
-            <h3 className="text-xl font-semibold text-gray-800">Academic Performance and Language Proficiency</h3>
-            <p className="text-sm text-gray-500">Please provide your academic performance and language proficiency details below.</p>
+          <Card className="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-lg">
+            <CardHeader className="pb-4 border-b border-gray-200 dark:border-gray-700">
+              <div className="flex items-center gap-3">
+                <Award size={24} className="text-primary" />
+                <div>
+                  <CardTitle className="text-xl font-semibold text-gray-900 dark:text-white">Academic Performance and Language Proficiency</CardTitle>
+                  <CardDescription className="text-gray-600 dark:text-gray-400">Please provide your academic performance and language proficiency details below.</CardDescription>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent className="pt-6 space-y-4">
             <div className="flex flex-col">
-              <label className="font-medium text-gray-700">Your academic performance (GPA/Grades):</label>
+              <label className="font-medium text-gray-700 dark:text-gray-300">Your academic performance (GPA/Grades):</label>
               <Input
                 as="textarea"
                 rows={3}
@@ -293,7 +339,7 @@ const StudentProfile = () => {
               />
             </div>
             <div className="flex flex-col">
-              <label className="font-medium text-gray-700">Language proficiency test scores (e.g., IELTS, TOEFL):</label>
+              <label className="font-medium text-gray-700 dark:text-gray-300">Language proficiency test scores (e.g., IELTS, TOEFL):</label>
               <Input
                 as="textarea"
                 placeholder='Enter your score and validity period'
@@ -304,19 +350,28 @@ const StudentProfile = () => {
                 className="border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
-            <div className='flex flex-row items-center justify-start gap-2'>
-              <Button appearance="primary" onClick={(e) => {setActiveKey('work_experience'); handleSubmit(e)}} className="w-fit">Update & Next</Button>
-            </div>
-          </div>
+              <div className='flex flex-row items-center justify-start gap-2 pt-4 border-t border-gray-200 dark:border-gray-700'>
+                <Button appearance="primary" onClick={(e) => {setActiveKey('work_experience'); handleSubmit(e)}} className="w-fit">Update & Next</Button>
+              </div>
+            </CardContent>
+          </Card>
         );
 
       case 'work_experience':
         return (
-          <div className="p-6 bg-white shadow-md rounded-lg border border-gray-300 space-y-4">
-            <h3 className="text-xl font-semibold text-gray-800">Work and Internship Experience</h3>
-            <p className="text-sm text-gray-500">Please provide details of any work or internship experience you have.</p>
+          <Card className="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-lg">
+            <CardHeader className="pb-4 border-b border-gray-200 dark:border-gray-700">
+              <div className="flex items-center gap-3">
+                <Briefcase size={24} className="text-primary" />
+                <div>
+                  <CardTitle className="text-xl font-semibold text-gray-900 dark:text-white">Work and Internship Experience</CardTitle>
+                  <CardDescription className="text-gray-600 dark:text-gray-400">Please provide details of any work or internship experience you have.</CardDescription>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent className="pt-6 space-y-4">
             <div className="flex flex-col">
-              <label className="font-medium text-gray-700">Describe your work experience:</label>
+              <label className="font-medium text-gray-700 dark:text-gray-300">Describe your work experience:</label>
               <Input
                 style={{ width: '100%', marginBottom: '1rem' }}
                 onChange={setWorkExperience}
@@ -325,7 +380,7 @@ const StudentProfile = () => {
               />
             </div>
             <div className="flex flex-col">
-              <label className="font-medium text-gray-700">Preferred roles for internships:</label>
+              <label className="font-medium text-gray-700 dark:text-gray-300">Preferred roles for internships:</label>
               <Input
                 style={{ width: '100%', marginBottom: '1rem' }}
                 onChange={setPreferredInternshipRoles}
@@ -333,19 +388,28 @@ const StudentProfile = () => {
                 className="border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
-            <div className='flex flex-row items-center justify-start gap-2'>
-              <Button appearance="primary" onClick={(e) => {setActiveKey('visa_accommodation'); handleSubmit(e)}} className="w-fit">Update & Next</Button>
-            </div>
-          </div>
+              <div className='flex flex-row items-center justify-start gap-2 pt-4 border-t border-gray-200 dark:border-gray-700'>
+                <Button appearance="primary" onClick={(e) => {setActiveKey('visa_accommodation'); handleSubmit(e)}} className="w-fit">Update & Next</Button>
+              </div>
+            </CardContent>
+          </Card>
         );
 
       case 'visa_accommodation':
         return (
-          <div className="p-6 bg-white shadow-lg rounded-lg border border-gray-300 space-y-4">
-            <h3 className="text-xl font-semibold text-gray-800">Visa and Accommodation Needs</h3>
-            <p className="text-sm text-gray-500">Please provide details about your visa requirements and accommodation preferences.</p>
+          <Card className="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-lg">
+            <CardHeader className="pb-4 border-b border-gray-200 dark:border-gray-700">
+              <div className="flex items-center gap-3">
+                <FileCheck size={24} className="text-primary" />
+                <div>
+                  <CardTitle className="text-xl font-semibold text-gray-900 dark:text-white">Visa and Accommodation Needs</CardTitle>
+                  <CardDescription className="text-gray-600 dark:text-gray-400">Please provide details about your visa requirements and accommodation preferences.</CardDescription>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent className="pt-6 space-y-4">
             <div className="flex flex-col">
-              <label className="font-medium text-gray-700">What type of visa do you plan to apply for?</label>
+              <label className="font-medium text-gray-700 dark:text-gray-300">What type of visa do you plan to apply for?</label>
               <SelectPicker
                 data={[{ label: 'Student Visa', value: 'Student Visa' }, { label: 'Work Visa', value: 'Work Visa' }]}
                 style={{ width: '100%', marginBottom: '1rem' }}
@@ -355,7 +419,7 @@ const StudentProfile = () => {
               />
             </div>
             <div className="flex flex-col">
-              <label className="font-medium text-gray-700">Do you need help with accommodation?</label>
+              <label className="font-medium text-gray-700 dark:text-gray-300">Do you need help with accommodation?</label>
               <SelectPicker
                 data={[{ label: 'Yes', value: 'true' }, { label: 'No', value: 'false' }]}
                 style={{ width: '100%', marginBottom: '1rem' }}
@@ -365,7 +429,7 @@ const StudentProfile = () => {
               />
             </div>
             <div className="flex flex-col">
-              <label className="font-medium text-gray-700">Accommodation preferences (e.g., dorm, apartment):</label>
+              <label className="font-medium text-gray-700 dark:text-gray-300">Accommodation preferences (e.g., dorm, apartment):</label>
               <Input
                 style={{ width: '100%', marginBottom: '1rem' }}
                 onChange={setAccommodationPreferences}
@@ -374,7 +438,7 @@ const StudentProfile = () => {
               />
             </div>
             <div className="flex flex-col">
-              <label className="font-medium text-gray-700">Do you require health insurance assistance?</label>
+              <label className="font-medium text-gray-700 dark:text-gray-300">Do you require health insurance assistance?</label>
               <SelectPicker
                 data={[{ label: 'Yes', value: 'true' }, { label: 'No', value: 'false' }]}
                 style={{ width: '100%', marginBottom: '1rem' }}
@@ -383,19 +447,28 @@ const StudentProfile = () => {
                 className="border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
-            <div className='flex flex-row items-center justify-start gap-2'>
-              <Button appearance="primary" onClick={(e) => {setActiveKey('additional_preferences'); handleSubmit(e)}} className="w-fit">Update & Next</Button>
-            </div>
-          </div>
+              <div className='flex flex-row items-center justify-start gap-2 pt-4 border-t border-gray-200 dark:border-gray-700'>
+                <Button appearance="primary" onClick={(e) => {setActiveKey('additional_preferences'); handleSubmit(e)}} className="w-fit">Update & Next</Button>
+              </div>
+            </CardContent>
+          </Card>
         );
 
       case 'additional_preferences':
         return (
-          <div className="p-6 bg-white shadow-md rounded-lg border border-gray-300 space-y-4">
-            <h3 className="text-xl font-semibold text-gray-800">Additional Preferences</h3>
-            <p className="text-sm text-gray-600">Specify any other preferences or requirements you have.</p>
+          <Card className="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-lg">
+            <CardHeader className="pb-4 border-b border-gray-200 dark:border-gray-700">
+              <div className="flex items-center gap-3">
+                <Settings size={24} className="text-primary" />
+                <div>
+                  <CardTitle className="text-xl font-semibold text-gray-900 dark:text-white">Additional Preferences</CardTitle>
+                  <CardDescription className="text-gray-600 dark:text-gray-400">Specify any other preferences or requirements you have.</CardDescription>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent className="pt-6 space-y-4">
             <div className="flex flex-col">
-              <label className="font-medium text-gray-700">Do you have any extracurricular interests or hobbies?</label>
+              <label className="font-medium text-gray-700 dark:text-gray-300">Do you have any extracurricular interests or hobbies?</label>
               <Input
                 style={{ width: '100%', marginBottom: '1rem' }}
                 onChange={setExtracurricularInterests}
@@ -404,7 +477,7 @@ const StudentProfile = () => {
               />
             </div>
             <div className="flex flex-col">
-              <label className="font-medium text-gray-700">Have you previously applied to universities or for a visa?</label>
+              <label className="font-medium text-gray-700 dark:text-gray-300">Have you previously applied to universities or for a visa?</label>
               <SelectPicker
                 data={[{ label: 'Yes', value: 'true' }, { label: 'No', value: 'false' }]}
                 style={{ width: '100%', marginBottom: '1rem' }}
@@ -414,7 +487,7 @@ const StudentProfile = () => {
               />
             </div>
             <div className="flex flex-col">
-              <label className="font-medium text-gray-700">Are you interested in part-time job opportunities during your studies?</label>
+              <label className="font-medium text-gray-700 dark:text-gray-300">Are you interested in part-time job opportunities during your studies?</label>
               <SelectPicker
                 data={[{ label: 'Yes', value: 'true' }, { label: 'No', value: 'false' }]}
                 style={{ width: '100%', marginBottom: '1rem' }}
@@ -424,7 +497,7 @@ const StudentProfile = () => {
               />
             </div>
             <div className="flex flex-col">
-              <label className="font-medium text-gray-700">Are you looking for language courses (e.g. English Proficiency)?</label>
+              <label className="font-medium text-gray-700 dark:text-gray-300">Are you looking for language courses (e.g. English Proficiency)?</label>
               <SelectPicker
                 data={[{ label: 'Yes', value: 'true' }, { label: 'No', value: 'false' }]}
                 style={{ width: '100%', marginBottom: '1rem' }}
@@ -434,7 +507,7 @@ const StudentProfile = () => {
               />
             </div>
             <div className="flex flex-col">
-              <label className="font-medium text-gray-700">Do you have application documents ready (e.g. SOP, Cover Letters)?</label>
+              <label className="font-medium text-gray-700 dark:text-gray-300">Do you have application documents ready (e.g. SOP, Cover Letters)?</label>
               <SelectPicker
                 data={[{ label: 'Yes', value: 'true' }, { label: 'No', value: 'false' }]}
                 style={{ width: '100%', marginBottom: '1rem' }}
@@ -443,8 +516,11 @@ const StudentProfile = () => {
                 className="border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
-            <Button appearance="primary" onClick={handleSubmit} className="w-fit">Update Profile</Button>
-          </div>
+              <div className='flex flex-row items-center justify-start gap-2 pt-4 border-t border-gray-200 dark:border-gray-700'>
+                <Button appearance="primary" onClick={handleSubmit} className="w-fit">Update Profile</Button>
+              </div>
+            </CardContent>
+          </Card>
         );
 
       default:
@@ -496,22 +572,26 @@ const StudentProfile = () => {
           <Spinner />
         </div>
       ) : (
-        <form className="container mx-auto ">
-          <div className="mb-4 p-4 bg-white shadow-md rounded-lg border border-gray-300">
-            <h3 className="text-lg md:text-xl font-semibold text-gray-800">Profile Completion Status</h3>
-            <div className="flex items-center gap-2">
-              <span className="text-lg font-bold text-blue-600">{(profileCompletionProgress?.completionPercentage)?.toFixed(2)}%</span>
-              <span className="text-sm font-medium text-gray-500">of your profile is complete</span>
-            </div>
-            <div className="relative pt-1 mt-2">
-              <div className="flex h-2 bg-gray-200 rounded">
-                <div
-                  className="bg-blue-600 h-full rounded"
-                  style={{ width: `${profileCompletionProgress?.completionPercentage}%` }}
-                />
+        <form className="container mx-auto p-4 md:p-6">
+          <Card className="mb-6 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-lg">
+            <CardHeader className="pb-4">
+              <CardTitle className="text-lg md:text-xl font-semibold text-gray-900 dark:text-white">Profile Completion Status</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="flex items-center gap-2 mb-4">
+                <span className="text-2xl font-bold text-primary">{(profileCompletionProgress?.completionPercentage)?.toFixed(2)}%</span>
+                <span className="text-sm font-medium text-gray-600 dark:text-gray-400">of your profile is complete</span>
               </div>
-            </div>
-          </div>
+              <div className="relative pt-1">
+                <div className="flex h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                  <div
+                    className="bg-primary h-full rounded-full transition-all duration-300"
+                    style={{ width: `${profileCompletionProgress?.completionPercentage || 0}%` }}
+                  />
+                </div>
+              </div>
+            </CardContent>
+          </Card>
 
           <Nav
             appearance="subtle"

@@ -19,7 +19,7 @@ const IntroPage = () => {
     const navigate = useNavigate()
 
     return (
-        <section className='text-dark_primary dark:text-white'>
+        <section className='text-dark_primary dark:text-white w-full'>
             {/* Header & Hero Section */}
             <HeroSection />
 

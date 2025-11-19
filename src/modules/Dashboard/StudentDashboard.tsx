@@ -163,26 +163,26 @@ const data = {
         },
       ],
     },
-    {
-      title: "Language Preparation",
-      url: "#",
-      icon: Languages,
-      isActive: true,
-      items: [
-        {
-          title: "View All",
-          url: "/services/language",
-        },
-        {
-          title: "In Progress",
-          url: "/purchased_language_prep",
-        },
-        {
-          title: "Offline",
-          url: "/offline_language_prep",
-        },
-      ],
-    },
+    // {
+    //   title: "Language Preparation",
+    //   url: "#",
+    //   icon: Languages,
+    //   isActive: true,
+    //   items: [
+    //     {
+    //       title: "View All",
+    //       url: "/services/language",
+    //     },
+    //     {
+    //       title: "In Progress",
+    //       url: "/purchased_language_prep",
+    //     },
+    //     {
+    //       title: "Offline",
+    //       url: "/offline_language_prep",
+    //     },
+    //   ],
+    // },
     {
       title: "Career",
       url: "#",

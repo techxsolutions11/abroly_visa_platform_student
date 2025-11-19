@@ -14,8 +14,9 @@ import { TbReceiptRupee } from 'react-icons/tb';
 import * as Yup from 'yup'
 import { ErrorMessage, Form, Formik } from 'formik';
 import { SuccessToast } from '../../utils/Toaster';
-import { BookOpen, Briefcase, Globe, HelpCircle, Home, MapPin, Paperclip, Shield } from 'lucide-react';
+import { BookOpen, Briefcase, Globe, HelpCircle, Home, MapPin, Paperclip, Shield, ArrowRight } from 'lucide-react';
 import useApiCallUtils from '@/hooks/useApiCallUtils';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
 const PrivateIntroPage = () => {
 
@@ -60,89 +61,84 @@ const PrivateIntroPage = () => {
     }
 
     return (
-        <div className=''>
+        <div className='w-full min-h-screen p-4 md:p-6 lg:p-8'>
+            <section className='max-w-7xl mx-auto' id='services'>
+                {/* Header Section */}
+                <div className="mb-8 text-center">
+                    <h1 className='text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-3'>
+                        Everything you need for academics in one place
+                    </h1>
+                    <p className="text-gray-600 dark:text-gray-400 text-lg">
+                        Comprehensive services to support your academic journey abroad
+                    </p>
+                </div>
 
-            <section className='container' id='services' >
-                <h1 className='text-3xl text-center my-5'>Everything you need for academics in one place</h1>
-
-                {/* <p className='text-center'>Content Writing</p> */}
-                {/* <ContentWritingList setFormOptions={setFormOptions} formOptions={formOptions} /> */}
-
-                <section className="grid gap-2 grid-cols-1 md:grid-cols-2 p-4">
+                {/* Services Grid */}
+                <section className="grid gap-4 md:gap-6 grid-cols-1 md:grid-cols-2">
                     {[
                         {
                             title: "Visa & Course Consultation",
                             description: 
                                 "Expert guidance on visa processes and course selection to help you make informed decisions for your academic journey.",
-                            icon: <MapPin className="text-orange-500" size={40} />,
+                            icon: <MapPin className="text-primary" size={24} />,
                             navigateTo: "/services/visa_consultation",
                         },
                         {
                             title: "Health Insurance",
                             description:
                                 "Comprehensive health coverage to ensure peace of mind during your academic pursuits abroad.",
-                            icon: <Shield className="text-orange-500" size={40} />,
+                            icon: <Shield className="text-primary" size={24} />,
                             navigateTo: "/services_request/health",
                         },
                         {
                             title: "International SIM Card",
                             description:
                                 "Stay connected with affordable international SIM card options tailored to your needs.",
-                            icon: <Briefcase className="text-orange-500" size={40} />,
+                            icon: <Briefcase className="text-primary" size={24} />,
                             navigateTo: "/services_request/data",
                         },
-                        // {
-                        //     title: "Accommodation",
-                        //     description:
-                        //         "Find comfortable and secure accommodation options near your university or workplace.",
-                        //     icon: <Home className="text-orange-500" size={40} />,
-                        //     navigateTo: "/services/accommodation",
-                        // },
-                        // {
-                        //     title: "Tourist Visa/Package",
-                        //     description:
-                        //         "Hassle-free visa services and exciting travel packages to explore new destinations.",
-                        //     icon: <Globe className="text-orange-500" size={40} />,
-                        //     navigateTo: "/services/tourist_visa",
-                        // },
                         {
                             title: "Language Preparation",
                             description:
                                 "Master your language skills with our expert-led preparation courses for a successful future.",
-                            icon: <BookOpen className="text-orange-500" size={40} />,
+                            icon: <BookOpen className="text-primary" size={24} />,
                             navigateTo: "/services/language",
                         },
-                        
                     ].map((service, index) => (
-                        <div
+                        <Card
                             key={index}
-                            className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-6 flex flex-col items-start justify-between"
+                            className="group hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 cursor-pointer"
+                            onClick={() => navigate(service.navigateTo)}
                         >
-                            <div className="flex items-center mb-4">{service.icon}</div>
-                            <h3 className="text-xl font-semibold text-gray-800 mb-2">
-                                {service.title}
-                            </h3>
-                            <p className="text-gray-600 mb-4">{service.description}</p>
-                            <Button
-                                color="primary"
-                                variant="shadow"
-                                className="w-fit"
-                                onPress={() => navigate(service.navigateTo)}
-                            >
-                                Know More
-                            </Button>
-                        </div>
+                            <CardContent className="p-6">
+                                <div className="flex items-start gap-4 mb-4">
+                                    <div className="p-3 rounded-lg bg-primary/10 dark:bg-primary/20 group-hover:bg-primary/20 dark:group-hover:bg-primary/30 transition-colors">
+                                        {service.icon}
+                                    </div>
+                                    <div className="flex-1">
+                                        <CardTitle className="text-xl font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-primary transition-colors">
+                                            {service.title}
+                                        </CardTitle>
+                                        <CardDescription className="text-gray-600 dark:text-gray-400">
+                                            {service.description}
+                                        </CardDescription>
+                                    </div>
+                                </div>
+                                <Button
+                                    color="primary"
+                                    variant="flat"
+                                    size="sm"
+                                    className="w-full sm:w-auto"
+                                    endContent={<ArrowRight size={16} />}
+                                    onPress={() => navigate(service.navigateTo)}
+                                >
+                                    Know More
+                                </Button>
+                            </CardContent>
+                        </Card>
                     ))}
                 </section>
             </section>
-
-            {/* why choose Techxuniverse */}
-
-            {/* <Testimonials /> */}
-
-            {/* <FaqSection /> */}
-
-
         </div>
     )
 

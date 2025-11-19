@@ -1,8 +1,8 @@
 import useApiCallUtils from '@/hooks/useApiCallUtils';
-import { Spinner, Button } from '@nextui-org/react';
+import { Spinner, Button, Checkbox } from '@nextui-org/react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { User, MapPin, Building2, GraduationCap, Calendar, BookOpen, DollarSign, FileText } from 'lucide-react';
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle } from '@/components/ui/drawer';
@@ -12,6 +12,7 @@ import { countries } from 'country-data';
 
 const VisaConsultationDetails = () => {
     const queryClient = fetchQueriesHook();
+    const navigate = useNavigate()
     const { commonGetAPICalls, commonPostAPICall } = useApiCallUtils();
     const { id } = useParams();
     const [selectedLead, setSelectedLead] = useState(null);
@@ -49,6 +50,7 @@ const VisaConsultationDetails = () => {
             setSelectedSuggestions([]);
             setSelectedLead(null);
             setIsDrawerOpen(false);
+            navigate("/accepted_applications");
         }
     });
 
@@ -122,6 +124,8 @@ const VisaConsultationDetails = () => {
                                         startContent={<User className="p-1" />}
                                     >View Agent Profile</Button>
                                 </div>
+                                <p className='text-sm text-gray-500 mb-4'>Please Select at least one suggestion to continue.</p>
+
                                 <div className="space-4 grid md:grid-cols-3 gap-2">
                                     {JSON.parse(selectedLead?.suggestions).map((suggestion, index) => (
                                         <Card 
@@ -130,6 +134,12 @@ const VisaConsultationDetails = () => {
                                             onClick={() => toggleSuggestion(index)}
                                         >
                                             <CardContent className="space-y-2 p-4 my-2">
+                                                <div>
+                                                    <Checkbox
+                                                        isSelected={selectedSuggestions.includes(index)}
+                                                        onValueChange={() => toggleSuggestion(index)}
+                                                    />
+                                                </div>
                                                 <div className="max-w-lg mx-auto transition-shadow duration-300">
                                                     <div className="flex items-center justify-between">
                                                         <h2 className="text-md font-semibold flex items-center gap-2">
