@@ -97,13 +97,13 @@ const PrivateIntroPage = () => {
                             icon: <Briefcase className="text-primary" size={24} />,
                             navigateTo: "/services_request/data",
                         },
-                        {
-                            title: "Language Preparation",
-                            description:
-                                "Master your language skills with our expert-led preparation courses for a successful future.",
-                            icon: <BookOpen className="text-primary" size={24} />,
-                            navigateTo: "/services/language",
-                        },
+                        // {
+                        //     title: "Language Preparation",
+                        //     description:
+                        //         "Master your language skills with our expert-led preparation courses for a successful future.",
+                        //     icon: <BookOpen className="text-primary" size={24} />,
+                        //     navigateTo: "/services/language",
+                        // },
                     ].map((service, index) => (
                         <Card
                             key={index}

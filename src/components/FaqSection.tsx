@@ -38,7 +38,7 @@ const FaqSection = () => {
     );
 
     return (
-        <section className="bg-slate-50 py-16">
+        <section className="py-16">
             <div className="container px-4 sm:px-6 lg:px-8 mx-auto">
                 {/* Header Section */}
                 <motion.div 
