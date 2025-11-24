@@ -293,9 +293,9 @@ const ServiceInfo = () => {
                             service == "visa_consultation" && getAuthToken() && <VisaConsultation />
                         }
                     </section>
-                    <section className='col-span-2 h-full items-center'>
+                    {/* <section className='col-span-2 h-full items-center'>
                         <AchievementBanner target_type={service} />
-                    </section>
+                    </section> */}
                     
                 </section>
             }
