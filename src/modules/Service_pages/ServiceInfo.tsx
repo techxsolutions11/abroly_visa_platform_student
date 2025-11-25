@@ -1,6 +1,6 @@
 import { Button, Image, Input, Radio, RadioGroup, Select, SelectItem, Spinner, Textarea, useDisclosure } from '@nextui-org/react';
 import axios from 'axios';
-import { ArrowLeft, Edit, FileText, ImageIcon, Plus, Trash } from 'lucide-react';
+import { ArrowLeft, Edit, FileText, ImageIcon, Plus, Trash, Shield, Wifi, BookOpen, Briefcase, Home, MapPin, FileText as FileTextIcon } from 'lucide-react';
 import React, { useEffect, useState } from 'react'
 import ReactQuill from 'react-quill';
 import { useNavigate, useParams } from 'react-router-dom'
@@ -19,6 +19,7 @@ import Career from '../Career/Career';
 import VisaConsultation from '../VisaConsultation/VisaConsultation';
 import Accommodation from '../Accommodation/Accommodation';
 import useApiCallUtils from '@/hooks/useApiCallUtils';
+import { PRIMARY_COLOR, PRIMARY_COLOR_50, PRIMARY_COLOR_100, PRIMARY_COLOR_200, PRIMARY_COLOR_800, PRIMARY_COLOR_900 } from '@/lib/theme';
 
 
 const ServiceInfo = () => {
@@ -89,15 +90,103 @@ const ServiceInfo = () => {
 
     }
 
+    // Get service info for banner
+    const getServiceInfo = () => {
+        const serviceMap: any = {
+            'sop': { title: 'Statement of Purpose', subtitle: 'Professional SOP writing services for your study abroad journey', icon: FileTextIcon, image: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&w=1500&q=80' },
+            'motivation': { title: 'Motivation Letter', subtitle: 'Craft compelling motivation letters that showcase your passion', icon: FileTextIcon, image: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&w=1500&q=80' },
+            'cover': { title: 'Cover Letter', subtitle: 'Professional cover letters to make your application stand out', icon: FileTextIcon, image: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&w=1500&q=80' },
+            'health_ins': { title: 'Health Insurance', subtitle: 'Comprehensive health insurance plans for students studying abroad', icon: Shield, image: 'https://images.unsplash.com/photo-1584466977773-e625c37cdd50?auto=format&w=1500&q=80' },
+            'sim_card': { title: 'International E-SIM', subtitle: 'Stay connected with international e-SIM cards for your travels', icon: Wifi, image: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&w=1500&q=80' },
+            'language': { title: 'Language Preparation', subtitle: 'Prepare for language proficiency tests with expert guidance', icon: BookOpen, image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&w=1500&q=80' },
+            'career': { title: 'Career Services', subtitle: 'Find job opportunities and advance your career abroad', icon: Briefcase, image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&w=1500&q=80' },
+            'accommodation': { title: 'Accommodation', subtitle: 'Find safe and comfortable housing near your institution', icon: Home, image: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&w=1500&q=80' },
+            'visa_consultation': { title: 'Visa Consultation', subtitle: 'Expert visa guidance and documentation support', icon: MapPin, image: 'https://images.pexels.com/photos/7009468/pexels-photo-7009468.jpeg' },
+        };
+        return serviceMap[service || ''] || { title: 'Service Information', subtitle: 'Get detailed information about our services', icon: FileTextIcon, image: 'https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&w=1500&q=80' };
+    }
+
+    const serviceInfo = getServiceInfo();
+    const ServiceIcon = serviceInfo.icon;
+
     return (
-        <div className='container mx-auto'>
-            <Button
-                variant='light'
-                onPress={() => {
-                    navigate(-1)
-                }}
-                isIconOnly
-            ><ArrowLeft className='h-4' /> </Button>
+        <div className='w-full'>
+            {/* Hero Banner Section */}
+            <div className="relative w-full overflow-hidden mb-8 md:mb-12">
+                {/* Background Image with Gradient Overlay */}
+                <div 
+                    className="relative w-full h-[100px] sm:h-[110px] md:h-[130px] lg:h-[150px] xl:h-[170px] bg-cover bg-center bg-no-repeat transition-all duration-500"
+                    style={{
+                        backgroundImage: `linear-gradient(135deg, ${PRIMARY_COLOR}dd 0%, ${PRIMARY_COLOR_800}dd 50%, ${PRIMARY_COLOR_900}dd 100%), url('${serviceInfo.image}')`,
+                        backgroundBlendMode: 'overlay',
+                        backgroundColor: PRIMARY_COLOR
+                    }}
+                >
+                    {/* Animated Gradient Overlay */}
+                    <div 
+                        className="absolute inset-0 opacity-90 transition-opacity duration-300"
+                        style={{
+                            background: `linear-gradient(135deg, ${PRIMARY_COLOR}cc 0%, ${PRIMARY_COLOR_800}cc 50%, ${PRIMARY_COLOR_900}cc 100%)`
+                        }}
+                    />
+                    
+                    {/* Content Overlay */}
+                    <div className="relative z-10 h-full flex items-center justify-center px-4 sm:px-6 md:px-8 lg:px-12">
+                        <div className="max-w-4xl w-full text-center">
+                            {/* Icon Badge */}
+                            <div className="flex justify-center mb-1">
+                                <div 
+                                    className="p-1 sm:p-1.5 rounded-md backdrop-blur-sm shadow-lg transition-all duration-300 hover:scale-110"
+                                    style={{ 
+                                        backgroundColor: `${PRIMARY_COLOR_50}40`,
+                                        border: `1.5px solid ${PRIMARY_COLOR_200}`
+                                    }}
+                                >
+                                    <ServiceIcon size={18} className="sm:w-5 sm:h-5 md:w-6 md:h-6 transition-transform duration-300 hover:rotate-6" style={{ color: '#ffffff' }} />
+                                </div>
+                            </div>
+                            
+                            {/* Title */}
+                            <h1 className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-bold text-white mb-0.5 sm:mb-1 drop-shadow-2xl leading-tight">
+                                {serviceInfo.title}
+                            </h1>
+                            
+                            {/* Subtitle */}
+                            <p className="text-xs sm:text-sm md:text-base text-white/90 mb-1 max-w-2xl mx-auto drop-shadow-lg">
+                                {serviceInfo.subtitle}
+                            </p>
+                        </div>
+                    </div>
+                    
+                    {/* Decorative Bottom Wave */}
+                    <div className="absolute bottom-0 left-0 right-0">
+                        <svg 
+                            className="w-full h-3 sm:h-4 md:h-5 lg:h-6" 
+                            viewBox="0 0 1440 120" 
+                            fill="none" 
+                            xmlns="http://www.w3.org/2000/svg"
+                            preserveAspectRatio="none"
+                        >
+                            <path 
+                                d="M0,120 L48,105 C96,90 192,60 288,45 C384,30 480,30 576,37.5 C672,45 768,60 864,67.5 C960,75 1056,75 1152,67.5 C1248,60 1344,45 1392,37.5 L1440,30 L1440,120 L1392,120 C1344,120 1248,120 1152,120 C1056,120 960,120 864,120 C768,120 672,120 576,120 C480,120 384,120 288,120 C192,120 96,120 48,120 L0,120 Z" 
+                                fill="white" 
+                                className="dark:fill-gray-900"
+                            />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div className='container mx-auto px-4 sm:px-6 lg:px-8'>
+                <Button
+                    variant='light'
+                    onPress={() => {
+                        navigate(-1)
+                    }}
+                    isIconOnly
+                    className="mb-4"
+                    style={{ color: PRIMARY_COLOR }}
+                ><ArrowLeft className='h-4' style={{ color: PRIMARY_COLOR }} /> </Button>
 
 
             {!getAuthToken() &&
@@ -230,7 +319,7 @@ const ServiceInfo = () => {
 
                                     />
                                     {/* <ErrorMessage name="message" component="div" className="error" /> */}
-                                    <Button isLoading={isSubmit} type="submit" variant='flat' color='primary'>
+                                    <Button isLoading={isSubmit} type="submit" variant='flat' className="text-white" style={{ backgroundColor: PRIMARY_COLOR }}>
                                         <TbReceiptRupee /> Pay Now And Submit
                                     </Button>
                                 </Form>
@@ -302,6 +391,8 @@ const ServiceInfo = () => {
 
             {getAuthToken() == null && <section className='flex my-4 items-center justify-center'><Button
                 onPress={onOpenChange}
+                className="text-white"
+                style={{ backgroundColor: PRIMARY_COLOR }}
             >Explore More</Button></section>}
 
 
@@ -316,6 +407,7 @@ const ServiceInfo = () => {
                 nagativeTitle={"No"}
                 positiveTitle={"Yes"}
             />
+            </div>
         </div>
     )
 }
