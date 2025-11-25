@@ -7,7 +7,7 @@ import { MdLocationOn } from 'react-icons/md';
 import ReactFlagsSelect from 'react-flags-select'
 import { ErrorToast } from '@/utils/Toaster';
 import { Separator } from '@/components/ui/separator';
-import { BookOpen, Eye, Globe, MapPin, GraduationCap, Calendar, DollarSign, School, User, Building2, FileText } from 'lucide-react';
+import { BookOpen, Eye, Globe, MapPin, GraduationCap, Calendar, DollarSign, School, User, Building2, FileText, X } from 'lucide-react';
 import CommonLocationSelector from '@/components/CommonLocationSelector';
 import { useSelector } from 'react-redux';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -19,6 +19,8 @@ import { PREDEFINED_AGENCY_ID } from '@/utils/Constants';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import fetchQueriesHook from '@/hooks/fetchQueriesHook';
 import moment from 'moment';
+import { PRIMARY_COLOR, PRIMARY_COLOR_50, PRIMARY_COLOR_100, PRIMARY_COLOR_200, PRIMARY_COLOR_800, PRIMARY_COLOR_900 } from '@/lib/theme';
+import { Badge } from '@/components/ui/badge';
 
 
 const VisaConsultation = () => {
@@ -749,31 +751,134 @@ const VisaConsultation = () => {
                 setSelectedLead(null);
                 setSelectedApplicationId(null);
             }}>
-                <DrawerContent className='h-[90vh]'>
-                    <DrawerHeader>
-                        <DrawerTitle>Suggestions</DrawerTitle>
+                <DrawerContent className='h-[90vh] bg-white dark:bg-gray-900'>
+                    {/* Modern Header with Gradient */}
+                    <div 
+                        className="relative w-full overflow-hidden border-b border-gray-200 dark:border-gray-700"
+                        style={{
+                            background: `linear-gradient(135deg, ${PRIMARY_COLOR}15 0%, ${PRIMARY_COLOR_50}10 50%, ${PRIMARY_COLOR}15 100%)`
+                        }}
+                    >
+                        <DrawerHeader className="pb-4 pt-6 px-6">
+                            <div className="flex items-center justify-between w-full">
+                                <div className="flex items-center gap-3">
+                                    <div 
+                                        className="p-2 rounded-lg shadow-sm"
+                                        style={{ 
+                                            backgroundColor: `${PRIMARY_COLOR_50}80`,
+                                            border: `1.5px solid ${PRIMARY_COLOR_200}`
+                                        }}
+                                    >
+                                        <GraduationCap size={24} style={{ color: PRIMARY_COLOR }} />
+                                    </div>
+                                    <div>
+                                        <DrawerTitle className="text-2xl font-bold text-gray-900 dark:text-white">
+                                            Expert Suggestions
+                                        </DrawerTitle>
+                                        <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                                            Review and select recommendations from our agents
+                                        </p>
+                                    </div>
+                                </div>
+                                <div className="flex items-center gap-3">
+                                    {suggestionsData && suggestionsData.length > 0 && (
+                                        <Badge 
+                                            className="px-3 py-1.5 text-sm font-semibold"
+                                            style={{ 
+                                                backgroundColor: PRIMARY_COLOR,
+                                                color: 'white'
+                                            }}
+                                        >
+                                            {suggestionsData.length} {suggestionsData.length === 1 ? 'Agent' : 'Agents'}
+                                        </Badge>
+                                    )}
+                                    <Button
+                                        isIconOnly
+                                        variant="light"
+                                        size="sm"
+                                        className="rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                                        onPress={() => {
+                                            setIsDrawerOpen(false);
+                                            setSelectedSuggestions([]);
+                                            setSelectedLead(null);
+                                            setSelectedApplicationId(null);
+                                        }}
+                                    >
+                                        <X size={20} className="text-gray-600 dark:text-gray-400" />
+                                    </Button>
+                                </div>
+                            </div>
                     </DrawerHeader>
-                    <div className="p-6 overflow-scroll">
+                    </div>
+
+                    <div className="flex-1 overflow-y-auto px-6 py-6">
                         {isFetchingSuggestions ? (
-                            <div className="flex items-center justify-center py-12">
-                                <Spinner size="lg" />
+                            <div className="flex flex-col items-center justify-center py-16 gap-4">
+                                <Spinner size="lg" style={{ color: PRIMARY_COLOR }} />
+                                <p className="text-gray-600 dark:text-gray-400">Loading suggestions...</p>
                             </div>
                         ) : suggestionsData && suggestionsData.length > 0 ? (
-                            <div className="space-y-4">
+                            <div className="space-y-6 max-w-7xl mx-auto">
                                 {suggestionsData.map((lead: any) => (
-                                    <div key={lead.id}>
-                                        <div 
+                                    <div key={lead.id} className="space-y-4">
+                                        {/* Agent Lead Card - Premium Design */}
+                                        <Card 
                                             onClick={() => { 
                                                 setSelectedLead(lead); 
                                             }}
-                                            className={`cursor-pointer p-4 rounded-lg border-2 transition-all mb-4 ${selectedLead?.id === lead.id ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20' : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'}`}
+                                            className={`cursor-pointer transition-all duration-300 border-2 overflow-hidden group ${
+                                                selectedLead?.id === lead.id 
+                                                    ? 'shadow-xl scale-[1.02]' 
+                                                    : 'hover:shadow-lg hover:scale-[1.01]'
+                                            }`}
+                                            style={{
+                                                borderColor: selectedLead?.id === lead.id ? PRIMARY_COLOR : undefined,
+                                                backgroundColor: selectedLead?.id === lead.id 
+                                                    ? `${PRIMARY_COLOR_50}30` 
+                                                    : undefined
+                                            }}
                                         >
-                                            <div className="flex items-center justify-between">
+                                            <CardContent className="p-5">
+                                                <div className="flex items-start justify-between gap-4">
+                                                    <div className="flex items-start gap-4 flex-1">
+                                                        {/* Agent Avatar */}
+                                                        <div 
+                                                            className="p-3 rounded-xl shadow-sm flex-shrink-0"
+                                                            style={{ 
+                                                                backgroundColor: `${PRIMARY_COLOR_50}80`,
+                                                                border: `2px solid ${PRIMARY_COLOR_200}`
+                                                            }}
+                                                        >
+                                                            <User size={24} style={{ color: PRIMARY_COLOR }} />
+                                                        </div>
+                                                        
+                                                        <div className="flex-1 min-w-0">
+                                                            <div className="flex items-center gap-3 mb-2">
+                                                                <h3 className="text-xl font-bold text-gray-900 dark:text-white">
+                                                                    {lead.lead_of.username}
+                                                                </h3>
+                                                                {selectedLead?.id === lead.id && (
+                                                                    <Badge 
+                                                                        className="px-2 py-0.5 text-xs"
+                                                                        style={{ 
+                                                                            backgroundColor: PRIMARY_COLOR,
+                                                                            color: 'white'
+                                                                        }}
+                                                                    >
+                                                        Selected
+                                                                    </Badge>
+                                                                )}
+                                                            </div>
+                                                            <div className="flex items-center gap-4 flex-wrap">
                                                 <div className="flex items-center gap-2">
-                                                    <User className="w-5 h-5 text-blue-500" />
-                                                    <h3 className="text-lg font-semibold">{lead.lead_of.username}</h3>
+                                                                    <FileText size={16} className="text-gray-500 dark:text-gray-400" />
+                                                                    <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                                                                        {JSON.parse(lead.suggestions).length} {JSON.parse(lead.suggestions).length === 1 ? 'Suggestion' : 'Suggestions'}
+                                                                    </span>
                                                 </div>
-                                                <div className="text-sm text-gray-500">
+                                                                <div className="flex items-center gap-2">
+                                                                    <Calendar size={16} className="text-gray-500 dark:text-gray-400" />
+                                                                    <span className="text-sm text-gray-600 dark:text-gray-400">
                                                     {moment.duration(moment().diff(lead?.updatedAt)).asWeeks() >= 1 
                                                         ? `${Math.floor(moment.duration(moment().diff(lead?.updatedAt)).asWeeks())} week${Math.floor(moment.duration(moment().diff(lead?.updatedAt)).asWeeks()) > 1 ? 's' : ''} ago` 
                                                         : moment.duration(moment().diff(lead?.updatedAt)).asDays() >= 1 
@@ -783,101 +888,275 @@ const VisaConsultation = () => {
                                                         : moment.duration(moment().diff(lead?.updatedAt)).asMinutes() >= 1 
                                                         ? `${Math.floor(moment.duration(moment().diff(lead?.updatedAt)).asMinutes())} minute${Math.floor(moment.duration(moment().diff(lead?.updatedAt)).asMinutes()) > 1 ? 's' : ''} ago` 
                                                         : 'Just now'}
+                                                                    </span>
                                                 </div>
                                             </div>
-                                            <p className="text-sm text-gray-500 mt-2">{JSON.parse(lead.suggestions).length} Suggestions</p>
+                                                        </div>
                                         </div>
 
+                                                    {/* Selection Indicator */}
+                                                    <div className="flex-shrink-0">
+                                                        <div 
+                                                            className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all ${
+                                                                selectedLead?.id === lead.id 
+                                                                    ? 'border-transparent' 
+                                                                    : 'border-gray-300 dark:border-gray-600'
+                                                            }`}
+                                                            style={{
+                                                                backgroundColor: selectedLead?.id === lead.id ? PRIMARY_COLOR : 'transparent'
+                                                            }}
+                                                        >
                                         {selectedLead?.id === lead.id && (
+                                                                <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                                                                </svg>
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </CardContent>
+                                        </Card>
+
+                                        {/* Expanded Suggestions Section */}
+                                        {selectedLead?.id === lead.id && (
+                                            <div className="space-y-6 animate-in fade-in slide-in-from-top-2 duration-300">
+                                                {/* Header Section */}
+                                                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-5 rounded-xl border-2 border-gray-200 dark:border-gray-700 bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900">
                                             <div>
-                                                <div className='flex gap-2 items-center my-4'>
-                                                    <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-200">Suggestions from {selectedLead?.lead_of?.username}</h2>
+                                                        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
+                                                            Recommendations from {selectedLead?.lead_of?.username}
+                                                        </h2>
+                                                        <p className="text-sm text-gray-600 dark:text-gray-400">
+                                                            Select one or more options to proceed with your application
+                                                        </p>
+                                                    </div>
                                                     <Button 
                                                         onClick={() => window.open(`/agent_profile/${selectedLead?.id}`, "_blank")}
                                                         size='sm'
-                                                        color='warning'
                                                         variant='flat'
-                                                        startContent={<User className="p-1" />}
-                                                    >View Agent Profile</Button>
+                                                        className="font-semibold"
+                                                        style={{ 
+                                                            backgroundColor: PRIMARY_COLOR,
+                                                            color: 'white'
+                                                        }}
+                                                        startContent={<User size={16} />}
+                                                    >
+                                                        View Agent Profile
+                                                    </Button>
                                                 </div>
-                                                <p className='text-sm text-gray-500 dark:text-gray-400 mb-4'>Please Select at least one suggestion to continue.</p>
 
-                                                <div className="space-4 grid md:grid-cols-3 gap-2">
-                                                    {JSON.parse(selectedLead?.suggestions).map((suggestion: any, index: number) => (
+                                                {/* Suggestions Grid */}
+                                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                                                    {JSON.parse(selectedLead?.suggestions).map((suggestion: any, index: number) => {
+                                                        const isSelected = selectedSuggestions.includes(index);
+                                                        return (
                                                         <Card 
                                                             key={index} 
-                                                            className={`cursor-pointer hover:shadow-md transition-all ${selectedSuggestions.includes(index) ? 'border-blue-500 border-2' : ''}`} 
                                                             onClick={() => toggleSuggestion(index)}
-                                                        >
-                                                            <CardContent className="space-y-2 p-4 my-2">
-                                                                <div>
-                                                                    <Checkbox
-                                                                        isSelected={selectedSuggestions.includes(index)}
-                                                                        onValueChange={() => toggleSuggestion(index)}
-                                                                    />
+                                                                className={`cursor-pointer transition-all duration-300 border-2 group ${
+                                                                    isSelected 
+                                                                        ? 'shadow-xl scale-[1.02]' 
+                                                                        : 'hover:shadow-lg hover:scale-[1.01]'
+                                                                }`}
+                                                                style={{
+                                                                    borderColor: isSelected ? PRIMARY_COLOR : undefined,
+                                                                    backgroundColor: isSelected 
+                                                                        ? `${PRIMARY_COLOR_50}20` 
+                                                                        : undefined
+                                                                }}
+                                                            >
+                                                                <CardContent className="p-5 space-y-4">
+                                                                    {/* Card Header */}
+                                                                    <div className="flex items-center justify-between pb-3 border-b border-gray-200 dark:border-gray-700">
+                                                                        <div className="flex items-center gap-3">
+                                                                            <div 
+                                                                                className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all ${
+                                                                                    isSelected 
+                                                                                        ? 'border-transparent' 
+                                                                                        : 'border-gray-300 dark:border-gray-600'
+                                                                                }`}
+                                                                                style={{
+                                                                                    backgroundColor: isSelected ? PRIMARY_COLOR : 'transparent'
+                                                                                }}
+                                                                            >
+                                                                                {isSelected && (
+                                                                                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                                                                                    </svg>
+                                                                                )}
                                                                 </div>
-                                                                <div className="max-w-lg mx-auto transition-shadow duration-300">
-                                                                    <div className="flex items-center justify-between">
-                                                                        <h2 className="text-md font-semibold flex items-center gap-2">
-                                                                            Recommendation
-                                                                        </h2>
-                                                                        <span className="text-sm text-gray-500">Option #{index + 1}</span>
+                                                                            <h3 className="font-semibold text-gray-900 dark:text-white">
+                                                                                Option #{index + 1}
+                                                                            </h3>
                                                                     </div>
-                                                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                                        {isSelected && (
+                                                                            <Badge 
+                                                                                className="px-2 py-0.5 text-xs"
+                                                                                style={{ 
+                                                                                    backgroundColor: PRIMARY_COLOR,
+                                                                                    color: 'white'
+                                                                                }}
+                                                                            >
+                                                                                Selected
+                                                                            </Badge>
+                                                                        )}
+                                                                    </div>
+
+                                                                    {/* Details Grid */}
                                                                         <div className="space-y-3">
-                                                                            <p className="flex items-center gap-2 text-gray-700 dark:text-gray-300">
-                                                                                <MapPin className="w-4 h-4 text-gray-500" />
-                                                                                <span><strong>Country:</strong> {countries[suggestion?.country || "IN"]?.name || 'Not specified'}</span>
-                                                                            </p>
-                                                                            <p className="flex items-center gap-2 text-gray-700 dark:text-gray-300">
-                                                                                <MapPin className="w-4 h-4 text-gray-500" />
-                                                                                <span><strong>State:</strong> {suggestion?.state || 'Not specified'}</span>
-                                                                            </p>
-                                                                            <p className="flex items-center gap-2 text-gray-700 dark:text-gray-300">
-                                                                                <Building2 className="w-4 h-4 text-gray-500" />
-                                                                                <span><strong>University:</strong> {suggestion?.university || 'Not specified'}</span>
-                                                                            </p>
-                                                                            <p className="flex items-center gap-2 text-gray-700 dark:text-gray-300">
-                                                                                <Building2 className="w-4 h-4 text-gray-500" />
-                                                                                <span><strong>Type:</strong> {suggestion?.universityType || 'Not specified'}</span>
-                                                                            </p>
-                                                                            <p className="flex items-center gap-2 text-gray-700 dark:text-gray-300">
-                                                                                <Calendar className="w-4 h-4 text-gray-500" />
-                                                                                <span><strong>Intake:</strong> {suggestion?.intakeMonth && suggestion?.intakeYear ? ` ${suggestion.intakeMonth} ${suggestion.intakeYear}` : 'Not specified'}</span>
+                                                                        {/* Location Details */}
+                                                                        <div className="space-y-2.5">
+                                                                            <div className="flex items-start gap-2.5">
+                                                                                <MapPin size={18} style={{ color: PRIMARY_COLOR }} className="mt-0.5 flex-shrink-0" />
+                                                                                <div className="flex-1 min-w-0">
+                                                                                    <p className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-0.5">
+                                                                                        Country
+                                                                                    </p>
+                                                                                    <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                                                                                        {countries[suggestion?.country || "IN"]?.name || 'Not specified'}
+                                                                                    </p>
+                                                                                </div>
+                                                                            </div>
+                                                                            {suggestion?.state && (
+                                                                                <div className="flex items-start gap-2.5 ml-7">
+                                                                                    <div className="flex-1 min-w-0">
+                                                                                        <p className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-0.5">
+                                                                                            State
+                                                                                        </p>
+                                                                                        <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                                                                                            {suggestion.state}
+                                                                                        </p>
+                                                                                    </div>
+                                                                                </div>
+                                                                            )}
+                                                                        </div>
+
+                                                                        {/* University Details */}
+                                                                        <div className="space-y-2.5 pt-2 border-t border-gray-100 dark:border-gray-800">
+                                                                            <div className="flex items-start gap-2.5">
+                                                                                <Building2 size={18} style={{ color: PRIMARY_COLOR }} className="mt-0.5 flex-shrink-0" />
+                                                                                <div className="flex-1 min-w-0">
+                                                                                    <p className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-0.5">
+                                                                                        University
+                                                                                    </p>
+                                                                                    <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                                                                                        {suggestion?.university || 'Not specified'}
                                                                             </p>
                                                                         </div>
-                                                                        <div className="space-y-3">
-                                                                            <p className="flex items-center gap-2 text-gray-700 dark:text-gray-300">
-                                                                                <GraduationCap className="w-4 h-4 text-gray-500" />
-                                                                                <span><strong>Program Level:</strong> {suggestion?.programLevel || 'Not specified'}</span>
-                                                                            </p>
-                                                                            <p className="flex items-center gap-2 text-gray-700 dark:text-gray-300">
-                                                                                <FileText className="w-4 h-4 text-gray-500" />
-                                                                                <span><strong>Course/Program Name:</strong> {suggestion?.course_program_name || 'Not specified'}</span>
-                                                                            </p>
-                                                                            <p className="flex items-center gap-2 text-gray-700 dark:text-gray-300">
-                                                                                <BookOpen className="w-4 h-4 text-gray-500" />
-                                                                                <span><strong>Field of Study:</strong> {suggestion?.fieldOfStudy || 'Not specified'}</span>
-                                                                            </p>
-                                                                            <p className="flex items-center gap-2 text-gray-700 dark:text-gray-300">
-                                                                                <DollarSign className="w-4 h-4 text-gray-500" />
-                                                                                <span><strong>Tuition Fees:</strong> {suggestion?.tuitionFees || 'Not specified'}</span>
+                                                                            </div>
+                                                                            {suggestion?.universityType && (
+                                                                                <div className="flex items-start gap-2.5 ml-7">
+                                                                                    <div className="flex-1 min-w-0">
+                                                                                        <p className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-0.5">
+                                                                                            Type
+                                                                                        </p>
+                                                                                        <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                                                                                            {suggestion.universityType}
+                                                                                        </p>
+                                                                                    </div>
+                                                                                </div>
+                                                                            )}
+                                                                        </div>
+
+                                                                        {/* Academic Details */}
+                                                                        <div className="space-y-2.5 pt-2 border-t border-gray-100 dark:border-gray-800">
+                                                                            <div className="flex items-start gap-2.5">
+                                                                                <GraduationCap size={18} style={{ color: PRIMARY_COLOR }} className="mt-0.5 flex-shrink-0" />
+                                                                                <div className="flex-1 min-w-0">
+                                                                                    <p className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-0.5">
+                                                                                        Program Level
+                                                                                    </p>
+                                                                                    <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                                                                                        {suggestion?.programLevel || 'Not specified'}
                                                                             </p>
                                                                         </div>
+                                                                            </div>
+                                                                            {suggestion?.course_program_name && (
+                                                                                <div className="flex items-start gap-2.5 ml-7">
+                                                                                    <FileText size={18} style={{ color: PRIMARY_COLOR }} className="mt-0.5 flex-shrink-0" />
+                                                                                    <div className="flex-1 min-w-0">
+                                                                                        <p className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-0.5">
+                                                                                            Course/Program
+                                                                                        </p>
+                                                                                        <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                                                                                            {suggestion.course_program_name}
+                                                                                        </p>
+                                                                                    </div>
+                                                                                </div>
+                                                                            )}
+                                                                            {suggestion?.fieldOfStudy && (
+                                                                                <div className="flex items-start gap-2.5 ml-7">
+                                                                                    <BookOpen size={18} style={{ color: PRIMARY_COLOR }} className="mt-0.5 flex-shrink-0" />
+                                                                                    <div className="flex-1 min-w-0">
+                                                                                        <p className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-0.5">
+                                                                                            Field of Study
+                                                                                        </p>
+                                                                                        <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                                                                                            {suggestion.fieldOfStudy}
+                                                                                        </p>
+                                                                                    </div>
+                                                                                </div>
+                                                                            )}
+                                                                        </div>
+
+                                                                        {/* Additional Details */}
+                                                                        <div className="space-y-2.5 pt-2 border-t border-gray-100 dark:border-gray-800">
+                                                                            {suggestion?.intakeMonth && suggestion?.intakeYear && (
+                                                                                <div className="flex items-start gap-2.5">
+                                                                                    <Calendar size={18} style={{ color: PRIMARY_COLOR }} className="mt-0.5 flex-shrink-0" />
+                                                                                    <div className="flex-1 min-w-0">
+                                                                                        <p className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-0.5">
+                                                                                            Intake
+                                                                                        </p>
+                                                                                        <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                                                                                            {suggestion.intakeMonth} {suggestion.intakeYear}
+                                                                                        </p>
+                                                                                    </div>
+                                                                                </div>
+                                                                            )}
+                                                                            {suggestion?.tuitionFees && (
+                                                                                <div className="flex items-start gap-2.5">
+                                                                                    <DollarSign size={18} style={{ color: PRIMARY_COLOR }} className="mt-0.5 flex-shrink-0" />
+                                                                                    <div className="flex-1 min-w-0">
+                                                                                        <p className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-0.5">
+                                                                                            Tuition Fees
+                                                                                        </p>
+                                                                                        <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                                                                                            {suggestion.tuitionFees}
+                                                                                        </p>
+                                                                                    </div>
+                                                                                </div>
+                                                                            )}
                                                                     </div>
                                                                 </div>
                                                             </CardContent>
                                                         </Card>
-                                                    ))}
+                                                        );
+                                                    })}
                                                 </div>
-                                                {selectedSuggestions.length > 0 && (
+
+                                                {/* Continue Button - Sticky Bottom */}
+                                                {selectedSuggestions?.length > 0 && (
+                                                    <div className="sticky bottom-0 h-[100%] left-0 right-0 bg-white dark:bg-white-900 border-t-2 border-gray-200 dark:border-gray-700 shadow-[0_-4px_20px_rgba(0,0,0,0.1)] dark:shadow-[0_-4px_20px_rgba(0,0,0,0.3)] px-6 py-4 -mx-6  mt-6 z-10">
+                                                        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 max-w-7xl mx-auto">
+                                                            <div className="text-sm text-gray-600 dark:text-gray-400">
+                                                                <span className="font-semibold text-gray-900 dark:text-white">
+                                                                    {selectedSuggestions.length}
+                                                                </span> {selectedSuggestions.length === 1 ? 'option' : 'options'} selected
+                                                            </div>
                                                     <Button 
                                                         onClick={() => continueWithSelectedOptions.mutate()}
-                                                        className="mt-4 w-fit mx-auto bg-blue-600 text-white hover:bg-blue-700 transition-all" 
-                                                        color="primary"
+                                                                size="lg"
+                                                                className="w-full sm:w-auto min-w-[200px] font-semibold text-base shadow-lg hover:shadow-xl transition-all"
+                                                                style={{ 
+                                                                    backgroundColor: PRIMARY_COLOR,
+                                                                    color: 'white'
+                                                                }}
                                                     >
                                                         Continue With {selectedSuggestions.length} Selected Option{selectedSuggestions.length > 1 ? 's' : ''}
                                                     </Button>
+                                                        </div>
+                                                    </div>
                                                 )}
                                             </div>
                                         )}
@@ -885,7 +1164,13 @@ const VisaConsultation = () => {
                                 ))}
                             </div>
                         ) : (
-                            <p className="text-gray-600 dark:text-gray-400 text-lg">No suggestions available.</p>
+                            <div className="flex flex-col items-center justify-center py-16 gap-4">
+                                <GraduationCap size={64} className="text-gray-400 dark:text-gray-500" />
+                                <p className="text-lg font-semibold text-gray-900 dark:text-white">No suggestions available</p>
+                                <p className="text-gray-600 dark:text-gray-400 text-center max-w-md">
+                                    There are currently no suggestions from agents for this application. Please check back later.
+                                </p>
+                            </div>
                         )}
                     </div>
                 </DrawerContent>

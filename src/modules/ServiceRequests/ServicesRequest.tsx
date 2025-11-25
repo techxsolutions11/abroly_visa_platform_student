@@ -23,8 +23,10 @@ import {
   Shield,
   Wifi,
   MapPin,
+  TrendingUp,
 } from "lucide-react";
 import { motion } from "framer-motion";
+import { PRIMARY_COLOR, PRIMARY_COLOR_50, PRIMARY_COLOR_100, PRIMARY_COLOR_200, PRIMARY_COLOR_800, PRIMARY_COLOR_900 } from '@/lib/theme';
 
 const ServicesRequest = () => {
   const { service } = useParams();
@@ -166,10 +168,10 @@ const ServicesRequest = () => {
     return (
       <div className="w-full h-full flex flex-col">
         <Card className="border border-gray-200 dark:border-gray-700 bg-white/90 dark:bg-gray-900/90 shadow-xl rounded-2xl flex flex-col h-full">
-          <CardHeader className="pb-5 border-b border-gray-200 dark:border-gray-800 bg-gradient-to-r from-primary/5 to-transparent rounded-t-2xl flex-shrink-0">
+          <CardHeader className="pb-5 border-b border-gray-200 dark:border-gray-800 rounded-t-2xl flex-shrink-0" style={{ background: `linear-gradient(to right, ${PRIMARY_COLOR_50}40, transparent)` }}>
             <div className="flex items-center gap-3 mb-2">
-              <div className="p-2.5 rounded-xl bg-primary/10 text-primary">
-                <Shield size={22} />
+              <div className="p-2.5 rounded-xl" style={{ backgroundColor: PRIMARY_COLOR_50 }}>
+                <Shield size={22} style={{ color: PRIMARY_COLOR }} />
               </div>
               <div>
                 <CardTitle className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">
@@ -199,7 +201,7 @@ const ServicesRequest = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                       <div className="space-y-2">
                         <label className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300">
-                          <User size={16} className="text-primary" />
+                          <User size={16} style={{ color: PRIMARY_COLOR }} />
                           Full Name *
                         </label>
                         <Field
@@ -212,7 +214,7 @@ const ServicesRequest = () => {
 
                       <div className="space-y-2">
                         <label className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300">
-                          <Mail size={16} className="text-primary" />
+                          <Mail size={16} style={{ color: PRIMARY_COLOR }} />
                           Email Address *
                         </label>
                         <Field
@@ -227,7 +229,7 @@ const ServicesRequest = () => {
 
                     <div className="space-y-2">
                       <label className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300">
-                        <Phone size={16} className="text-primary" />
+                        <Phone size={16} style={{ color: PRIMARY_COLOR }} />
                         Mobile Number (WhatsApp preferred) *
                       </label>
                       <Field
@@ -259,7 +261,7 @@ const ServicesRequest = () => {
 
                     <div className="space-y-2">
                       <label className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300">
-                        <Globe size={16} className="text-primary" />
+                        <Globe size={16} style={{ color: PRIMARY_COLOR }} />
                         Country of Study / Destination *
                       </label>
                       <ReactFlagsSelect
@@ -280,7 +282,7 @@ const ServicesRequest = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                       <div className="space-y-2">
                         <label className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300">
-                          <Shield size={16} className="text-primary" />
+                          <Shield size={16} style={{ color: PRIMARY_COLOR }} />
                           Preferred Coverage Type *
                         </label>
                         <Select
@@ -312,7 +314,7 @@ const ServicesRequest = () => {
 
                       <div className="space-y-2">
                         <label className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300">
-                          <Calendar size={16} className="text-primary" />
+                          <Calendar size={16} style={{ color: PRIMARY_COLOR }} />
                           Start Date of Insurance *
                         </label>
                         <Field
@@ -333,9 +335,9 @@ const ServicesRequest = () => {
               <Button
                 type="submit"
                 form="health-form"
-                color="primary"
                 size="lg"
-                className="w-full font-semibold"
+                className="w-full font-semibold text-white"
+                style={{ backgroundColor: PRIMARY_COLOR }}
               >
                 Submit Health Insurance Request
               </Button>
@@ -350,10 +352,10 @@ const ServicesRequest = () => {
     return (
       <div className="w-full h-full flex flex-col">
         <Card className="border border-gray-200 dark:border-gray-700 bg-white/90 dark:bg-gray-900/90 shadow-xl rounded-2xl flex flex-col h-full">
-          <CardHeader className="pb-5 border-b border-gray-200 dark:border-gray-800 bg-gradient-to-r from-primary/5 to-transparent rounded-t-2xl flex-shrink-0">
+          <CardHeader className="pb-5 border-b border-gray-200 dark:border-gray-800 rounded-t-2xl flex-shrink-0" style={{ background: `linear-gradient(to right, ${PRIMARY_COLOR_50}40, transparent)` }}>
             <div className="flex items-center gap-3 mb-2">
-              <div className="p-2.5 rounded-xl bg-primary/10 text-primary">
-                <Wifi size={22} />
+              <div className="p-2.5 rounded-xl" style={{ backgroundColor: PRIMARY_COLOR_50 }}>
+                <Wifi size={22} style={{ color: PRIMARY_COLOR }} />
               </div>
               <div>
                 <CardTitle className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">
@@ -380,7 +382,7 @@ const ServicesRequest = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                       <div className="space-y-2">
                         <label className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300">
-                          <User size={16} className="text-primary" />
+                          <User size={16} style={{ color: PRIMARY_COLOR }} />
                           Full Name *
                         </label>
                         <Field
@@ -393,7 +395,7 @@ const ServicesRequest = () => {
 
                       <div className="space-y-2">
                         <label className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300">
-                          <Mail size={16} className="text-primary" />
+                          <Mail size={16} style={{ color: PRIMARY_COLOR }} />
                           Email Address *
                         </label>
                         <Field
@@ -408,7 +410,7 @@ const ServicesRequest = () => {
 
                     <div className="space-y-2">
                       <label className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300">
-                        <Phone size={16} className="text-primary" />
+                        <Phone size={16} style={{ color: PRIMARY_COLOR }} />
                         Mobile Number (WhatsApp preferred) *
                       </label>
                       <Field
@@ -441,7 +443,7 @@ const ServicesRequest = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                       <div className="space-y-2">
                         <label className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300">
-                          <Globe size={16} className="text-primary" />
+                          <Globe size={16} style={{ color: PRIMARY_COLOR }} />
                           Country of Travel / Destination *
                         </label>
                         <ReactFlagsSelect
@@ -455,13 +457,13 @@ const ServicesRequest = () => {
                           placeholder="Select country"
                           searchable
                           className="w-full"
-                          selectButtonClassName="w-full h-11 border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 text-left bg-white dark:bg-gray-800 hover:border-gray-400 dark:hover:border-gray-500 focus:border-primary focus:ring-1 focus:ring-primary"
+                          selectButtonClassName="w-full h-11 border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 text-left bg-white dark:bg-gray-800 hover:border-gray-400 dark:hover:border-gray-500"
                         />
                       </div>
 
                       <div className="space-y-2">
                         <label className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300">
-                          <Calendar size={16} className="text-primary" />
+                          <Calendar size={16} style={{ color: PRIMARY_COLOR }} />
                           Travel Date (Approx.) *
                         </label>
                         <Field
@@ -476,7 +478,7 @@ const ServicesRequest = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                       <div className="space-y-2">
                         <label className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300">
-                          <Wifi size={16} className="text-primary" />
+                          <Wifi size={16} style={{ color: PRIMARY_COLOR }} />
                           Data Requirement *
                         </label>
                         <Select
@@ -513,7 +515,7 @@ const ServicesRequest = () => {
 
                       <div className="space-y-2">
                         <label className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300">
-                          <MapPin size={16} className="text-primary" />
+                          <MapPin size={16} style={{ color: PRIMARY_COLOR }} />
                           Coverage Type *
                         </label>
                         <Select
@@ -556,9 +558,9 @@ const ServicesRequest = () => {
               <Button
                 type="submit"
                 form="esim-form"
-                color="primary"
                 size="lg"
-                className="w-full font-semibold"
+                className="w-full font-semibold text-white"
+                style={{ backgroundColor: PRIMARY_COLOR }}
               >
                 Submit E-SIM Request
               </Button>
@@ -572,24 +574,97 @@ const ServicesRequest = () => {
   // ====== PAGE LAYOUT (form on left, banner on right) ======
   return (
     <motion.div
-      className="min-h-screen w-full bg-gray-100 dark:bg-gray-900 px-4 sm:px-6 lg:px-10 py-8 md:py-10"
+      className="min-h-screen w-full bg-gray-100 dark:bg-gray-900"
       variants={containerVariants}
       initial="hidden"
       animate="show"
     >
-      <div className="max-w-7xl mx-auto">
-        {/* TITLE ROW */}
-        <motion.div className="mb-8 md:mb-12" variants={fadeUp}>
-          <span className="inline-flex items-center px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-semibold tracking-wide uppercase">
-            {pageTag}
-          </span>
-          <h1 className="mt-3 text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">
-            {pageTitle}
-          </h1>
-          <p className="mt-2 text-sm md:text-base text-gray-600 dark:text-gray-400">
-            {pageSubtitle}
-          </p>
-        </motion.div>
+      {/* Hero Banner Section */}
+      <div className="relative w-full overflow-hidden mb-8 md:mb-12">
+        {/* Background Image with Gradient Overlay */}
+        <div 
+          className="relative w-full h-[100px] sm:h-[110px] md:h-[130px] lg:h-[150px] xl:h-[170px] bg-cover bg-center bg-no-repeat transition-all duration-500"
+          style={{
+            backgroundImage: `linear-gradient(135deg, ${PRIMARY_COLOR}dd 0%, ${PRIMARY_COLOR_800}dd 50%, ${PRIMARY_COLOR_900}dd 100%), url('${heroImage}')`,
+            backgroundBlendMode: 'overlay',
+            backgroundColor: PRIMARY_COLOR
+          }}
+        >
+          {/* Animated Gradient Overlay */}
+          <div 
+            className="absolute inset-0 opacity-90 transition-opacity duration-300"
+            style={{
+              background: `linear-gradient(135deg, ${PRIMARY_COLOR}cc 0%, ${PRIMARY_COLOR_800}cc 50%, ${PRIMARY_COLOR_900}cc 100%)`
+            }}
+          />
+          
+          {/* Content Overlay */}
+          <div className="relative z-10 h-full flex items-center justify-center px-4 sm:px-6 md:px-8 lg:px-12">
+            <div className="max-w-4xl w-full text-center">
+              {/* Icon Badge */}
+              <div className="flex justify-center mb-1">
+                <div 
+                  className="p-1 sm:p-1.5 rounded-md backdrop-blur-sm shadow-lg transition-all duration-300 hover:scale-110"
+                  style={{ 
+                    backgroundColor: `${PRIMARY_COLOR_50}40`,
+                    border: `1.5px solid ${PRIMARY_COLOR_200}`
+                  }}
+                >
+                  {isHealth ? (
+                    <Shield size={18} className="sm:w-5 sm:h-5 md:w-6 md:h-6 transition-transform duration-300 hover:rotate-6" style={{ color: '#ffffff' }} />
+                  ) : (
+                    <Wifi size={18} className="sm:w-5 sm:h-5 md:w-6 md:h-6 transition-transform duration-300 hover:rotate-6" style={{ color: '#ffffff' }} />
+                  )}
+                </div>
+              </div>
+              
+              {/* Title */}
+              <h1 className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-bold text-white mb-0.5 sm:mb-1 drop-shadow-2xl leading-tight">
+                {pageTitle}
+              </h1>
+              
+              {/* Subtitle */}
+              <p className="text-xs sm:text-sm md:text-base text-white/90 mb-1 max-w-2xl mx-auto drop-shadow-lg">
+                {pageSubtitle}
+              </p>
+              
+              {/* Tag Badge */}
+              <div className="flex justify-center mt-2">
+                <div 
+                  className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full backdrop-blur-md shadow-lg"
+                  style={{ 
+                    backgroundColor: `${PRIMARY_COLOR_50}30`,
+                    border: `1px solid ${PRIMARY_COLOR_200}80`
+                  }}
+                >
+                  <span className="text-white font-semibold text-xs sm:text-sm">
+                    {pageTag}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Decorative Bottom Wave */}
+          <div className="absolute bottom-0 left-0 right-0">
+            <svg 
+              className="w-full h-3 sm:h-4 md:h-5 lg:h-6" 
+              viewBox="0 0 1440 120" 
+              fill="none" 
+              xmlns="http://www.w3.org/2000/svg"
+              preserveAspectRatio="none"
+            >
+              <path 
+                d="M0,120 L48,105 C96,90 192,60 288,45 C384,30 480,30 576,37.5 C672,45 768,60 864,67.5 C960,75 1056,75 1152,67.5 C1248,60 1344,45 1392,37.5 L1440,30 L1440,120 L1392,120 C1344,120 1248,120 1152,120 C1056,120 960,120 864,120 C768,120 672,120 576,120 C480,120 384,120 288,120 C192,120 96,120 48,120 L0,120 Z" 
+                fill="white" 
+                className="dark:fill-gray-900"
+              />
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-6 sm:py-8">
 
         {/* MAIN CONTENT ROW */}
         <div className="flex flex-col lg:flex-row gap-6">

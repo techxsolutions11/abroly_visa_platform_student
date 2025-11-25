@@ -3,10 +3,11 @@ import { Button, Spinner } from "@nextui-org/react";
 import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent, CardDescription, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Calendar, School, DollarSign, User, ExternalLink, ArrowRight, FileCheck, CheckCircle2 } from "lucide-react";
+import { MapPin, Calendar, School, DollarSign, User, ExternalLink, ArrowRight, FileCheck, CheckCircle2, TrendingUp } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { countries } from 'country-data'
 import moment from "moment";
+import { PRIMARY_COLOR, PRIMARY_COLOR_50, PRIMARY_COLOR_100, PRIMARY_COLOR_200, PRIMARY_COLOR_800, PRIMARY_COLOR_900 } from '@/lib/theme';
 
 const AcceptedApplications = () => {
   const fetchSuggestions = async () => {
@@ -27,28 +28,98 @@ const AcceptedApplications = () => {
   };
 
   return (
-    <div className="w-full min-h-screen p-4 md:p-6 lg:p-8">
-      <div className="max-w-7xl mx-auto">
-        {/* Header Section */}
-        <div className="mb-8">
-          <div className="flex items-center gap-3 mb-3">
-            <div className="p-2 rounded-lg bg-primary/10 dark:bg-primary/20">
-              <CheckCircle2 size={24} className="text-primary" />
+    <div className="w-full min-h-screen">
+      {/* Hero Banner Section */}
+      <div className="relative w-full overflow-hidden mb-8 md:mb-12">
+        {/* Background Image with Gradient Overlay */}
+        <div 
+          className="relative w-full h-[100px] sm:h-[110px] md:h-[130px] lg:h-[150px] xl:h-[170px] bg-cover bg-center bg-no-repeat transition-all duration-500"
+          style={{
+            backgroundImage: `linear-gradient(135deg, ${PRIMARY_COLOR}dd 0%, ${PRIMARY_COLOR_800}dd 50%, ${PRIMARY_COLOR_900}dd 100%), url('https://images.pexels.com/photos/7009468/pexels-photo-7009468.jpeg')`,
+            backgroundBlendMode: 'overlay',
+            backgroundColor: PRIMARY_COLOR
+          }}
+        >
+          {/* Animated Gradient Overlay */}
+          <div 
+            className="absolute inset-0 opacity-90 transition-opacity duration-300"
+            style={{
+              background: `linear-gradient(135deg, ${PRIMARY_COLOR}cc 0%, ${PRIMARY_COLOR_800}cc 50%, ${PRIMARY_COLOR_900}cc 100%)`
+            }}
+          />
+          
+          {/* Content Overlay */}
+          <div className="relative z-10 h-full flex items-center justify-center px-4 sm:px-6 md:px-8 lg:px-12">
+            <div className="max-w-4xl w-full text-center">
+              {/* Icon Badge */}
+              <div className="flex justify-center mb-1">
+                <div 
+                  className="p-1 sm:p-1.5 rounded-md backdrop-blur-sm shadow-lg transition-all duration-300 hover:scale-110"
+                  style={{ 
+                    backgroundColor: `${PRIMARY_COLOR_50}40`,
+                    border: `1.5px solid ${PRIMARY_COLOR_200}`
+                  }}
+                >
+                  <CheckCircle2 size={18} className="sm:w-5 sm:h-5 md:w-6 md:h-6 transition-transform duration-300 hover:rotate-6" style={{ color: '#ffffff' }} />
+                </div>
+              </div>
+              
+              {/* Title */}
+              <h1 className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-bold text-white mb-0.5 sm:mb-1 drop-shadow-2xl leading-tight">
+                Accepted Applications
+              </h1>
+              
+              {/* Subtitle */}
+              <p className="text-xs sm:text-sm md:text-base text-white/90 mb-1 max-w-2xl mx-auto drop-shadow-lg">
+                Track and manage your accepted visa consultation applications
+              </p>
+              
+              {/* Stats Badge */}
+              {data && data.length > 0 && (
+                <div className="flex justify-center mt-2">
+                  <div 
+                    className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full backdrop-blur-md shadow-lg"
+                    style={{ 
+                      backgroundColor: `${PRIMARY_COLOR_50}30`,
+                      border: `1px solid ${PRIMARY_COLOR_200}80`
+                    }}
+                  >
+                    <TrendingUp size={16} className="sm:w-4 sm:h-4" style={{ color: '#ffffff' }} />
+                    <span className="text-white font-semibold text-xs sm:text-sm">
+                      Total Applications: <span className="font-bold">{data.length}</span>
+                    </span>
+                  </div>
+                </div>
+              )}
             </div>
-            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">
-              Accepted Applications
-            </h1>
           </div>
-          <p className="text-gray-600 dark:text-gray-400 text-lg ml-11">
-            Track and manage your accepted visa consultation applications
-          </p>
+          
+          {/* Decorative Bottom Wave */}
+          <div className="absolute bottom-0 left-0 right-0">
+            <svg 
+              className="w-full h-3 sm:h-4 md:h-5 lg:h-6" 
+              viewBox="0 0 1440 120" 
+              fill="none" 
+              xmlns="http://www.w3.org/2000/svg"
+              preserveAspectRatio="none"
+            >
+              <path 
+                d="M0,120 L48,105 C96,90 192,60 288,45 C384,30 480,30 576,37.5 C672,45 768,60 864,67.5 C960,75 1056,75 1152,67.5 C1248,60 1344,45 1392,37.5 L1440,30 L1440,120 L1392,120 C1344,120 1248,120 1152,120 C1056,120 960,120 864,120 C768,120 672,120 576,120 C480,120 384,120 288,120 C192,120 96,120 48,120 L0,120 Z" 
+                fill="white" 
+                className="dark:fill-gray-900"
+              />
+            </svg>
+          </div>
         </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
 
         {/* Loading State */}
         {isFetching ? (
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="flex flex-col items-center gap-4">
-              <Spinner size="lg" />
+              <Spinner size="lg" style={{ color: PRIMARY_COLOR }} />
               <p className="text-gray-600 dark:text-gray-400">Loading your applications...</p>
             </div>
           </div>
@@ -75,8 +146,8 @@ const AcceptedApplications = () => {
                         <div className="flex items-start justify-between mb-6 pb-4 border-b border-gray-200 dark:border-gray-700">
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center gap-3 mb-2">
-                              <div className="p-2 rounded-lg bg-primary/10 dark:bg-primary/20">
-                                <School size={18} className="text-primary" />
+                              <div className="p-2 rounded-lg" style={{ backgroundColor: PRIMARY_COLOR_50 }}>
+                                <School size={18} style={{ color: PRIMARY_COLOR }} />
                               </div>
                               <h3 className="text-lg md:text-xl font-semibold text-gray-900 dark:text-gray-100 truncate">
                                 {details.university}
@@ -104,7 +175,7 @@ const AcceptedApplications = () => {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                           {/* Location */}
                           <div className="flex items-start gap-3 p-3 rounded-lg bg-gray-50 dark:bg-gray-800/50">
-                            <MapPin size={18} className="text-primary mt-0.5 flex-shrink-0" />
+                            <MapPin size={18} style={{ color: PRIMARY_COLOR }} className="mt-0.5 flex-shrink-0" />
                             <div className="flex-1 min-w-0">
                               <p className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-1">
                                 Location
@@ -117,7 +188,7 @@ const AcceptedApplications = () => {
 
                           {/* Program Level */}
                           <div className="flex items-start gap-3 p-3 rounded-lg bg-gray-50 dark:bg-gray-800/50">
-                            <School size={18} className="text-primary mt-0.5 flex-shrink-0" />
+                            <School size={18} style={{ color: PRIMARY_COLOR }} className="mt-0.5 flex-shrink-0" />
                             <div className="flex-1 min-w-0">
                               <p className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-1">
                                 Program Level
@@ -130,7 +201,7 @@ const AcceptedApplications = () => {
 
                           {/* Intake */}
                           <div className="flex items-start gap-3 p-3 rounded-lg bg-gray-50 dark:bg-gray-800/50">
-                            <Calendar size={18} className="text-primary mt-0.5 flex-shrink-0" />
+                            <Calendar size={18} style={{ color: PRIMARY_COLOR }} className="mt-0.5 flex-shrink-0" />
                             <div className="flex-1 min-w-0">
                               <p className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-1">
                                 Intake
@@ -144,7 +215,7 @@ const AcceptedApplications = () => {
                           {/* Tuition Fees */}
                           {details.tuitionFees && (
                             <div className="flex items-start gap-3 p-3 rounded-lg bg-gray-50 dark:bg-gray-800/50">
-                              <DollarSign size={18} className="text-primary mt-0.5 flex-shrink-0" />
+                              <DollarSign size={18} style={{ color: PRIMARY_COLOR }} className="mt-0.5 flex-shrink-0" />
                               <div className="flex-1 min-w-0">
                                 <p className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-1">
                                   Tuition Fees
@@ -191,9 +262,9 @@ const AcceptedApplications = () => {
                                 navigate("/accepted_applications/" + item.id);
                               }}
                               size="sm"
-                              color="primary"
                               variant="solid"
-                              className="w-full sm:w-auto"
+                              className="w-full sm:w-auto text-white"
+                              style={{ backgroundColor: PRIMARY_COLOR }}
                               endContent={<ArrowRight size={16} />}
                               isDisabled={withdrawn}
                             >

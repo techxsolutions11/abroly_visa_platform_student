@@ -94,6 +94,7 @@ import useApiCallUtils from "@/hooks/useApiCallUtils"
 import { useQuery } from "@tanstack/react-query"
 import aborlyIcon from "../../assets/logo.png"
 import { getAppName, getConfig } from "@/utils/config"
+import { PRIMARY_COLOR, PRIMARY_COLOR_50, PRIMARY_COLOR_100, PRIMARY_COLOR_200, PRIMARY_COLOR_800, PRIMARY_COLOR_900 } from '@/lib/theme';
 
 const data = {
   navMain: [
@@ -248,7 +249,13 @@ const StudentDashboard = () => {
   return (
     <>
       <SidebarProvider className="bg-white">
-        <Sidebar collapsible="icon" className="bg-white md:bg-transparent" >
+        <Sidebar 
+          collapsible="icon" 
+          className="bg-white md:bg-transparent"
+          style={{
+            background: `linear-gradient(135deg, ${PRIMARY_COLOR_50}40 0%, ${PRIMARY_COLOR_100}30 50%, ${PRIMARY_COLOR_50}40 100%)`
+          }}
+        >
           <SidebarHeader>
             <SidebarMenu>
               <SidebarMenuItem>
@@ -301,14 +308,16 @@ const StudentDashboard = () => {
                                 <SidebarMenuSubButton 
                                   asChild
                                   isActive={isActive}
-                                  className={`w-full h-10 ${isActive ? '!bg-[#ab0d0d] !text-white [&>span]:!text-white [&>svg]:!text-white data-[active=true]:!bg-[#ab0d0d] data-[active=true]:!text-white' : ''}`}
+                                  className={`w-full h-10 no-underline ${isActive ? `!bg-[${PRIMARY_COLOR}] !text-white [&>span]:!text-white [&>svg]:!text-white [&>a]:!no-underline data-[active=true]:!bg-[${PRIMARY_COLOR}] data-[active=true]:!text-white` : ''}`}
+                                  style={isActive ? { backgroundColor: PRIMARY_COLOR } : undefined}
                                 >
                                   <Link
-                                    className={`w-full h-full text-sm py-2 transition-all ${
+                                    className={`w-full h-full text-sm py-2 transition-all no-underline ${
                                       isActive 
-                                        ? '!bg-[#ab0d0d] !text-white font-semibold' 
-                                        : 'text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground'
+                                        ? '!text-white font-semibold !no-underline' 
+                                        : 'text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground no-underline'
                                     }`}
+                                    style={isActive ? { backgroundColor: PRIMARY_COLOR, textDecoration: 'none' } : { textDecoration: 'none' }}
                                     to={subItem.url}
                                   >{subItem.title}</Link>
                                 </SidebarMenuSubButton>
@@ -349,14 +358,16 @@ const StudentDashboard = () => {
                                 <SidebarMenuSubButton 
                                   asChild
                                   isActive={isActive}
-                                  className={`w-full h-10 ${isActive ? '!bg-[#ab0d0d] !text-white [&>span]:!text-white [&>svg]:!text-white data-[active=true]:!bg-[#ab0d0d] data-[active=true]:!text-white' : ''}`}
+                                  className={`w-full h-10 no-underline ${isActive ? `!bg-[${PRIMARY_COLOR}] !text-white [&>span]:!text-white [&>svg]:!text-white [&>a]:!no-underline data-[active=true]:!bg-[${PRIMARY_COLOR}] data-[active=true]:!text-white` : ''}`}
+                                  style={isActive ? { backgroundColor: PRIMARY_COLOR } : undefined}
                                 >
                                   <Link
-                                    className={`w-full h-full text-sm py-2 transition-all ${
+                                    className={`w-full h-full text-sm py-2 transition-all no-underline ${
                                       isActive 
-                                        ? '!bg-[#ab0d0d] !text-white font-semibold' 
-                                        : 'text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground'
+                                        ? '!text-white font-semibold !no-underline' 
+                                        : 'text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground no-underline'
                                     }`}
+                                    style={isActive ? { backgroundColor: PRIMARY_COLOR, textDecoration: 'none' } : { textDecoration: 'none' }}
                                     to={subItem.url}
                                   >{subItem.title}</Link>
                                 </SidebarMenuSubButton>
@@ -381,11 +392,12 @@ const StudentDashboard = () => {
                         isActive={window.location.pathname === item.url}
                       >
                         <Link
-                          className={`w-full h-full ${
+                          className={`w-full h-full no-underline ${
                             window.location.pathname === item.url 
-                              ? 'bg-[#ab0d0d] text-white' 
+                              ? 'text-white' 
                               : ''
                           }`}
+                          style={window.location.pathname === item.url ? { backgroundColor: PRIMARY_COLOR, textDecoration: 'none' } : { textDecoration: 'none' }}
                           to={item.url}
                         >
                           <item.icon />

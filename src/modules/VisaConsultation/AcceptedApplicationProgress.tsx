@@ -8,11 +8,12 @@ import { Avatar, Button, Input, Radio, RadioGroup, Spinner, Tab, Tabs } from "@n
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import FileSaver from "file-saver";
-import { ArrowDownToLine, CircleCheck, Phone, User, FileText, MessageSquare, Upload, CheckCircle2, XCircle, AlertCircle, Clock, HelpCircle } from 'lucide-react';
+import { ArrowDownToLine, CircleCheck, Phone, User, FileText, MessageSquare, Upload, CheckCircle2, XCircle, AlertCircle, Clock, HelpCircle, TrendingUp } from 'lucide-react';
 import moment from "moment";
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { Steps } from "rsuite";
+import { PRIMARY_COLOR, PRIMARY_COLOR_50, PRIMARY_COLOR_100, PRIMARY_COLOR_200, PRIMARY_COLOR_800, PRIMARY_COLOR_900 } from '@/lib/theme';
 
 const AcceptedApplicationProgress = () => {
     const { id } = useParams()
@@ -116,8 +117,14 @@ const AcceptedApplicationProgress = () => {
             <Card className="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-lg">
                 <CardHeader className="pb-4 border-b border-gray-200 dark:border-gray-700">
                     <div className="flex items-center gap-3">
-                        <div className="p-2 rounded-lg bg-primary/10 dark:bg-primary/20">
-                            <FileText size={20} className="text-primary" />
+                        <div 
+                            className="p-2 rounded-lg"
+                            style={{ 
+                                backgroundColor: `${PRIMARY_COLOR_50}80`,
+                                border: `1.5px solid ${PRIMARY_COLOR_200}`
+                            }}
+                        >
+                            <FileText size={20} style={{ color: PRIMARY_COLOR }} />
                         </div>
                         <div className="flex-1">
                             <CardTitle className="text-xl font-semibold text-gray-900 dark:text-white">
@@ -148,7 +155,7 @@ const AcceptedApplicationProgress = () => {
                     ) : isFetching ? (
                         <div className="flex items-center justify-center w-full py-12">
                             <div className="flex flex-col items-center gap-4">
-                                <Spinner size="lg" />
+                                <Spinner size="lg" style={{ color: PRIMARY_COLOR }} />
                                 <p className="text-gray-600 dark:text-gray-400">Loading questions...</p>
                             </div>
                         </div>
@@ -216,7 +223,7 @@ const AcceptedApplicationProgress = () => {
                                         {/* Question Text */}
                                         <div className="mb-4">
                                             <div className="flex items-start gap-2 mb-2">
-                                                <MessageSquare size={18} className="text-primary mt-0.5 flex-shrink-0" />
+                                                <MessageSquare size={18} style={{ color: PRIMARY_COLOR }} className="mt-0.5 flex-shrink-0" />
                                                 <h3 className="text-base font-semibold text-gray-900 dark:text-white">
                                         {question?.question_text || ""}
                                                 </h3>
@@ -243,9 +250,9 @@ const AcceptedApplicationProgress = () => {
                                                     <Button
                                                         onClick={() => handleSubmitAnswer(question?.id)}
                                                         size="sm"
-                                                        color="primary"
-                                                            isDisabled={mutation.isPending || !answers[question?.id]?.answer}
-                                                            isLoading={mutation.isPending}
+                                                        style={{ backgroundColor: PRIMARY_COLOR, color: 'white' }}
+                                                        isDisabled={mutation.isPending || !answers[question?.id]?.answer}
+                                                        isLoading={mutation.isPending}
                                                     >
                                                             Submit Answer
                                                     </Button>
@@ -283,7 +290,7 @@ const AcceptedApplicationProgress = () => {
                                                     <Button
                                                         onClick={() => handleSubmitAnswer(question?.id)}
                                                             size="sm"
-                                                        color="primary"
+                                                        style={{ backgroundColor: PRIMARY_COLOR, color: 'white' }}
                                                             isDisabled={mutation.isPending || !answers[question?.id]?.file}
                                                             isLoading={mutation.isPending}
                                                             startContent={<Upload size={16} />}
@@ -314,19 +321,20 @@ const AcceptedApplicationProgress = () => {
                                                             Submitted File
                                                         </p>
                                                         <div className="flex items-center gap-3">
-                                                            <FileText size={18} className="text-primary" />
+                                                            <FileText size={18} style={{ color: PRIMARY_COLOR }} />
                                                     <a
                                                         href={question?.file_path || "#"}
                                                         target="_blank"
                                                         rel="noopener noreferrer"
-                                                                className="text-sm font-medium text-primary hover:underline"
+                                                                className="text-sm font-medium hover:underline"
+                                                                style={{ color: PRIMARY_COLOR }}
                                                     >
                                                         View File
                                                     </a>
                                                     <Button
                                                         size="sm"
                                                                 variant="flat"
-                                                        color="primary"
+                                                        style={{ backgroundColor: PRIMARY_COLOR_50, color: PRIMARY_COLOR }}
                                                                 isIconOnly
                                                         onClick={() => {
                                                             if (question?.file_path) {
@@ -415,29 +423,97 @@ const AcceptedApplicationProgress = () => {
     })
 
     return (
-        <div className="w-full min-h-screen p-4 md:p-6 lg:p-8">
-            <div className="max-w-7xl mx-auto">
-                {/* Header Section */}
-                <div className="mb-6 flex items-center justify-between">
-                    <div>
-                        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2">
-                            Application Progress
-                        </h1>
-                        <p className="text-gray-600 dark:text-gray-400">
-                            Track your application progress and respond to agent questions
-                        </p>
-                    </div>
-                <Button
-                    size="sm"
-                    color="danger"
-                        variant="flat"
-                    onClick={() => {
-                        setIsOpen(true)
+        <div className="w-full min-h-screen bg-gray-50 dark:bg-gray-900">
+            {/* Hero Banner Section */}
+            <div className="relative w-full overflow-hidden mb-8 md:mb-12">
+                <div 
+                    className="relative w-full h-[100px] sm:h-[110px] md:h-[130px] lg:h-[150px] xl:h-[170px] bg-cover bg-center bg-no-repeat transition-all duration-500"
+                    style={{
+                        backgroundImage: `linear-gradient(135deg, ${PRIMARY_COLOR}dd 0%, ${PRIMARY_COLOR_800}dd 50%, ${PRIMARY_COLOR_900}dd 100%), url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&w=1500&q=80')`,
+                        backgroundBlendMode: 'overlay',
+                        backgroundColor: PRIMARY_COLOR
                     }}
+                >
+                    <div 
+                        className="absolute inset-0 opacity-90 transition-opacity duration-300"
+                        style={{
+                            background: `linear-gradient(135deg, ${PRIMARY_COLOR}cc 0%, ${PRIMARY_COLOR_800}cc 50%, ${PRIMARY_COLOR_900}cc 100%)`
+                        }}
+                    />
+                    
+                    <div className="relative z-10 h-full flex items-center justify-center px-4 sm:px-6 md:px-8 lg:px-12">
+                        <div className="max-w-4xl w-full text-center">
+                            <div className="flex justify-center mb-1">
+                                <div 
+                                    className="p-1 sm:p-1.5 rounded-md backdrop-blur-sm shadow-lg transition-all duration-300 hover:scale-110"
+                                    style={{ 
+                                        backgroundColor: `${PRIMARY_COLOR_50}40`,
+                                        border: `1px solid ${PRIMARY_COLOR_200}`
+                                    }}
+                                >
+                                    <TrendingUp size={18} className="sm:w-5 sm:h-5 md:w-6 md:h-6 transition-transform duration-300 hover:rotate-6" style={{ color: '#ffffff' }} />
+                                </div>
+                            </div>
+                            
+                            <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-white mb-1 sm:mb-2 drop-shadow-2xl leading-tight">
+                                Application Progress
+                            </h1>
+                            
+                            <p className="text-xs sm:text-sm md:text-base lg:text-lg text-white/90 max-w-2xl mx-auto drop-shadow-lg">
+                                Track your application progress and respond to agent questions
+                            </p>
+                            
+                            {tabs?.steps && tabs?.steps?.length > 0 && (
+                                <div className="flex justify-center mt-2">
+                                    <div 
+                                        className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full backdrop-blur-md shadow-lg"
+                                        style={{ 
+                                            backgroundColor: `${PRIMARY_COLOR_50}30`,
+                                            border: `1px solid ${PRIMARY_COLOR_200}80`
+                                        }}
+                                    >
+                                        <span className="text-white font-semibold text-xs sm:text-sm">
+                                            Total Steps: <span className="font-bold">{tabs?.steps?.length}</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                    
+                    <div className="absolute bottom-0 left-0 right-0">
+                        <svg 
+                            className="w-full h-4 sm:h-6 md:h-8 lg:h-10" 
+                            viewBox="0 0 1440 120" 
+                            fill="none" 
+                            xmlns="http://www.w3.org/2000/svg"
+                            preserveAspectRatio="none"
+                        >
+                            <path 
+                                d="M0,120 L48,105 C96,90 192,60 288,45 C384,30 480,30 576,37.5 C672,45 768,60 864,67.5 C960,75 1056,75 1152,67.5 C1248,60 1344,45 1392,37.5 L1440,30 L1440,120 L1392,120 C1344,120 1248,120 1152,120 C1056,120 960,120 864,120 C768,120 672,120 576,120 C480,120 384,120 288,120 C192,120 96,120 48,120 L0,120 Z" 
+                                fill="white" 
+                                className="dark:fill-gray-900"
+                            />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 pb-8">
+                {/* Header Section with Withdraw Button */}
+                <div className="mb-6 flex items-center justify-between">
+                    <div className="flex-1"></div>
+                    <Button
+                        size="sm"
+                        color="danger"
+                        variant="flat"
+                        onClick={() => {
+                            setIsOpen(true)
+                        }}
                     >
                         Withdraw Application
                     </Button>
-            </div>
+                </div>
             
                 {/* Agent Details Card */}
             {!isFetching && tabs?.agent && (
@@ -452,7 +528,7 @@ const AcceptedApplicationProgress = () => {
                                 />
                                 <div className="flex-1">
                                     <div className="flex items-center gap-2 mb-2">
-                                        <User size={18} className="text-primary" />
+                                        <User size={18} style={{ color: PRIMARY_COLOR }} />
                                         <CardTitle className="text-lg font-semibold text-gray-900 dark:text-white">
                                             {tabs?.agent?.username || "Unknown Agent"}
                                         </CardTitle>
@@ -485,7 +561,7 @@ const AcceptedApplicationProgress = () => {
                 ) : isFetching ? (
                     <div className="flex items-center justify-center min-h-[400px]">
                         <div className="flex flex-col items-center gap-4">
-                            <Spinner size="lg" />
+                            <Spinner size="lg" style={{ color: PRIMARY_COLOR }} />
                             <p className="text-gray-600 dark:text-gray-400">Loading application progress...</p>
                         </div>
                                     </div>
@@ -521,9 +597,10 @@ const AcceptedApplicationProgress = () => {
                                         key={item?.id}
                                                 className={`cursor-pointer transition-colors ${
                                                     step === index
-                                                        ? "font-bold text-primary dark:text-primary"
+                                                        ? "font-bold"
                                                         : "text-gray-600 dark:text-gray-400"
                                                 }`}
+                                                style={step === index ? { color: PRIMARY_COLOR } : undefined}
                                         status={`${item?.step_status === 1 ? "finish" : "wait"}`}
                                     />
                                 ))}

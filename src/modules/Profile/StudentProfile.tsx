@@ -4,7 +4,8 @@ import { Nav, Input, SelectPicker, Button } from 'rsuite';
 import { Spinner } from '@nextui-org/react';
 import useApiCallUtils from '@/hooks/useApiCallUtils';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { GraduationCap, BookOpen, MapPin, DollarSign, Award, Briefcase, FileCheck, Settings } from 'lucide-react';
+import { GraduationCap, BookOpen, MapPin, DollarSign, Award, Briefcase, FileCheck, Settings, UserCircle } from 'lucide-react';
+import { PRIMARY_COLOR, PRIMARY_COLOR_50, PRIMARY_COLOR_100, PRIMARY_COLOR_200, PRIMARY_COLOR_800, PRIMARY_COLOR_900 } from '@/lib/theme';
 
 
 const StudentProfile = () => {
@@ -127,7 +128,7 @@ const StudentProfile = () => {
           <Card className="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-lg">
             <CardHeader className="pb-4 border-b border-gray-200 dark:border-gray-700">
               <div className="flex items-center gap-3">
-                <GraduationCap size={24} className="text-primary" />
+                <GraduationCap size={24} style={{ color: PRIMARY_COLOR }} />
                 <div>
                   <CardTitle className="text-xl font-semibold text-gray-900 dark:text-white">Academic and Career Aspirations</CardTitle>
                   <CardDescription className="text-gray-600 dark:text-gray-400">Please provide information regarding your academic goals and career aspirations.</CardDescription>
@@ -192,7 +193,7 @@ const StudentProfile = () => {
             </div>
 
               <div className='flex flex-row items-center justify-start gap-2 pt-4 border-t border-gray-200 dark:border-gray-700'>
-                <Button appearance="primary" onClick={(e) => { setActiveKey('course'); handleSubmit(e) }} className="w-fit">Update & Next</Button>
+                <Button appearance="primary" onClick={(e) => { setActiveKey('course'); handleSubmit(e) }} className="w-fit" style={{ backgroundColor: PRIMARY_COLOR, borderColor: PRIMARY_COLOR }}>Update & Next</Button>
               </div>
             </CardContent>
           </Card>
@@ -203,7 +204,7 @@ const StudentProfile = () => {
           <Card className="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-lg">
             <CardHeader className="pb-4 border-b border-gray-200 dark:border-gray-700">
               <div className="flex items-center gap-3">
-                <BookOpen size={24} className="text-primary" />
+                <BookOpen size={24} style={{ color: PRIMARY_COLOR }} />
                 <div>
                   <CardTitle className="text-xl font-semibold text-gray-900 dark:text-white">Course Preferences</CardTitle>
                   <CardDescription className="text-gray-600 dark:text-gray-400">Please share your preferences regarding courses and program durations.</CardDescription>
@@ -230,7 +231,7 @@ const StudentProfile = () => {
               />
             </div>
               <div className='flex flex-row items-center justify-start gap-2 pt-4 border-t border-gray-200 dark:border-gray-700'>
-                <Button appearance="primary" onClick={(e) => {setActiveKey('location'); handleSubmit(e)}} className="w-fit">Update & Next</Button>
+                <Button appearance="primary" onClick={(e) => {setActiveKey('location'); handleSubmit(e)}} className="w-fit" style={{ backgroundColor: PRIMARY_COLOR, borderColor: PRIMARY_COLOR }}>Update & Next</Button>
               </div>
             </CardContent>
           </Card>
@@ -241,7 +242,7 @@ const StudentProfile = () => {
           <Card className="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-lg">
             <CardHeader className="pb-4 border-b border-gray-200 dark:border-gray-700">
               <div className="flex items-center gap-3">
-                <MapPin size={24} className="text-primary" />
+                <MapPin size={24} style={{ color: PRIMARY_COLOR }} />
                 <div>
                   <CardTitle className="text-xl font-semibold text-gray-900 dark:text-white">Location Preferences</CardTitle>
                   <CardDescription className="text-gray-600 dark:text-gray-400">Please indicate your preferred locations for studying.</CardDescription>
@@ -268,7 +269,7 @@ const StudentProfile = () => {
               />
             </div>
               <div className='flex flex-row items-center justify-start gap-2 pt-4 border-t border-gray-200 dark:border-gray-700'>
-                <Button appearance="primary" onClick={(e) => {setActiveKey('financial'); handleSubmit(e)}} className="w-fit">Update & Next</Button>
+                <Button appearance="primary" onClick={(e) => {setActiveKey('financial'); handleSubmit(e)}} className="w-fit" style={{ backgroundColor: PRIMARY_COLOR, borderColor: PRIMARY_COLOR }}>Update & Next</Button>
               </div>
             </CardContent>
           </Card>
@@ -279,7 +280,7 @@ const StudentProfile = () => {
           <Card className="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-lg">
             <CardHeader className="pb-4 border-b border-gray-200 dark:border-gray-700">
               <div className="flex items-center gap-3">
-                <DollarSign size={24} className="text-primary" />
+                <DollarSign size={24} style={{ color: PRIMARY_COLOR }} />
                 <div>
                   <CardTitle className="text-xl font-semibold text-gray-900 dark:text-white">Financial and Scholarship Information</CardTitle>
                   <CardDescription className="text-gray-600 dark:text-gray-400">Please provide details about your financial situation and scholarship needs.</CardDescription>
@@ -307,7 +308,7 @@ const StudentProfile = () => {
               />
             </div>
               <div className='flex flex-row items-center justify-start gap-2 pt-4 border-t border-gray-200 dark:border-gray-700'>
-                <Button appearance="primary" onClick={(e) => {setActiveKey('performance'); handleSubmit(e)}} className="w-fit">Update & Next</Button>
+                <Button appearance="primary" onClick={(e) => {setActiveKey('performance'); handleSubmit(e)}} className="w-fit" style={{ backgroundColor: PRIMARY_COLOR, borderColor: PRIMARY_COLOR }}>Update & Next</Button>
               </div>
             </CardContent>
           </Card>
@@ -318,7 +319,7 @@ const StudentProfile = () => {
           <Card className="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-lg">
             <CardHeader className="pb-4 border-b border-gray-200 dark:border-gray-700">
               <div className="flex items-center gap-3">
-                <Award size={24} className="text-primary" />
+                <Award size={24} style={{ color: PRIMARY_COLOR }} />
                 <div>
                   <CardTitle className="text-xl font-semibold text-gray-900 dark:text-white">Academic Performance and Language Proficiency</CardTitle>
                   <CardDescription className="text-gray-600 dark:text-gray-400">Please provide your academic performance and language proficiency details below.</CardDescription>
@@ -351,7 +352,7 @@ const StudentProfile = () => {
               />
             </div>
               <div className='flex flex-row items-center justify-start gap-2 pt-4 border-t border-gray-200 dark:border-gray-700'>
-                <Button appearance="primary" onClick={(e) => {setActiveKey('work_experience'); handleSubmit(e)}} className="w-fit">Update & Next</Button>
+                <Button appearance="primary" onClick={(e) => {setActiveKey('work_experience'); handleSubmit(e)}} className="w-fit" style={{ backgroundColor: PRIMARY_COLOR, borderColor: PRIMARY_COLOR }}>Update & Next</Button>
               </div>
             </CardContent>
           </Card>
@@ -362,7 +363,7 @@ const StudentProfile = () => {
           <Card className="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-lg">
             <CardHeader className="pb-4 border-b border-gray-200 dark:border-gray-700">
               <div className="flex items-center gap-3">
-                <Briefcase size={24} className="text-primary" />
+                <Briefcase size={24} style={{ color: PRIMARY_COLOR }} />
                 <div>
                   <CardTitle className="text-xl font-semibold text-gray-900 dark:text-white">Work and Internship Experience</CardTitle>
                   <CardDescription className="text-gray-600 dark:text-gray-400">Please provide details of any work or internship experience you have.</CardDescription>
@@ -389,7 +390,7 @@ const StudentProfile = () => {
               />
             </div>
               <div className='flex flex-row items-center justify-start gap-2 pt-4 border-t border-gray-200 dark:border-gray-700'>
-                <Button appearance="primary" onClick={(e) => {setActiveKey('visa_accommodation'); handleSubmit(e)}} className="w-fit">Update & Next</Button>
+                <Button appearance="primary" onClick={(e) => {setActiveKey('visa_accommodation'); handleSubmit(e)}} className="w-fit" style={{ backgroundColor: PRIMARY_COLOR, borderColor: PRIMARY_COLOR }}>Update & Next</Button>
               </div>
             </CardContent>
           </Card>
@@ -400,7 +401,7 @@ const StudentProfile = () => {
           <Card className="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-lg">
             <CardHeader className="pb-4 border-b border-gray-200 dark:border-gray-700">
               <div className="flex items-center gap-3">
-                <FileCheck size={24} className="text-primary" />
+                <FileCheck size={24} style={{ color: PRIMARY_COLOR }} />
                 <div>
                   <CardTitle className="text-xl font-semibold text-gray-900 dark:text-white">Visa and Accommodation Needs</CardTitle>
                   <CardDescription className="text-gray-600 dark:text-gray-400">Please provide details about your visa requirements and accommodation preferences.</CardDescription>
@@ -448,7 +449,7 @@ const StudentProfile = () => {
               />
             </div>
               <div className='flex flex-row items-center justify-start gap-2 pt-4 border-t border-gray-200 dark:border-gray-700'>
-                <Button appearance="primary" onClick={(e) => {setActiveKey('additional_preferences'); handleSubmit(e)}} className="w-fit">Update & Next</Button>
+                <Button appearance="primary" onClick={(e) => {setActiveKey('additional_preferences'); handleSubmit(e)}} className="w-fit" style={{ backgroundColor: PRIMARY_COLOR, borderColor: PRIMARY_COLOR }}>Update & Next</Button>
               </div>
             </CardContent>
           </Card>
@@ -459,7 +460,7 @@ const StudentProfile = () => {
           <Card className="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-lg">
             <CardHeader className="pb-4 border-b border-gray-200 dark:border-gray-700">
               <div className="flex items-center gap-3">
-                <Settings size={24} className="text-primary" />
+                <Settings size={24} style={{ color: PRIMARY_COLOR }} />
                 <div>
                   <CardTitle className="text-xl font-semibold text-gray-900 dark:text-white">Additional Preferences</CardTitle>
                   <CardDescription className="text-gray-600 dark:text-gray-400">Specify any other preferences or requirements you have.</CardDescription>
@@ -517,7 +518,7 @@ const StudentProfile = () => {
               />
             </div>
               <div className='flex flex-row items-center justify-start gap-2 pt-4 border-t border-gray-200 dark:border-gray-700'>
-                <Button appearance="primary" onClick={handleSubmit} className="w-fit">Update Profile</Button>
+                <Button appearance="primary" onClick={handleSubmit} className="w-fit" style={{ backgroundColor: PRIMARY_COLOR, borderColor: PRIMARY_COLOR }}>Update Profile</Button>
               </div>
             </CardContent>
           </Card>
@@ -566,27 +567,113 @@ const StudentProfile = () => {
   };
 
   return (
-    <div className="text-gray-800 dark:bg-gray-900 dark:text-white">
+    <div className="text-gray-800 dark:bg-gray-900 dark:text-white w-full">
+      {/* Hero Banner Section */}
+      <div className="relative w-full overflow-hidden mb-8 md:mb-12">
+        {/* Background Image with Gradient Overlay */}
+        <div 
+          className="relative w-full h-[100px] sm:h-[110px] md:h-[130px] lg:h-[150px] xl:h-[170px] bg-cover bg-center bg-no-repeat transition-all duration-500"
+          style={{
+            backgroundImage: `linear-gradient(135deg, ${PRIMARY_COLOR}dd 0%, ${PRIMARY_COLOR_800}dd 50%, ${PRIMARY_COLOR_900}dd 100%), url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&w=1500&q=80')`,
+            backgroundBlendMode: 'overlay',
+            backgroundColor: PRIMARY_COLOR
+          }}
+        >
+          {/* Animated Gradient Overlay */}
+          <div 
+            className="absolute inset-0 opacity-90 transition-opacity duration-300"
+            style={{
+              background: `linear-gradient(135deg, ${PRIMARY_COLOR}cc 0%, ${PRIMARY_COLOR_800}cc 50%, ${PRIMARY_COLOR_900}cc 100%)`
+            }}
+          />
+          
+          {/* Content Overlay */}
+          <div className="relative z-10 h-full flex items-center justify-center px-4 sm:px-6 md:px-8 lg:px-12">
+            <div className="max-w-4xl w-full text-center">
+              {/* Icon Badge */}
+              <div className="flex justify-center mb-1">
+                <div 
+                  className="p-1 sm:p-1.5 rounded-md backdrop-blur-sm shadow-lg transition-all duration-300 hover:scale-110"
+                  style={{ 
+                    backgroundColor: `${PRIMARY_COLOR_50}40`,
+                    border: `1.5px solid ${PRIMARY_COLOR_200}`
+                  }}
+                >
+                  <UserCircle size={18} className="sm:w-5 sm:h-5 md:w-6 md:h-6 transition-transform duration-300 hover:rotate-6" style={{ color: '#ffffff' }} />
+                </div>
+              </div>
+              
+              {/* Title */}
+              <h1 className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-bold text-white mb-0.5 sm:mb-1 drop-shadow-2xl leading-tight">
+                Student Profile
+              </h1>
+              
+              {/* Subtitle */}
+              <p className="text-xs sm:text-sm md:text-base text-white/90 mb-1 max-w-2xl mx-auto drop-shadow-lg">
+                Complete your profile to get personalized recommendations and better service
+              </p>
+              
+              {/* Completion Badge */}
+              {profileCompletionProgress && (
+                <div className="flex justify-center mt-2">
+                  <div 
+                    className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full backdrop-blur-md shadow-lg"
+                    style={{ 
+                      backgroundColor: `${PRIMARY_COLOR_50}30`,
+                      border: `1px solid ${PRIMARY_COLOR_200}80`
+                    }}
+                  >
+                    <span className="text-white font-semibold text-xs sm:text-sm">
+                      Profile: <span className="font-bold">{profileCompletionProgress?.completionPercentage?.toFixed(0) || 0}%</span> Complete
+                    </span>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+          
+          {/* Decorative Bottom Wave */}
+          <div className="absolute bottom-0 left-0 right-0">
+            <svg 
+              className="w-full h-3 sm:h-4 md:h-5 lg:h-6" 
+              viewBox="0 0 1440 120" 
+              fill="none" 
+              xmlns="http://www.w3.org/2000/svg"
+              preserveAspectRatio="none"
+            >
+              <path 
+                d="M0,120 L48,105 C96,90 192,60 288,45 C384,30 480,30 576,37.5 C672,45 768,60 864,67.5 C960,75 1056,75 1152,67.5 C1248,60 1344,45 1392,37.5 L1440,30 L1440,120 L1392,120 C1344,120 1248,120 1152,120 C1056,120 960,120 864,120 C768,120 672,120 576,120 C480,120 384,120 288,120 C192,120 96,120 48,120 L0,120 Z" 
+                fill="white" 
+                className="dark:fill-gray-900"
+              />
+            </svg>
+          </div>
+        </div>
+      </div>
+
       {isLoading ? (
         <div className='flex items-center justify-center my-5'>
-          <Spinner />
+          <Spinner style={{ color: PRIMARY_COLOR }} />
         </div>
       ) : (
-        <form className="container mx-auto p-4 md:p-6">
+        <form className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
           <Card className="mb-6 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-lg">
             <CardHeader className="pb-4">
               <CardTitle className="text-lg md:text-xl font-semibold text-gray-900 dark:text-white">Profile Completion Status</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="flex items-center gap-2 mb-4">
-                <span className="text-2xl font-bold text-primary">{(profileCompletionProgress?.completionPercentage)?.toFixed(2)}%</span>
+                <span className="text-2xl font-bold" style={{ color: PRIMARY_COLOR }}>{(profileCompletionProgress?.completionPercentage)?.toFixed(2)}%</span>
                 <span className="text-sm font-medium text-gray-600 dark:text-gray-400">of your profile is complete</span>
               </div>
               <div className="relative pt-1">
                 <div className="flex h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
                   <div
-                    className="bg-primary h-full rounded-full transition-all duration-300"
-                    style={{ width: `${profileCompletionProgress?.completionPercentage || 0}%` }}
+                    className="h-full rounded-full transition-all duration-300"
+                    style={{ 
+                      width: `${profileCompletionProgress?.completionPercentage || 0}%`,
+                      backgroundColor: PRIMARY_COLOR
+                    }}
                   />
                 </div>
               </div>
