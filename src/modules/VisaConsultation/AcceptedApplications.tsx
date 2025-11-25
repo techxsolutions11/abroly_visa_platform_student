@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { MapPin, Calendar, School, DollarSign, User, ExternalLink, ArrowRight, FileCheck, CheckCircle2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { countries } from 'country-data'
+import moment from "moment";
 
 const AcceptedApplications = () => {
   const fetchSuggestions = async () => {
@@ -200,6 +201,7 @@ const AcceptedApplications = () => {
                             </Button>
                           </div>
                         </div>
+                        <p className="text-xs text-gray-500 dark:text-gray-400 text-right">Last Updated: {moment(item?.updatedAt).format('DD/MM/YYYY HH:mm')}</p>
                       </CardContent>
                     </Card>
                   );

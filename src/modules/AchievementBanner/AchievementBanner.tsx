@@ -58,10 +58,10 @@ const AchievementBanner = ({ target_type }) => {
     }
 
     return (
-        <div className='flex flex-col justify-center items-center'>
-            <>
-                {/* {JSON.stringify(banners)} */}
-                {banners?.sort((a, b) => a.position - b.position)?.map((item: any) => (<div
+        <div className='w-full flex flex-wrap justify-center gap-4 p-4'>
+            {banners?.sort((a, b) => a.position - b.position)?.map((item: any, index: number) => (
+                <div
+                    key={item?.uuid || index}
                     onClick={() => {
                         setForm({
                             name: "",
@@ -72,24 +72,30 @@ const AchievementBanner = ({ target_type }) => {
                         })
                         onOpenChangeInquieryAdd()
                     }}
-                    className="flex flex-col p-4 max-w-sm">
-
-                    {/* Banner Image */}
+                    className="flex flex-col cursor-pointer hover:opacity-90 transition-opacity"
+                    style={{ maxWidth: '300px' }}
+                >
                     {item?.access_image ? (
                         <img
                             src={item?.access_image}
                             alt={item?.campaign_title}
-                            className="w-full object-scale-down"
+                            className="w-full h-auto rounded-md shadow-sm"
                         />
                     ) : (
-                        <div className="w-full h-32 bg-gray-100 flex items-center justify-center text-gray-400 rounded-md mb-4">
-                            No Image Available
+                        <div className="w-full h-40 bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-400 dark:text-gray-500 rounded-md">
+                            <div className="text-center">
+                                <LucideMegaphone className="w-8 h-8 mx-auto mb-2 opacity-50" />
+                                <p className="text-xs">No Image</p>
+                            </div>
                         </div>
                     )}
-                    <p className="text-[10px] text-gray-400">{item?.campaign_title}</p>
+                    {item?.campaign_title && (
+                        <p className="text-xs text-gray-500 dark:text-gray-400 mt-2 text-center">
+                            {item?.campaign_title}
+                        </p>
+                    )}
                 </div>
-                ))}
-            </>
+            ))}
 
             <Modal
                 isOpen={isOpenInquieryAdd}
@@ -106,46 +112,36 @@ const AchievementBanner = ({ target_type }) => {
                                 Submit Your Interest - {form?.title}
                             </ModalHeader>
                             <ModalBody>
-                                {/* Form for adding/updating questions */}
                                 <form onSubmit={(e) => {
                                     e.preventDefault()
                                     submitApiCall()
                                 }} className="space-y-4 mb-8">
                                     <div>
-                                        {/* <label className="block text-lg">Email</label> */}
                                         <Input
                                             type="email"
-                                            label="email"
+                                            label="Email"
                                             name="email"
                                             value={form.email}
                                             onChange={handleChange}
-                                            labelPlacement='outside-left'
-                                            className='block'
                                             required
                                         />
                                     </div>
                                     <div>
-                                        {/* <label className="block text-lg">Name</label> */}
                                         <Input
                                             type="text"
                                             name="name"
                                             label="Name"
                                             value={form.name}
                                             onChange={handleChange}
-                                              labelPlacement='outside-left'
-                                               className='block'
                                             required
                                         />
                                     </div>
                                     <div>
-                                        {/* <label className="block text-lg">Name</label> */}
                                         <Input
                                             type="text"
                                             name="phone_number"
                                             label="Phone Number"
                                             value={form.phone_number}
-                                              labelPlacement='outside-left'
-                                               className='block'
                                             onChange={handleChange}
                                             required
                                         />

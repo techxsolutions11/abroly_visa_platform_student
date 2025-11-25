@@ -330,7 +330,7 @@ const VisaConsultation = () => {
     };
 
     return (
-        <div className="w-[122%] min-h-screen p-4 md:p-6 lg:p-8">
+        <div className="w-full min-h-screen p-4 md:p-6 lg:p-8">
             {isLoading ? (
                 <div className='flex items-center justify-center min-h-[50vh]'>
                     <Spinner size="lg" />
@@ -629,6 +629,7 @@ const VisaConsultation = () => {
                             {/* Header Section with Suggestions Badge */}
                             <div className="flex items-start justify-between mb-6 pb-4 border-b border-gray-200 dark:border-gray-700">
                                 <div className="flex-1">
+                                    {/* <p>{application?.id}</p> */}
                                     <div className="flex items-center gap-2 mb-2">
                                         <BookOpen size={18} className="text-primary" />
                                         <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
@@ -692,15 +693,15 @@ const VisaConsultation = () => {
 
                             {/* Footer Section */}
                             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+                               <div className="flex flex-col gap-2">
                                 <div className="text-xs text-gray-500 dark:text-gray-400">
-                                    <span className="font-medium">Submitted:</span>{' '}
-                                    {new Date(application?.createdAt).toLocaleDateString('en-US', {
-                                        year: 'numeric',
-                                        month: 'short',
-                                        day: 'numeric',
-                                        hour: '2-digit',
-                                        minute: '2-digit'
-                                    })}
+                                    <span className="font-medium">Created:</span>{' '}
+                                    {moment(application?.createdAt).format('DD/MM/YYYY HH:mm')}
+                                </div>
+                                <div className="text-xs text-gray-500 dark:text-gray-400">
+                                    <span className="font-medium">Last Updated:</span>{' '}
+                                    {moment(application?.updatedAt).format('DD/MM/YYYY HH:mm')}
+                                </div>
                                 </div>
                                 <Button 
                                     isDisabled={application?.suggestions == 0} 
