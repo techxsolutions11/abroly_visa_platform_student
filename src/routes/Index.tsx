@@ -99,7 +99,7 @@ const Index = () => {
             const queryString = queryParams.toString();
             const apiUrl = queryString 
                 ? `/agent/get_agency?${queryString}`
-                : '/agent/get_agency';
+                : '/agent/get_agency_dev';
             
             // Fetch config from backend - adjust endpoint as needed
             const { data, success } = await commonPublicGetApiCalls(apiUrl);

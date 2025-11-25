@@ -293,17 +293,28 @@ const StudentDashboard = () => {
                         </SidebarMenuButton>
                       </CollapsibleTrigger>
                       <CollapsibleContent>
-                        <SidebarMenuSub>
-                          {item.items?.map((subItem) => (
-                            <SidebarMenuSubItem key={subItem.title}>
-                              <SidebarMenuSubButton asChild>
-                                <Link
-                                  className={`${window.location.pathname == subItem.url && 'bg-gray-100'} text-xs -my-1`}
-                                  to={subItem.url}
-                                >{subItem.title}</Link>
-                              </SidebarMenuSubButton>
-                            </SidebarMenuSubItem>
-                          ))}
+                        <SidebarMenuSub className="gap-2">
+                          {item.items?.map((subItem) => {
+                            const isActive = window.location.pathname === subItem.url;
+                            return (
+                              <SidebarMenuSubItem key={subItem.title} className="mb-1">
+                                <SidebarMenuSubButton 
+                                  asChild
+                                  isActive={isActive}
+                                  className={`w-full h-10 ${isActive ? '!bg-[#ab0d0d] !text-white [&>span]:!text-white [&>svg]:!text-white data-[active=true]:!bg-[#ab0d0d] data-[active=true]:!text-white' : ''}`}
+                                >
+                                  <Link
+                                    className={`w-full h-full text-sm py-2 transition-all ${
+                                      isActive 
+                                        ? '!bg-[#ab0d0d] !text-white font-semibold' 
+                                        : 'text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground'
+                                    }`}
+                                    to={subItem.url}
+                                  >{subItem.title}</Link>
+                                </SidebarMenuSubButton>
+                              </SidebarMenuSubItem>
+                            );
+                          })}
                         </SidebarMenuSub>
                       </CollapsibleContent>
                     </SidebarMenuItem>
@@ -330,17 +341,28 @@ const StudentDashboard = () => {
                         </SidebarMenuButton>
                       </CollapsibleTrigger>
                       <CollapsibleContent>
-                        <SidebarMenuSub>
-                          {item.items?.map((subItem) => (
-                            <SidebarMenuSubItem key={subItem.title}>
-                              <SidebarMenuSubButton asChild>
-                                <Link
-                                  className={`${window.location.pathname == subItem.url && 'bg-gray-100'}`}
-                                  to={subItem.url}
-                                >{subItem.title}</Link>
-                              </SidebarMenuSubButton>
-                            </SidebarMenuSubItem>
-                          ))}
+                        <SidebarMenuSub className="gap-2">
+                          {item.items?.map((subItem) => {
+                            const isActive = window.location.pathname === subItem.url;
+                            return (
+                              <SidebarMenuSubItem key={subItem.title} className="mb-1">
+                                <SidebarMenuSubButton 
+                                  asChild
+                                  isActive={isActive}
+                                  className={`w-full h-10 ${isActive ? '!bg-[#ab0d0d] !text-white [&>span]:!text-white [&>svg]:!text-white data-[active=true]:!bg-[#ab0d0d] data-[active=true]:!text-white' : ''}`}
+                                >
+                                  <Link
+                                    className={`w-full h-full text-sm py-2 transition-all ${
+                                      isActive 
+                                        ? '!bg-[#ab0d0d] !text-white font-semibold' 
+                                        : 'text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground'
+                                    }`}
+                                    to={subItem.url}
+                                  >{subItem.title}</Link>
+                                </SidebarMenuSubButton>
+                              </SidebarMenuSubItem>
+                            );
+                          })}
                         </SidebarMenuSub>
                       </CollapsibleContent>
                     </SidebarMenuItem>
@@ -353,8 +375,17 @@ const StudentDashboard = () => {
                 <SidebarMenu>
                   {data.navSecondary.map((item) => (
                     <SidebarMenuItem key={item.title}>
-                      <SidebarMenuButton asChild size="sm">
+                      <SidebarMenuButton 
+                        asChild 
+                        size="sm"
+                        isActive={window.location.pathname === item.url}
+                      >
                         <Link
+                          className={`w-full h-full ${
+                            window.location.pathname === item.url 
+                              ? 'bg-[#ab0d0d] text-white' 
+                              : ''
+                          }`}
                           to={item.url}
                         >
                           <item.icon />
