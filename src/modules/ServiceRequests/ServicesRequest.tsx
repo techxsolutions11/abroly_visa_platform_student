@@ -2,7 +2,7 @@ import { Input } from "@/components/ui/input";
 import { Button, Select, SelectItem } from "@nextui-org/react";
 import useApiCallUtils from "@/hooks/useApiCallUtils";
 import { Form, Formik, Field } from "formik";
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { ErrorToast, SuccessToast } from "@/utils/Toaster";
 import ReactFlagsSelect from "react-flags-select";
@@ -14,6 +14,13 @@ import {
   CardTitle,
   CardDescription,
 } from "@/components/ui/card";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 import {
   User,
   Mail,
@@ -31,6 +38,7 @@ import { PRIMARY_COLOR, PRIMARY_COLOR_50, PRIMARY_COLOR_100, PRIMARY_COLOR_200, 
 const ServicesRequest = () => {
   const { service } = useParams();
   const { commonPostPublicAPICall } = useApiCallUtils();
+  const [showThankYouDialog, setShowThankYouDialog] = useState(false);
 
   const isHealth = service === "health";
   const pageTitle = isHealth ? "Health Insurance Request" : "International E-SIM Request";
@@ -39,7 +47,7 @@ const ServicesRequest = () => {
     ? "Get the right health insurance plan for your study abroad journey with expert support."
     : "Request an international e-SIM with the right data plan before you land.";
   const heroImage = isHealth
-    ? "https://images.unsplash.com/photo-1584466977773-e625c37cdd50?auto=format&w=1500&q=80"
+    ? "https://images.pexels.com/photos/7163955/pexels-photo-7163955.jpeg"
     : "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&w=1500&q=80";
 
   // animation variants
@@ -136,6 +144,7 @@ const ServicesRequest = () => {
     if (success) {
       SuccessToast("Health Insurance request submitted successfully!");
       resetForm();
+      setShowThankYouDialog(true);
     }
   };
 
@@ -160,13 +169,14 @@ const ServicesRequest = () => {
     if (success) {
       SuccessToast("E-sim request submitted successfully!");
       resetForm();
+      setShowThankYouDialog(true);
     }
   };
 
   // ====== FORM COMPONENTS (UI only changed, functionality same) ======
   const HealthInsurance = () => {
     return (
-      <div className="w-full h-full flex flex-col">
+      <div className="w-full flex flex-col">
         <Card className="border border-gray-200 dark:border-gray-700 bg-white/90 dark:bg-gray-900/90 shadow-xl rounded-2xl flex flex-col h-full">
           <CardHeader className="pb-5 border-b border-gray-200 dark:border-gray-800 rounded-t-2xl flex-shrink-0" style={{ background: `linear-gradient(to right, ${PRIMARY_COLOR_50}40, transparent)` }}>
             <div className="flex items-center gap-3 mb-2">
@@ -350,7 +360,7 @@ const ServicesRequest = () => {
 
   const InternationalSIMCard = () => {
     return (
-      <div className="w-full h-full flex flex-col">
+      <div className="w-full flex flex-col">
         <Card className="border border-gray-200 dark:border-gray-700 bg-white/90 dark:bg-gray-900/90 shadow-xl rounded-2xl flex flex-col h-full">
           <CardHeader className="pb-5 border-b border-gray-200 dark:border-gray-800 rounded-t-2xl flex-shrink-0" style={{ background: `linear-gradient(to right, ${PRIMARY_COLOR_50}40, transparent)` }}>
             <div className="flex items-center gap-3 mb-2">
@@ -682,13 +692,13 @@ const ServicesRequest = () => {
             variants={fadeUp}
           >
             <div className="sticky top-24">
-              <div className="relative h-64 md:h-80 lg:h-[500px] rounded-2xl overflow-hidden shadow-xl">
+              <div className="relative h-36 rounded-2xl overflow-hidden shadow-xl">
                 <img
                   src={heroImage}
                   alt="Student Service"
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent flex flex-col justify-end p-6">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-black/40 flex flex-col justify-end p-6">
                   <h3 className="text-2xl font-bold text-white mb-2">{pageTitle}</h3>
                   <p className="text-gray-200 text-sm">{pageSubtitle}</p>
                 </div>
@@ -705,6 +715,20 @@ const ServicesRequest = () => {
           </motion.aside>
         </div>
       </div>
+
+      {/* Thank You Dialog */}
+      <Dialog open={showThankYouDialog} onOpenChange={setShowThankYouDialog}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle className="text-2xl font-bold text-center">
+              Thank You for Your Inquiry!
+            </DialogTitle>
+            <DialogDescription className="text-center text-base pt-2">
+              Our team will connect with you soon.
+            </DialogDescription>
+          </DialogHeader>
+        </DialogContent>
+      </Dialog>
     </motion.div>
   );
 };

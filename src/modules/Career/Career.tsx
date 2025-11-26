@@ -516,16 +516,16 @@ const Career = () => {
 
                                         {/* Job Features Badges */}
                                         <div className="mb-6 flex flex-wrap gap-2">
-                                            <Badge variant={job.overtime ? "default" : "secondary"} className={job.overtime ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400" : ""}>
+                                            <Badge variant={job.overtime ? "default" : "outline"} className={job.overtime ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400" : ""}>
                                                 {job.overtime ? 'Overtime Available' : 'No Overtime'}
                                             </Badge>
-                                            <Badge variant={job.accommodation ? "default" : "secondary"} className={job.accommodation ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400" : ""}>
+                                            <Badge variant={job.accommodation ? "default" : "outline"} className={job.accommodation ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400" : ""}>
                                                 {job.accommodation ? 'Accommodation' : 'No Accommodation'}
                                             </Badge>
-                                            <Badge variant={job.transportation ? "default" : "secondary"} className={job.transportation ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400" : ""}>
+                                            <Badge variant={job.transportation ? "default" : "outline"} className={job.transportation ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400" : ""}>
                                                 {job.transportation ? 'Transportation' : 'No Transportation'}
                                             </Badge>
-                                            <Badge variant={job.medicalInsurance ? "default" : "secondary"} className={job.medicalInsurance ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400" : ""}>
+                                            <Badge variant={job.medicalInsurance ? "default" : "outline"} className={job.medicalInsurance ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400" : ""}>
                                                 {job.medicalInsurance ? 'Medical Insurance' : 'No Insurance'}
                                             </Badge>
                                             <Badge variant="outline" className="bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">

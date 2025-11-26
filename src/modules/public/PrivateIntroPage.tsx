@@ -260,13 +260,14 @@ const services = [
                                     </p>
 
                                     <Button
-                                        variant="ghost"
-                                        className="w-fit px-0 hover:bg-transparent hover:underline group-hover:translate-x-2 transition-transform"
-                                        style={{ color: PRIMARY_COLOR }}
-                                        endContent={<ArrowRight size={16} className="ml-1" style={{ color: PRIMARY_COLOR }} />}
+                                        // variant="ghost"
+                                        className="w-fit"
+                                        style={{ color: PRIMARY_COLOR,backgroundColor: PRIMARY_COLOR_50 }}
+                                        // color="primary"
+                                        // endContent={<ArrowRight size={16} className="ml-1" style={{ color: PRIMARY_COLOR }} />}
                                         onPress={() => navigate(service.navigateTo)}
                                     >
-                                        Learn More
+                                        Learn More <ArrowRight size={16} className="ml-1" style={{ color: PRIMARY_COLOR }} />
                                     </Button>
                                 </div>
                             </Card>

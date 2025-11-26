@@ -371,16 +371,16 @@ const VisaConsultation = () => {
                     </div>
 
                     {/* Side by Side Layout: Form (Left) and Listing (Right) */}
-                    <div className={`flex flex-col gap-6 ${raiseApplicationFormOpen ? 'lg:flex-row lg:items-start' : ''}`}>
+                    <div className={`flex flex-col flex-wrap gap-6 ${raiseApplicationFormOpen ? 'lg:flex-row lg:items-start' : ''}`}>
                         {/* Left Side - Form */}
                         {raiseApplicationFormOpen && (
                             raiseApplicationLoader ? (
-                                <div className='w-full lg:w-1/2 flex items-center gap-4 justify-center py-12'>
+                                <div className='w-full flex-1 flex items-center gap-4 justify-center py-12'>
                                     <Spinner size="lg" /> 
                                     <p className="text-gray-600 dark:text-gray-400">Please Wait...</p>
                                 </div>
                             ) : (
-                                <div className="w-full lg:w-1/2 lg:sticky lg:top-4 lg:max-h-[calc(100vh-2rem)]">
+                                <div className="w-full lg:max-h-[calc(100vh-2rem)]">
                                     {/* Form Container with Banner */}
                                     <Card className="border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-2xl relative flex flex-col max-h-[calc(100vh-8rem)]">
                                         {/* Banner Heading - Inside Card */}
@@ -557,10 +557,6 @@ const VisaConsultation = () => {
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </CardContent>
-
-                                            {/* Sticky Submit Button - Always Visible at Bottom */}
-                                            <div className="sticky bottom-0 left-0 right-0 bg-white dark:bg-gray-900 border-t-2 border-gray-200 dark:border-gray-700 shadow-[0_-4px_20px_rgba(0,0,0,0.1)] dark:shadow-[0_-4px_20px_rgba(0,0,0,0.3)] px-4 md:px-6 py-4 z-[100] -mx-4 md:-mx-6 -mb-4 md:-mb-6">
                                                 <div className="flex flex-col sm:flex-row items-center justify-end gap-3">
                                                     <Button
                                                         variant="flat"
@@ -596,7 +592,8 @@ const VisaConsultation = () => {
                                                         Submit Application
                                                     </Button>
                                                 </div>
-                                            </div>
+                                            </CardContent>
+
                                         </Card>
                                 </div>
                             )
@@ -1123,6 +1120,19 @@ const VisaConsultation = () => {
                                                                                         </p>
                                                                                         <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">
                                                                                             {suggestion.tuitionFees}
+                                                                                        </p>
+                                                                                    </div>
+                                                                                </div>
+                                                                            )}
+                                                                            {suggestion?.description && (
+                                                                                <div className="flex items-start gap-2.5">
+                                                                                    <FileText size={18} style={{ color: PRIMARY_COLOR }} className="mt-0.5 flex-shrink-0" />
+                                                                                    <div className="flex-1 min-w-0">
+                                                                                        <p className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-0.5">
+                                                                                            Description
+                                                                                        </p>
+                                                                                        <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                                                                                            {suggestion.description}
                                                                                         </p>
                                                                                     </div>
                                                                                 </div>
