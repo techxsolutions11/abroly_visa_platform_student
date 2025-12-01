@@ -34,6 +34,7 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { PRIMARY_COLOR, PRIMARY_COLOR_50, PRIMARY_COLOR_100, PRIMARY_COLOR_200, PRIMARY_COLOR_800, PRIMARY_COLOR_900 } from '@/lib/theme';
+import { getAgentId } from "@/utils/config";
 
 const ServicesRequest = () => {
   const { service } = useParams();
@@ -136,7 +137,7 @@ const ServicesRequest = () => {
     }
 
     const { success } = await commonPostPublicAPICall(
-      values,
+      {...values,agent_id:getAgentId()},
       "service_form_requests/add",
       true
     );
