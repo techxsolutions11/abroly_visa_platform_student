@@ -24,3 +24,9 @@ dist-ssr
 *.sw?
 
 .env
+
+# local secrets - never commit
+.env
+.env.*
+!.env.example
+env.txt
