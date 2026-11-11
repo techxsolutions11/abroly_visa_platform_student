@@ -25,10 +25,11 @@ const Login = () => {
     const [loginLoading, setLoginLoading] = useState(false)
     const [OTPScreen, setOTPScreeen] = useState(false)
     const [verificationId, setVerificationId] = useState("")
-    const [numberAndCountryCode, setNumberAndCountryCode] = useState({
-        phone_number: "",
+    // the agency's portal invite link opens /login?phone=XXXXXXXXXX - pre-fill it
+    const [numberAndCountryCode, setNumberAndCountryCode] = useState(() => ({
+        phone_number: (new URLSearchParams(window.location.search).get("phone") || "").replace(/\D/g, "").slice(-10),
         country_code: "+91"
-    })
+    }))
     const initialValues = Array(4).fill('')
     const [otpValues, setValues] = useState<string[]>(initialValues)
     const inputRefs = Array(4).fill(0).map(() => useRef<HTMLInputElement>(null))
