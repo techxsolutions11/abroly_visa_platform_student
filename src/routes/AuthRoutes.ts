@@ -31,6 +31,8 @@ const PublicEventBanners = lazy(()=> import("@/modules/EventBanners/PublicEventB
 const VisaConsultationDetails = lazy(()=> import("@/modules/VisaConsultation/VisaConsultationDetails"))
 const AcceptedApplicationProgress = lazy(()=> import("@/modules/VisaConsultation/AcceptedApplicationProgress"))
 const AcceptedApplications = lazy(()=> import("@/modules/VisaConsultation/AcceptedApplications"))
+const ProgressTracker = lazy(() => import("@/modules/VisaConsultation/ProgressTracker"))
+const HomeWithProgress = lazy(() => import("@/modules/VisaConsultation/HomeWithProgress"))
 const AgnetProfile = lazy(()=> import("@/modules/VisaConsultation/AgnetProfile"))
 // const CoinHistory = lazy(()=> import("@/modules/Coins/CoinHistory"))
 const OfflinePrep =  lazy(()=> import("@/modules/LanguagePrep/OfflinePrep"))
@@ -98,7 +100,7 @@ export const StudentRoutes = [
 
     {
         path: "/",
-        element: PrivateIntroPage
+        element: HomeWithProgress
     },
     {
         path: "/contact_us",
@@ -192,6 +194,10 @@ export const StudentRoutes = [
     {
         path: "/accepted_applications",
         element: AcceptedApplications
+    },
+    {
+        path: "/my_progress",
+        element: ProgressTracker
     },
     {
         path: "/accepted_applications/:id",

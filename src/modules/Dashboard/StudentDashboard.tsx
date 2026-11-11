@@ -156,6 +156,10 @@ const data = {
       isActive: true,
       items: [
         {
+          title: "My progress",
+          url: "/my_progress",
+        },
+        {
           title: "Raise an application",
           url: "/services/visa_consultation",
         },
