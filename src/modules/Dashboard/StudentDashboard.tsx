@@ -116,6 +116,7 @@ const data = {
     },
     {
       title: "Services",
+      addon: "service_requests",
       url: "#",
       icon: SquareChartGantt,
       isActive: true,
@@ -186,6 +187,7 @@ const data = {
     // },
     {
       title: "Career",
+      addon: "jobs",
       url: "#",
       icon: Briefcase,
       isActive: true,
@@ -234,6 +236,10 @@ const data = {
 const placesApiKey = import.meta.env.VITE_GOOGLE_PLACES_API_KEY;
 
 const StudentDashboard = () => {
+  // SaaS: only show optional modules included in the agency's plan (null = all)
+  const planAddons: string[] | null = (() => {
+    try { return JSON.parse(getConfig('ADDONS') || 'null') } catch { return null }
+  })()
 
   // for logout
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -284,7 +290,7 @@ const StudentDashboard = () => {
             <SidebarGroup>
               <SidebarGroupLabel>Platform</SidebarGroupLabel>
               <SidebarMenu>
-                {data?.navMain.map((item) => (
+                {data?.navMain.filter((item: any) => !item.addon || !planAddons || planAddons.includes(item.addon)).map((item) => (
                   <Collapsible
                     key={item.title}
                     asChild

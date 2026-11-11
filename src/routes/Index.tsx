@@ -139,7 +139,9 @@ const Index = () => {
                     META_DESCRIPTION: data.meta_description || data.metaDescription || '',
                     META_KEYWORDS: data.meta_keywords || data.metaKeywords || '',
                     OG_IMAGE: data.og_image_full || data.ogImageFull || data.og_image || data.ogImage || '/logo.png',
-                    OG_URL: ensureFullUrl(data.og_url || data.ogUrl || '')
+                    OG_URL: ensureFullUrl(data.og_url || data.ogUrl || ''),
+                    // optional modules in the agency's plan ("null" = all)
+                    ADDONS: JSON.stringify(data.addons ?? null)
                 };
                 
                 console.log('Mapped config:', config); // Debug log
