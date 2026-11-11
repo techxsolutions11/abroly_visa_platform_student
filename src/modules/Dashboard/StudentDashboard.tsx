@@ -160,6 +160,10 @@ const data = {
           url: "/my_progress",
         },
         {
+          title: "My fees",
+          url: "/my_fees",
+        },
+        {
           title: "Raise an application",
           url: "/services/visa_consultation",
         },
