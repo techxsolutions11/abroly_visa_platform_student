@@ -1,3 +1,4 @@
+import { applyBrand } from '@/lib/theme';
 import axios from "axios";
 import { getPrimaryColor, getPrimaryForegroundColor, getDarkPrimaryColor } from "./config";
 import { getAuthToken } from "./localstorage";
@@ -15,9 +16,8 @@ export const setThemeColors = () => {
     const primaryForegroundColor = getPrimaryForegroundColor();
     const darkPrimaryColor = getDarkPrimaryColor();
     
-    // Set CSS variables
-    root.style.setProperty('--primary-color', primaryColor);
-    root.style.setProperty('--primary-foreground-color', primaryForegroundColor);
+    // Agency colour drives every brand colour in the portal (CSS variables + PRIMARY_COLOR constants)
+    applyBrand(primaryColor, primaryForegroundColor);
     root.style.setProperty('--dark-primary-color', darkPrimaryColor);
   }
 

@@ -1,3 +1,4 @@
+import { DEFAULT_BRAND } from '@/lib/theme';
 import { getFromLocal } from './localstorage';
 
 /**
@@ -47,7 +48,7 @@ export const getAllConfig = (): Record<string, string> => {
 // Convenience functions for commonly used config values
 export const getAgentUuid = (): string => getConfig('AGENT_UUID');
 export const getAgentId = (): string => getConfig('AGENT_ID');
-export const getPrimaryColor = (): string => getConfig('PRIMARY_COLOR', '#f66b47');
+export const getPrimaryColor = (): string => getConfig('PRIMARY_COLOR', DEFAULT_BRAND);
 export const getPrimaryForegroundColor = (): string => getConfig('PRIMARY_FOREGROUND_COLOR', '#ffffff');
 export const getDarkPrimaryColor = (): string => getConfig('DARK_PRIMARY_COLOR', '#050a30');
 export const getAppName = (): string => getConfig('APP_NAME');

@@ -12,12 +12,23 @@ export default {
       colors: {
         // Set primary colors to use your new palette
         primary: {
-          DEFAULT: 'var(--primary-color)', // Orange for light mode buttons, backgrounds, etc.
-          foreground: 'var(--primary-foreground-color)', // Using white for text on orange for good contrast
+          // brand colour - set at runtime by applyBrand() in src/lib/theme.ts
+          DEFAULT: 'hsl(var(--brand) / <alpha-value>)',
+          foreground: 'hsl(var(--brand-foreground) / <alpha-value>)',
+          50: 'hsl(var(--brand-50) / <alpha-value>)',
+          100: 'hsl(var(--brand-100) / <alpha-value>)',
+          200: 'hsl(var(--brand-200) / <alpha-value>)',
+          300: 'hsl(var(--brand-300) / <alpha-value>)',
+          400: 'hsl(var(--brand-400) / <alpha-value>)',
+          500: 'hsl(var(--brand-500) / <alpha-value>)',
+          600: 'hsl(var(--brand-600) / <alpha-value>)',
+          700: 'hsl(var(--brand-700) / <alpha-value>)',
+          800: 'hsl(var(--brand-800) / <alpha-value>)',
+          900: 'hsl(var(--brand-900) / <alpha-value>)',
         },
         dark_primary: 'var(--dark-primary-color)', // Dark blue for dark mode primary color
         // Optionally expose these as standalone keys for direct usage
-        orange: 'var(--primary-color)',
+        orange: 'hsl(var(--brand) / <alpha-value>)',
         darkblue: 'var(--dark-primary-color)',
         // Retaining other colors from the original configuration
         secondary: {

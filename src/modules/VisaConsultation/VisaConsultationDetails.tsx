@@ -93,7 +93,7 @@ const VisaConsultationDetails = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       {/* Header Section */}
-      <div className="bg-gradient-to-r from-[#ab0d0d] to-[#c41e1e] text-white py-8 px-6 shadow-lg">
+      <div className="bg-gradient-to-r from-primary to-primary-400 text-white py-8 px-6 shadow-lg">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center gap-3 mb-2">
             <div className="p-2 rounded-lg bg-white/20 backdrop-blur-sm">
@@ -136,8 +136,8 @@ const VisaConsultationDetails = () => {
                   }}
                   className={`cursor-pointer transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] group ${
                     selectedLead?.id === lead.id
-                      ? "border-[#ab0d0d] border-2 shadow-xl bg-gradient-to-br from-[#ab0d0d]/5 to-white dark:from-[#ab0d0d]/10 dark:to-gray-800"
-                      : "border-gray-200 dark:border-gray-700 hover:border-[#ab0d0d]/50"
+                      ? "border-primary border-2 shadow-xl bg-gradient-to-br from-primary/5 to-white dark:from-primary/10 dark:to-gray-800"
+                      : "border-gray-200 dark:border-gray-700 hover:border-primary/50"
                   }`}
                 >
                   <CardHeader className="pb-3">
@@ -146,8 +146,8 @@ const VisaConsultationDetails = () => {
                         <div
                           className={`p-2 rounded-lg ${
                             selectedLead?.id === lead.id
-                              ? "bg-[#ab0d0d] text-white"
-                              : "bg-[#ab0d0d]/10 text-[#ab0d0d]"
+                              ? "bg-primary text-white"
+                              : "bg-primary/10 text-primary"
                           } transition-colors`}
                         >
                           <User className="w-5 h-5" />
@@ -237,14 +237,14 @@ const VisaConsultationDetails = () => {
                         </div>
                       </div>
                       {selectedLead?.id === lead.id && (
-                        <CheckCircle2 className="w-5 h-5 text-[#ab0d0d]" />
+                        <CheckCircle2 className="w-5 h-5 text-primary" />
                       )}
                     </div>
                   </CardHeader>
                   <CardContent className="pt-0">
-                    <div className="flex items-center gap-2 px-2 py-2 rounded-lg bg-[#ab0d0d]/10 dark:bg-[#ab0d0d]/20">
-                      <Sparkles className="w-4 h-4 text-[#ab0d0d]" />
-                      <span className="text-sm font-semibold text-[#ab0d0d]">
+                    <div className="flex items-center gap-2 px-2 py-2 rounded-lg bg-primary/10 dark:bg-primary/20">
+                      <Sparkles className="w-4 h-4 text-primary" />
+                      <span className="text-sm font-semibold text-primary">
                         {JSON.parse(lead.suggestions).length}{" "}
                         {JSON.parse(lead.suggestions).length === 1
                           ? "Suggestion"
@@ -268,8 +268,8 @@ const VisaConsultationDetails = () => {
             <div className="w-full lg:w-2/3">
               <Card className="p-12 text-center border-2 border-dashed border-gray-300 dark:border-gray-700">
                 <div className="flex flex-col items-center gap-4">
-                  <div className="p-4 rounded-full bg-[#ab0d0d]/10">
-                    <Sparkles className="w-12 h-12 text-[#ab0d0d]" />
+                  <div className="p-4 rounded-full bg-primary/10">
+                    <Sparkles className="w-12 h-12 text-primary" />
                   </div>
                   <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
                     Select an Agent
@@ -296,7 +296,7 @@ const VisaConsultationDetails = () => {
         }}
       >
         <DrawerContent className="h-[90vh] bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800">
-          <div className="bg-gradient-to-r from-[#ab0d0d] to-[#c41e1e] text-white">
+          <div className="bg-gradient-to-r from-primary to-primary-400 text-white">
             <DrawerHeader className="border-b border-white/20">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
@@ -314,21 +314,21 @@ const VisaConsultationDetails = () => {
             {selectedLead ? (
               <div className="max-w-7xl mx-auto">
                 {/* Agent Info Header */}
-                <div className="bg-white dark:bg-gray-800 rounded-xl p-6 mb-6 shadow-xl border-2 border-[#ab0d0d]/20 dark:border-[#ab0d0d]/30 relative overflow-hidden">
+                <div className="bg-white dark:bg-gray-800 rounded-xl p-6 mb-6 shadow-xl border-2 border-primary/20 dark:border-primary/30 relative overflow-hidden">
                   {/* Top accent bar */}
-                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#ab0d0d] to-[#c41e1e]"></div>
+                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary to-primary-400"></div>
 
                   <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
                     <div className="flex items-center gap-4">
-                      <div className="p-3 rounded-xl bg-gradient-to-br from-[#ab0d0d]/20 to-[#ab0d0d]/10 border-2 border-[#ab0d0d]/30 shadow-md">
-                        <User className="w-8 h-8 text-[#ab0d0d]" />
+                      <div className="p-3 rounded-xl bg-gradient-to-br from-primary/20 to-primary/10 border-2 border-primary/30 shadow-md">
+                        <User className="w-8 h-8 text-primary" />
                       </div>
                       <div>
                         <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
                           Suggestions from {selectedLead?.lead_of?.username}
                         </h2>
                         <div className="flex items-center gap-2 mt-1">
-                          <Sparkles className="w-4 h-4 text-[#ab0d0d]" />
+                          <Sparkles className="w-4 h-4 text-primary" />
                           <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
                             {JSON.parse(selectedLead?.suggestions).length}{" "}
                             {JSON.parse(selectedLead?.suggestions).length === 1
@@ -347,7 +347,7 @@ const VisaConsultationDetails = () => {
                         )
                       }
                       size="md"
-                      className="bg-[#ab0d0d] hover:bg-[#c41e1e] active:bg-[#8a0a0a] text-white font-semibold transition-all shadow-lg hover:shadow-xl border-2 border-[#ab0d0d] hover:border-[#c41e1e]"
+                      className="bg-primary hover:bg-primary-400 active:bg-primary-700 text-white font-semibold transition-all shadow-lg hover:shadow-xl border-2 border-primary hover:border-primary-400"
                       startContent={<User className="w-4 h-4" />}
                     >
                       View Agent Profile
@@ -356,14 +356,14 @@ const VisaConsultationDetails = () => {
                 </div>
 
                 {/* Instructions */}
-                <div className="bg-gradient-to-r from-[#ab0d0d]/10 via-[#ab0d0d]/5 to-[#ab0d0d]/10 dark:from-[#ab0d0d]/20 dark:via-[#ab0d0d]/10 dark:to-[#ab0d0d]/20 border-2 border-[#ab0d0d]/30 rounded-xl p-5 mb-6 shadow-md">
+                <div className="bg-gradient-to-r from-primary/10 via-primary/5 to-primary/10 dark:from-primary/20 dark:via-primary/10 dark:to-primary/20 border-2 border-primary/30 rounded-xl p-5 mb-6 shadow-md">
                   <div className="flex items-start gap-3">
-                    <div className="p-2 rounded-lg bg-[#ab0d0d] text-white flex-shrink-0">
+                    <div className="p-2 rounded-lg bg-primary text-white flex-shrink-0">
                       <Sparkles className="w-4 h-4" />
                     </div>
                     <div>
                       <p className="text-sm font-semibold text-gray-900 dark:text-white mb-1">
-                        <span className="font-bold text-[#ab0d0d]">
+                        <span className="font-bold text-primary">
                           Important:
                         </span>{" "}
                         Select Your Preferred Options
@@ -385,8 +385,8 @@ const VisaConsultationDetails = () => {
                         key={index}
                         className={`cursor-pointer transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] group relative overflow-hidden ${
                           selectedSuggestions.includes(index)
-                            ? "border-[#ab0d0d] border-[3px] shadow-2xl bg-gradient-to-br from-[#ab0d0d]/10 via-white to-[#ab0d0d]/5 dark:from-[#ab0d0d]/20 dark:via-gray-800 dark:to-[#ab0d0d]/10 ring-2 ring-[#ab0d0d]/20"
-                            : "border-2 border-gray-300 dark:border-gray-600 hover:border-[#ab0d0d] hover:shadow-lg"
+                            ? "border-primary border-[3px] shadow-2xl bg-gradient-to-br from-primary/10 via-white to-primary/5 dark:from-primary/20 dark:via-gray-800 dark:to-primary/10 ring-2 ring-primary/20"
+                            : "border-2 border-gray-300 dark:border-gray-600 hover:border-primary hover:shadow-lg"
                         }`}
                         onClick={() => toggleSuggestion(index)}
                       >
@@ -394,14 +394,14 @@ const VisaConsultationDetails = () => {
                         <div
                           className={`absolute top-0 left-0 right-0 h-1 ${
                             selectedSuggestions.includes(index)
-                              ? "bg-[#ab0d0d]"
-                              : "bg-gray-300 dark:bg-gray-600 group-hover:bg-[#ab0d0d]"
+                              ? "bg-primary"
+                              : "bg-gray-300 dark:bg-gray-600 group-hover:bg-primary"
                           } transition-colors`}
                         ></div>
 
                         {/* Selection Indicator */}
                         {selectedSuggestions.includes(index) && (
-                          <div className="absolute top-3 right-3 p-2 rounded-full bg-[#ab0d0d] text-white shadow-lg animate-pulse">
+                          <div className="absolute top-3 right-3 p-2 rounded-full bg-primary text-white shadow-lg animate-pulse">
                             <CheckCircle2 className="w-5 h-5" />
                           </div>
                         )}
@@ -413,8 +413,8 @@ const VisaConsultationDetails = () => {
                               <div
                                 className={`p-2.5 rounded-xl shadow-md transition-all ${
                                   selectedSuggestions.includes(index)
-                                    ? "bg-[#ab0d0d] text-white"
-                                    : "bg-[#ab0d0d]/10 text-[#ab0d0d] group-hover:bg-[#ab0d0d]/20"
+                                    ? "bg-primary text-white"
+                                    : "bg-primary/10 text-primary group-hover:bg-primary/20"
                                 }`}
                               >
                                 <Sparkles className="w-5 h-5" />
@@ -434,7 +434,7 @@ const VisaConsultationDetails = () => {
                               classNames={{
                                 base: "cursor-pointer",
                                 wrapper: selectedSuggestions.includes(index)
-                                  ? "after:bg-[#ab0d0d] after:text-white border-[#ab0d0d]"
+                                  ? "after:bg-primary after:text-white border-primary"
                                   : "border-gray-300",
                               }}
                               size="lg"
@@ -446,7 +446,7 @@ const VisaConsultationDetails = () => {
                             <div
                               className={`p-4 rounded-xl border-2 transition-all ${
                                 selectedSuggestions.includes(index)
-                                  ? "border-[#ab0d0d]/30 bg-[#ab0d0d]/5 dark:bg-[#ab0d0d]/10"
+                                  ? "border-primary/30 bg-primary/5 dark:bg-primary/10"
                                   : "border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50"
                               }`}
                             >
@@ -454,7 +454,7 @@ const VisaConsultationDetails = () => {
                                 <MapPin
                                   className={`w-4 h-4 mt-0.5 flex-shrink-0 ${
                                     selectedSuggestions.includes(index)
-                                      ? "text-[#ab0d0d]"
+                                      ? "text-primary"
                                       : "text-gray-500"
                                   }`}
                                 />
@@ -479,7 +479,7 @@ const VisaConsultationDetails = () => {
                             <div
                               className={`p-4 rounded-xl border-2 transition-all ${
                                 selectedSuggestions.includes(index)
-                                  ? "border-[#ab0d0d]/30 bg-[#ab0d0d]/5 dark:bg-[#ab0d0d]/10"
+                                  ? "border-primary/30 bg-primary/5 dark:bg-primary/10"
                                   : "border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50"
                               }`}
                             >
@@ -487,7 +487,7 @@ const VisaConsultationDetails = () => {
                                 <Building2
                                   className={`w-4 h-4 mt-0.5 flex-shrink-0 ${
                                     selectedSuggestions.includes(index)
-                                      ? "text-[#ab0d0d]"
+                                      ? "text-primary"
                                       : "text-gray-500"
                                   }`}
                                 />
@@ -511,7 +511,7 @@ const VisaConsultationDetails = () => {
                             <div
                               className={`p-4 rounded-xl border-2 transition-all ${
                                 selectedSuggestions.includes(index)
-                                  ? "border-[#ab0d0d]/30 bg-[#ab0d0d]/5 dark:bg-[#ab0d0d]/10"
+                                  ? "border-primary/30 bg-primary/5 dark:bg-primary/10"
                                   : "border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50"
                               }`}
                             >
@@ -519,7 +519,7 @@ const VisaConsultationDetails = () => {
                                 <GraduationCap
                                   className={`w-4 h-4 mt-0.5 flex-shrink-0 ${
                                     selectedSuggestions.includes(index)
-                                      ? "text-[#ab0d0d]"
+                                      ? "text-primary"
                                       : "text-gray-500"
                                   }`}
                                 />
@@ -535,7 +535,7 @@ const VisaConsultationDetails = () => {
                             <div
                               className={`p-4 rounded-xl border-2 transition-all ${
                                 selectedSuggestions.includes(index)
-                                  ? "border-[#ab0d0d]/30 bg-[#ab0d0d]/5 dark:bg-[#ab0d0d]/10"
+                                  ? "border-primary/30 bg-primary/5 dark:bg-primary/10"
                                   : "border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50"
                               }`}
                             >
@@ -543,7 +543,7 @@ const VisaConsultationDetails = () => {
                                 <BookOpen
                                   className={`w-4 h-4 mt-0.5 flex-shrink-0 ${
                                     selectedSuggestions.includes(index)
-                                      ? "text-[#ab0d0d]"
+                                      ? "text-primary"
                                       : "text-gray-500"
                                   }`}
                                 />
@@ -561,7 +561,7 @@ const VisaConsultationDetails = () => {
                                 <div
                                   className={`p-4 rounded-xl border-2 transition-all ${
                                     selectedSuggestions.includes(index)
-                                      ? "border-[#ab0d0d]/30 bg-[#ab0d0d]/5 dark:bg-[#ab0d0d]/10"
+                                      ? "border-primary/30 bg-primary/5 dark:bg-primary/10"
                                       : "border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50"
                                   }`}
                                 >
@@ -569,7 +569,7 @@ const VisaConsultationDetails = () => {
                                     <Calendar
                                       className={`w-4 h-4 mt-0.5 flex-shrink-0 ${
                                         selectedSuggestions.includes(index)
-                                          ? "text-[#ab0d0d]"
+                                          ? "text-primary"
                                           : "text-gray-500"
                                       }`}
                                     />
@@ -588,7 +588,7 @@ const VisaConsultationDetails = () => {
                               <div
                                 className={`p-4 rounded-xl border-2 transition-all ${
                                   selectedSuggestions.includes(index)
-                                    ? "border-[#ab0d0d]/30 bg-[#ab0d0d]/5 dark:bg-[#ab0d0d]/10"
+                                    ? "border-primary/30 bg-primary/5 dark:bg-primary/10"
                                     : "border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50"
                                 }`}
                               >
@@ -596,7 +596,7 @@ const VisaConsultationDetails = () => {
                                   <DollarSign
                                     className={`w-4 h-4 mt-0.5 flex-shrink-0 ${
                                       selectedSuggestions.includes(index)
-                                        ? "text-[#ab0d0d]"
+                                        ? "text-primary"
                                         : "text-gray-500"
                                     }`}
                                   />
@@ -614,7 +614,7 @@ const VisaConsultationDetails = () => {
                               <div
                                 className={`p-4 rounded-xl border-2 transition-all ${
                                   selectedSuggestions.includes(index)
-                                    ? "border-[#ab0d0d]/30 bg-[#ab0d0d]/5 dark:bg-[#ab0d0d]/10"
+                                    ? "border-primary/30 bg-primary/5 dark:bg-primary/10"
                                     : "border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50"
                                 }`}
                               >
@@ -622,7 +622,7 @@ const VisaConsultationDetails = () => {
                                   <FileText
                                     className={`w-4 h-4 mt-0.5 flex-shrink-0 ${
                                       selectedSuggestions.includes(index)
-                                        ? "text-[#ab0d0d]"
+                                        ? "text-primary"
                                         : "text-gray-500"
                                     }`}
                                   />
@@ -644,12 +644,12 @@ const VisaConsultationDetails = () => {
 
                 {/* Continue Button - Sticky */}
                 {selectedSuggestions.length > 0 && (
-                  <div className="sticky bottom-0 bg-white dark:bg-gray-900 border-t-[3px] border-[#ab0d0d] shadow-[0_-8px_30px_rgba(171,13,13,0.2)] dark:shadow-[0_-8px_30px_rgba(171,13,13,0.3)] p-6 -mx-6 -mb-6 mt-6">
+                  <div className="sticky bottom-0 bg-white dark:bg-gray-900 border-t-[3px] border-primary shadow-[0_-8px_30px_rgba(171,13,13,0.2)] dark:shadow-[0_-8px_30px_rgba(171,13,13,0.3)] p-6 -mx-6 -mb-6 mt-6">
                     <div className="max-w-7xl mx-auto">
                       <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                         <div className="text-center sm:text-left">
                           <div className="flex items-center gap-2 justify-center sm:justify-start mb-1">
-                            <CheckCircle2 className="w-5 h-5 text-[#ab0d0d]" />
+                            <CheckCircle2 className="w-5 h-5 text-primary" />
                             <p className="text-base font-bold text-gray-900 dark:text-white">
                               {selectedSuggestions.length}{" "}
                               {selectedSuggestions.length === 1
@@ -664,7 +664,7 @@ const VisaConsultationDetails = () => {
                         </div>
                         <Button
                           onClick={() => continueWithSelectedOptions.mutate()}
-                          className="w-full sm:w-auto bg-[#ab0d0d] hover:bg-[#c41e1e] active:bg-[#8a0a0a] text-white font-bold px-10 py-7 text-lg transition-all shadow-xl hover:shadow-2xl border-2 border-[#ab0d0d] hover:border-[#c41e1e] transform hover:scale-105 active:scale-100"
+                          className="w-full sm:w-auto bg-primary hover:bg-primary-400 active:bg-primary-700 text-white font-bold px-10 py-7 text-lg transition-all shadow-xl hover:shadow-2xl border-2 border-primary hover:border-primary-400 transform hover:scale-105 active:scale-100"
                           size="lg"
                           startContent={<CheckCircle2 className="w-5 h-5" />}
                         >
