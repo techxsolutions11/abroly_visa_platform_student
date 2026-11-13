@@ -18,6 +18,8 @@ export const setThemeColors = () => {
     
     // Agency colour drives every brand colour in the portal (CSS variables + PRIMARY_COLOR constants)
     applyBrand(primaryColor, primaryForegroundColor);
+    // home-screen icon / name follow the agency too
+    import('./installApp').then((m) => m.brandManifest()).catch(() => {});
     root.style.setProperty('--dark-primary-color', darkPrimaryColor);
   }
 

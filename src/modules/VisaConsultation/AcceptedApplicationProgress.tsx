@@ -1,3 +1,4 @@
+import DocumentPicker from "@/components/DocumentPicker";
 import CommonConfirmation from "@/components/CommonConfirmation";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -261,32 +262,10 @@ const AcceptedApplicationProgress = () => {
 
                                             {question?.question_type === 'file_selector' && (
                                                     <div className="space-y-3">
-                                                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                                                            Upload File
-                                                        </label>
-                                                        <div className="flex items-center gap-3">
-                                                    <input
-                                                        type="file"
-                                                        onChange={(e) =>
-                                                            handleFileChange(
-                                                                question?.id,
-                                                                e.target.files?.[0] || null
-                                                            )
-                                                        }
-                                                                className="block w-full text-sm text-gray-500 dark:text-gray-400
-                                                                    file:mr-4 file:py-2 file:px-4
-                                                                    file:rounded-md file:border-0
-                                                                    file:text-sm file:font-semibold
-                                                                    file:bg-primary file:text-white
-                                                                    hover:file:bg-primary/90
-                                                                    file:cursor-pointer"
-                                                            />
-                                                        </div>
-                                                        {answers[question?.id]?.file && (
-                                                            <p className="text-sm text-gray-600 dark:text-gray-400">
-                                                                Selected: {answers[question?.id]?.file?.name}
-                                                            </p>
-                                                        )}
+                                                        <DocumentPicker
+                                                            value={answers[question?.id]?.file || null}
+                                                            onChange={(file) => handleFileChange(question?.id, file)}
+                                                        />
                                                     <Button
                                                         onClick={() => handleSubmitAnswer(question?.id)}
                                                             size="sm"

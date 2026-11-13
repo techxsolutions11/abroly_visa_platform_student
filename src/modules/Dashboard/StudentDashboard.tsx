@@ -94,6 +94,7 @@ import useApiCallUtils from "@/hooks/useApiCallUtils"
 import { useQuery } from "@tanstack/react-query"
 import aborlyIcon from "../../assets/logo.png"
 import { getAppName, getConfig } from "@/utils/config"
+import { AgencyLogo, StudentTopBar } from "@/components/AgencyBrand"
 import { PRIMARY_COLOR, PRIMARY_COLOR_50, PRIMARY_COLOR_100, PRIMARY_COLOR_200, PRIMARY_COLOR_800, PRIMARY_COLOR_900 } from '@/lib/theme';
 
 const data = {
@@ -277,10 +278,7 @@ const StudentDashboard = () => {
                   size="lg"
                   className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
                 >
-                  <div className="flex aspect-square size-8 items-center justify-center rounded-lg">
-                  {/* <img src={aborlyIcon} alt={getAppName()}  />  */}
-                  <img src={getConfig('FAVICON_URL')} alt="techxuniverse" className="w-12 h-12" />
-                  </div>
+                  <AgencyLogo size={32} />
                   <div className="grid flex-1 text-left text-sm leading-tight">
                     <span className="truncate font-semibold">
                       {getAppName()}
@@ -485,13 +483,12 @@ const StudentDashboard = () => {
           </SidebarFooter>
           <SidebarRail />
         </Sidebar>
-        <SidebarInset>
-          <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
+        <SidebarInset className="min-w-0">
+          <header className="sticky top-0 z-30 flex h-14 shrink-0 items-center gap-2 border-b border-default-100 bg-background/90 backdrop-blur">
             <div className="flex items-center gap-2 px-4 w-full">
               <SidebarTrigger className="-ml-1" />
-              <Separator orientation="vertical" className="mr-2 h-4" />
-              {/* <Button size="sm" onClick={() => { onLocationOpenChange() }} startContent={<MapPin className="p-1" />} color="primary">{area !== "" ? area : "Select Your Location"}</Button> */}
-              <Separator orientation="vertical" className="mr-2 h-4" />
+              <Separator orientation="vertical" className="mr-1 h-4" />
+              <StudentTopBar />
               {/* <Button size="sm" variant="flat" className="ml-auto"
               onClick={()=> {
                 navigate("/coin_history")
@@ -499,7 +496,7 @@ const StudentDashboard = () => {
               startContent={<BadgeIndianRupee className="p-1" />} color="success"><p className="font-bold text-lg">{balance}</p></Button> */}
             </div>
           </header>
-          <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
+          <div className="flex flex-1 flex-col gap-4 p-3 sm:p-4 min-w-0">
             <Suspense fallback={<Spinner />}>
               <Routes>
                 {
