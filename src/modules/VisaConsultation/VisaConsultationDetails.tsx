@@ -644,7 +644,7 @@ const VisaConsultationDetails = () => {
 
                 {/* Continue Button - Sticky */}
                 {selectedSuggestions.length > 0 && (
-                  <div className="sticky bottom-0 bg-white dark:bg-gray-900 border-t-[3px] border-primary shadow-[0_-8px_30px_rgba(171,13,13,0.2)] dark:shadow-[0_-8px_30px_rgba(171,13,13,0.3)] p-6 -mx-6 -mb-6 mt-6">
+                  <div className="sticky bottom-0 bg-white dark:bg-gray-900 border-t-[3px] border-primary shadow-[0_-8px_30px_rgba(15,91,216,0.2)] dark:shadow-[0_-8px_30px_rgba(15,91,216,0.3)] p-6 -mx-6 -mb-6 mt-6">
                     <div className="max-w-7xl mx-auto">
                       <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                         <div className="text-center sm:text-left">

@@ -10,7 +10,7 @@
  * Do not hard-code brand hex values in components. Red / green / amber stay only for meanings (overdue, approved...).
  */
 
-export const DEFAULT_BRAND = '#ab0d0d';
+export const DEFAULT_BRAND = '#0f5bd8';
 const STORAGE_KEY = 'brand_color';
 
 // ---------- colour maths ----------

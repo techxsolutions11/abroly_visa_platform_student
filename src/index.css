@@ -42,7 +42,7 @@ h1,h2,h3,h4,h5,h6{
     --brand-900: 0.0 85.3% 18.6%;
 
     /* Custom colors from environment variables */
-    --primary-color: #ab0d0d;
+    --primary-color: #0f5bd8;
     --primary-foreground-color: #ffffff;
     --dark-primary-color: #050a30;
     
