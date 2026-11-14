@@ -165,6 +165,10 @@ const data = {
           url: "/my_fees",
         },
         {
+          title: "Services",
+          url: "/services",
+        },
+        {
           title: "Raise an application",
           url: "/services/visa_consultation",
         },

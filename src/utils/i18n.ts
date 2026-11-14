@@ -13,6 +13,17 @@ export type Lang = typeof LANGUAGES[number]["key"];
 
 const T: Record<string, Record<Lang, string>> = {
     my_progress: { en: "My visa progress", hi: "मेरी वीज़ा प्रगति", gu: "મારી વિઝા પ્રગતિ" },
+    services: { en: "Services", hi: "सेवाएं", gu: "સેવાઓ" },
+    services_intro: { en: "Extra help from {agency}. Pay online and get your invoice instantly.", hi: "{agency} से अतिरिक्त सहायता। ऑनलाइन भुगतान करें और तुरंत रसीद पाएं।", gu: "{agency} તરફથી વધારાની મદદ. ઓનલાઇન ચૂકવો અને તરત જ ઇન્વૉઇસ મેળવો." },
+    buy_now: { en: "Buy now", hi: "अभी खरीदें", gu: "હમણાં ખરીદો" },
+    incl_gst: { en: "incl. {n}% GST", hi: "{n}% GST सहित", gu: "{n}% GST સહિત" },
+    no_services: { en: "No services are available right now.", hi: "अभी कोई सेवा उपलब्ध नहीं है।", gu: "અત્યારે કોઈ સેવા ઉપલબ્ધ નથી." },
+    pay_not_ready: { en: "Online payment is not set up yet - please contact your counsellor to buy.", hi: "ऑनलाइन भुगतान अभी सेट नहीं है - खरीदने के लिए अपने काउंसलर से संपर्क करें।", gu: "ઓનલાઇન ચુકવણી હજી સેટ નથી - ખરીદવા માટે તમારા કાઉન્સેલરનો સંપર્ક કરો." },
+    payment_done: { en: "Payment received", hi: "भुगतान प्राप्त हुआ", gu: "ચુકવણી મળી ગઈ" },
+    payment_done_text: { en: "Thank you! Invoice {n} is in My fees. Your counsellor has been told.", hi: "धन्यवाद! इनवॉइस {n} मेरी फीस में है। आपके काउंसलर को सूचना दे दी गई है।", gu: "આભાર! ઇન્વૉઇસ {n} મારી ફીમાં છે. તમારા કાઉન્સેલરને જાણ કરવામાં આવી છે." },
+    view_invoice: { en: "View in My fees", hi: "मेरी फीस में देखें", gu: "મારી ફીમાં જુઓ" },
+    my_purchases: { en: "Bought by you", hi: "आपकी खरीदारी", gu: "તમારી ખરીદી" },
+    secure_payment: { en: "Secure payment by Razorpay - UPI, cards, net banking", hi: "Razorpay द्वारा सुरक्षित भुगतान - UPI, कार्ड, नेट बैंकिंग", gu: "Razorpay દ્વારા સુરક્ષિત ચુકવણી - UPI, કાર્ડ, નેટ બેંકિંગ" },
     my_fees: { en: "My fees", hi: "मेरी फीस", gu: "મારી ફી" },
     chat_with_us: { en: "Chat with us", hi: "हमसे बात करें", gu: "અમારી સાથે વાત કરો" },
     not_started: { en: "Your visa process has not started yet. Your consultant will open it for you.", hi: "आपकी वीज़ा प्रक्रिया अभी शुरू नहीं हुई है। आपके सलाहकार इसे शुरू करेंगे।", gu: "તમારી વિઝા પ્રક્રિયા હજી શરૂ થઈ નથી. તમારા કન્સલ્ટન્ટ તેને શરૂ કરશે." },

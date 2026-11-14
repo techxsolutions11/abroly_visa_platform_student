@@ -16,7 +16,7 @@ export const AgencyLogo = ({ size = 32 }: { size?: number }) => {
 };
 
 const TITLES: [string, string][] = [
-    ["/my_progress", "@my_progress"], ["/my_fees", "@my_fees"], ["/profile", "My profile"], ["/visa", "Visa consultation"],
+    ["/my_progress", "@my_progress"], ["/my_fees", "@my_fees"], ["/services", "@services"], ["/profile", "My profile"], ["/visa", "Visa consultation"],
     ["/accepted", "My applications"], ["/career", "Careers"], ["/health", "Health insurance"], ["/sim", "SIM cards"],
 ];
 

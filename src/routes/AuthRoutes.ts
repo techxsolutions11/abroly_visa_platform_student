@@ -33,6 +33,7 @@ const AcceptedApplicationProgress = lazy(()=> import("@/modules/VisaConsultation
 const AcceptedApplications = lazy(()=> import("@/modules/VisaConsultation/AcceptedApplications"))
 const ProgressTracker = lazy(() => import("@/modules/VisaConsultation/ProgressTracker"))
 const MyFees = lazy(() => import("@/modules/Fees/MyFees"))
+const ServicesStore = lazy(() => import("@/modules/Services/ServicesStore"))
 const HomeWithProgress = lazy(() => import("@/modules/VisaConsultation/HomeWithProgress"))
 const AgnetProfile = lazy(()=> import("@/modules/VisaConsultation/AgnetProfile"))
 // const CoinHistory = lazy(()=> import("@/modules/Coins/CoinHistory"))
@@ -203,6 +204,10 @@ export const StudentRoutes = [
     {
         path: "/my_fees",
         element: MyFees
+    },
+    {
+        path: "/services",
+        element: ServicesStore
     },
     {
         path: "/accepted_applications/:id",
