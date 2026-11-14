@@ -28,6 +28,10 @@ const ServicesStore = () => {
     const [error, setError] = useState("");
     const agencyName = (() => { try { return JSON.parse(localStorage.getItem("app_config") || "{}").APP_NAME || ""; } catch { return ""; } })();
 
+    const { data: orderData } = useQuery({
+        queryKey: ["student_service_orders"],
+        queryFn: async () => { const { data, success } = await commonGetAPICalls("/student/service_orders"); return success ? data : null; },
+    });
     const { data, isLoading } = useQuery({
         queryKey: ["student_services"],
         queryFn: async () => {
@@ -49,7 +53,7 @@ const ServicesStore = () => {
             handler: async (resp: any) => {
                 const r = await commonPostAPICall(resp, "student/services/verify", true);
                 setBusy("");
-                if (r?.success) { setDone({ ...r.data, service: svc.name, total: svc.total }); qc.invalidateQueries({ queryKey: ["student_services"] }); qc.invalidateQueries({ queryKey: ["student_fees"] }); }
+                if (r?.success) { setDone({ ...r.data, service: svc.name, total: svc.total }); qc.invalidateQueries({ queryKey: ["student_services"] }); qc.invalidateQueries({ queryKey: ["student_fees"] }); qc.invalidateQueries({ queryKey: ["student_service_orders"] }); }
             },
             modal: { ondismiss: () => setBusy("") },
         });
@@ -64,7 +68,8 @@ const ServicesStore = () => {
                 <h1 className="text-xl font-bold">{t("payment_done")}</h1>
                 <p className="text-gray-600 dark:text-gray-300">{done.service} · {rupees(done.total)}</p>
                 <p className="text-sm text-gray-500">{t("payment_done_text", { n: done.number })}</p>
-                <button type="button" onClick={() => navigate("/my_fees")} className="mt-2 w-full rounded-xl px-4 py-3 font-medium text-white" style={{ background: PRIMARY_COLOR }}>{t("view_invoice")}</button>
+                {done.order_id && <button type="button" onClick={() => navigate(`/services/orders/${done.order_id}`)} className="mt-2 w-full rounded-xl px-4 py-3 font-medium text-white" style={{ background: PRIMARY_COLOR }}>{t("open_order")}: {done.service}</button>}
+                <button type="button" onClick={() => navigate("/my_fees")} className="w-full rounded-xl px-4 py-3 font-medium border" style={{ color: PRIMARY_COLOR, borderColor: PRIMARY_COLOR }}>{t("view_invoice")}</button>
                 <button type="button" onClick={() => setDone(null)} className="text-sm text-gray-500">{t("services")}</button>
             </div>
         );
@@ -106,16 +111,22 @@ const ServicesStore = () => {
 
             {services.length > 0 && <div className="text-xs text-gray-500 flex items-center gap-1.5"><ShieldCheck size={14} /> {t("secure_payment")}</div>}
 
-            {data?.purchases?.length > 0 && (
+            {orderData?.orders?.length > 0 && (
                 <div className="flex flex-col gap-2 mt-2">
                     <h2 className="font-semibold">{t("my_purchases")}</h2>
-                    {data.purchases.map((p: any) => (
-                        <button key={p.invoice_id} type="button" onClick={() => navigate("/my_fees")} className="flex items-center gap-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 px-3 py-2.5 text-left">
-                            <CheckCircle2 size={18} className="text-green-600 shrink-0" />
-                            <div className="min-w-0 flex-1"><div className="text-sm font-medium truncate">{p.service}</div><div className="text-xs text-gray-500">{p.number} · {new Date(p.at).toLocaleDateString(undefined, { day: "numeric", month: "short", year: "numeric" })}</div></div>
-                            <div className="text-sm font-medium">{rupees(p.total)}</div>
-                        </button>
-                    ))}
+                    {orderData.orders.map((o: any) => {
+                        const tone = o.status === "delivered" ? "bg-green-100 text-green-700" : o.status === "completed" ? "bg-gray-100 text-gray-600" : o.status === "changes_requested" ? "bg-yellow-100 text-yellow-800" : "bg-blue-50 text-blue-700";
+                        return (
+                            <button key={o.id} type="button" onClick={() => navigate(`/services/orders/${o.id}`)} className="flex items-center gap-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 px-3 py-3 text-left">
+                                <div className="min-w-0 flex-1">
+                                    <div className="text-sm font-medium truncate">{o.title}</div>
+                                    <div className="text-xs text-gray-500">{new Date(o.at).toLocaleDateString(undefined, { day: "numeric", month: "short", year: "numeric" })}{o.delivered_files ? ` · ${o.delivered_files} file(s)` : ""}</div>
+                                </div>
+                                <span className={`text-xs font-medium rounded-full px-2.5 py-1 shrink-0 ${tone}`}>{t(`order_${o.status}`)}</span>
+                                <span className="text-sm font-medium shrink-0" style={{ color: PRIMARY_COLOR }}>{t("open_order")}</span>
+                            </button>
+                        );
+                    })}
                 </div>
             )}
         </div>
